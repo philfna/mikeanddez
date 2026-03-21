@@ -262,7 +262,7 @@
       <div class="flight-mid"><div class="flight-line"></div><div class="flight-date">Fri, May 15</div></div>
       <div class="flight-city" style="text-align:right;"><div class="fc-time">9:35 AM</div><div class="fc-code">SFO</div><div class="fc-city">San Francisco, CA</div></div>
     </div>
-    <div class="flight-note">🎉 Lands in SF! We'll be there to pick you up.</div>
+    <div class="flight-note">🎉 Lands in SF! See the <strong>Getting Here</strong> tab for rideshare instructions to our place.</div>
   </div>
   <div class="flight-card">
     <div class="flight-header"><div><div class="flight-num">Flight 3 of 4 · UA1604</div></div><div class="flight-badge fb-ret">Return Leg 1</div></div>
@@ -378,6 +378,12 @@
       <text x="290" y="239" font-size="9.5" font-weight="600" text-anchor="middle" fill="#C9953A" font-family="sans-serif">St. Frank Coffee</text>
       <text x="290" y="250" font-size="8.5" text-anchor="middle" fill="#8E8E93" font-family="sans-serif">~4 min walk</text>
 
+      <!-- JUNIPER BAKERY - near Jones + Green ≈ (290, 295) -->
+      <circle cx="290" cy="295" r="11" fill="#C9953A" stroke="white" stroke-width="2"/>
+      <text x="290" y="299.5" font-size="11" text-anchor="middle" fill="white" font-family="sans-serif">🌿</text>
+      <text x="290" y="314" font-size="9.5" font-weight="600" text-anchor="middle" fill="#C9953A" font-family="sans-serif">Juniper Bakery</text>
+      <text x="290" y="325" font-size="8.5" text-anchor="middle" fill="#8E8E93" font-family="sans-serif">~5 min walk</text>
+
       <!-- CABLE CAR line on Hyde -->
       <line x1="90" y1="25" x2="90" y2="370" stroke="#F5C842" stroke-width="3" stroke-dasharray="8,4" opacity="0.7"/>
       <text x="96" y="355" font-size="8.5" fill="#C9953A" font-family="sans-serif" font-weight="600">Cable Car ↕</text>
@@ -398,6 +404,7 @@
     <div class="card-sm"><div style="font-size:13px;font-weight:600;margin-bottom:2px;">🍕 Back2Back</div><div style="font-size:12px;color:var(--text-mid);">~3 min · natural wine + wood-fired pizza</div></div>
     <div class="card-sm"><div style="font-size:13px;font-weight:600;margin-bottom:2px;">🥩 Osso Steakhouse</div><div style="font-size:12px;color:var(--text-mid);">~5 min · California St</div></div>
     <div class="card-sm"><div style="font-size:13px;font-weight:600;margin-bottom:2px;">☕ St. Frank Coffee</div><div style="font-size:12px;color:var(--text-mid);">~4 min · neighborhood coffee bar</div></div>
+    <div class="card-sm"><div style="font-size:13px;font-weight:600;margin-bottom:2px;">🌿 Juniper Bakery</div><div style="font-size:12px;color:var(--text-mid);">~5 min · pastries + coffee</div></div>
     <div class="card-sm"><div style="font-size:13px;font-weight:600;margin-bottom:2px;">🛒 Le Beau Market</div><div style="font-size:12px;color:var(--text-mid);">~5 min · our grocery store</div></div>
     <div class="card-sm"><div style="font-size:13px;font-weight:600;margin-bottom:2px;">🍦 Swensen's Ice Cream</div><div style="font-size:12px;color:var(--text-mid);">~8 min · Hyde + Union</div></div>
     <div class="card-sm"><div style="font-size:13px;font-weight:600;margin-bottom:2px;">🍝 Seven Hills</div><div style="font-size:12px;color:var(--text-mid);">~10 min · Hyde St Italian</div></div>
@@ -441,7 +448,7 @@
       <span style="font-size:32px;flex-shrink:0;">🌲</span>
       <div>
         <div style="font-family:'Playfair Display',serif;font-size:17px;font-weight:700;margin-bottom:5px;">Muir Woods — The Big One</div>
-        <div style="font-size:13px;opacity:0.88;line-height:1.55;">One of the main reasons for this trip — ancient coastal redwoods with groves so tall and quiet they feel like a cathedral. <strong>We've already reserved your timed entry, and we're driving you there</strong> — all you have to do is show up and be in awe. Plan a full morning there, and we can swing through the Marin Headlands on the way back for jaw-dropping Golden Gate views.</div>
+        <div style="font-size:13px;opacity:0.88;line-height:1.55;">One of the main reasons for this trip — ancient coastal redwoods with groves so tall and quiet they feel like a cathedral. <strong>We've already reserved your timed entry and we're driving you there</strong>, so all you have to do is show up and be in awe. We can swing through the Marin Headlands on the way back for jaw-dropping Golden Gate views.</div>
         <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap;">
           <span style="background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.3);border-radius:6px;font-size:11px;padding:2px 9px;font-weight:600;">✅ Entry reserved</span>
           <span style="background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.3);border-radius:6px;font-size:11px;padding:2px 9px;font-weight:600;">🚗 We're driving you</span>
@@ -485,8 +492,15 @@
 
   <div class="rest-card our-fave walkable">
     <div class="rest-header">
-      <div class="rest-emoji">🛒</div>
-      <div><div class="rest-name">Le Beau Market</div><div class="rest-meta">Our favorite neighborhood grocery · Nob Hill · walkable</div></div>
+      <div class="rest-emoji">🌿</div>
+      <div><div class="rest-name">Juniper Bakery</div><div class="rest-meta">Neighborhood bakery · Nob Hill · walkable from us</div></div>
+    </div>
+    <div class="rest-badges"><span class="badge badge-forest">Walking distance</span><span class="badge badge-gold">Local gem</span><span class="badge badge-ocean">Morning</span></div>
+    <div class="rest-desc">A lovely neighborhood bakery right in Nob Hill — fresh pastries, great coffee, and a warm local vibe. Perfect for a relaxed morning closer to home when you don't want to trek to the Mission for Tartine. A neighborhood staple we love.</div>
+    <div class="menu-highlights"><div class="menu-title">Get This</div><div class="menu-items"><span class="menu-item">Seasonal pastries 🌟</span><span class="menu-item">Morning coffee</span><span class="menu-item">Fresh baked goods</span></div></div>
+  </div>
+
+<div class="rest-meta">Our favorite neighborhood grocery · Nob Hill · walkable</div></div>
     </div>
     <div class="rest-badges"><span class="badge badge-forest">Walking distance</span><span class="badge badge-gold">Our go-to</span></div>
     <div class="rest-desc">Our favorite local market — well-stocked with great produce, prepared foods, cheeses, and everything you need for a morning in or a quick snack run. Perfect if you want to grab breakfast fixings, extra drinks, or anything you forgot to pack. Infinitely better than a chain grocery and feels very SF neighborhood.</div>
@@ -708,6 +722,8 @@
       <div class="activity-card" id="act-alcatraz" onclick="togAct('alcatraz')"><span class="activity-emoji">🏝️</span><div class="activity-title">Alcatraz Island</div><div class="activity-desc">Haunting and fascinating. The audio tour is excellent. Book weeks in advance!</div><div class="activity-meta"><span class="tag tag-o">Half day</span><span class="tag tag-g">Book early!</span></div></div>
       <div class="activity-card" id="act-lombard" onclick="togAct('lombard')"><span class="activity-emoji">🌸</span><div class="activity-title">Lombard St + Coit Tower</div><div class="activity-desc">The famous crooked street, then Coit Tower for panoramic bay views.</div><div class="activity-meta"><span class="tag tag-o">1.5 hrs</span></div></div>
       <div class="activity-card" id="act-castro" onclick="togAct('castro')"><span class="activity-emoji">🏘️</span><div class="activity-title">Castro / Haight-Ashbury</div><div class="activity-desc">Colorful Victorians, unique shops, and great people-watching in historic neighborhoods.</div><div class="activity-meta"><span class="tag tag-f">2 hrs</span></div></div>
+      <div class="activity-card" id="act-crissy" onclick="togAct('crissy')"><span class="activity-emoji">🏛️</span><div class="activity-title">Crissy Field + Palace of Fine Arts</div><div class="activity-desc">Flat waterfront walk with Golden Gate views, then the gorgeous Palace rotunda — one of the most photogenic spots in SF. Totally free.</div><div class="activity-meta"><span class="tag tag-o">2 hrs</span><span class="tag tag-g">Free!</span></div></div>
+      <div class="activity-card" id="act-cablecar" onclick="togAct('cablecar')"><span class="activity-emoji">🚃</span><div class="activity-title">Cable Car Ride</div><div class="activity-desc">The Powell-Hyde line starts right near us. Ride down to Fisherman's Wharf or up from downtown — a classic SF experience, steps from our door.</div><div class="activity-meta"><span class="tag tag-o">30–60 min</span><span class="tag tag-g">Steps away!</span></div></div>
     </div>
   </div>
 
@@ -789,6 +805,7 @@
       <strong style="color:var(--text);">Sunscreen</strong> — Even on foggy days, UV is surprisingly strong. The marine layer doesn't block UV the way clouds do.<br><br>
       <strong style="color:var(--text);">Power bank</strong> — GPS, maps, and Waymo drain batteries fast on a full day out.<br><br>
       <strong style="color:var(--text);">Comfortable shoes, seriously</strong> — Nob Hill is steep. Russian Hill is steep. Most of SF is hilly. Flip flops on day one is a classic mistake.<br><br>
+      <strong style="color:var(--text);">Rideshare from Muir Woods</strong> — Cell signal is spotty inside the canyon. Request your Uber/Lyft/Waymo <em>before leaving the visitor center</em>, not at the trailhead, or you may not get signal.<br><br>
       <strong style="color:var(--text);">Dining time</strong> — We eat dinner around <strong>5 PM</strong>, so you won't go hungry waiting for an 8 PM reservation like in other cities.
     </div>
   </div>
@@ -1108,7 +1125,7 @@ function updateActCounter() {
 }
 
 const AI = {
-  muir:      {name:'Muir Woods',              emoji:'🌲', time:'9:00 AM – 1:00 PM',   note:'✅ Entry reserved · we drive you there!'},
+  muir:      {name:'Muir Woods',              emoji:'🌲', time:'9:00 AM – 1:00 PM',   note:'✅ Entry reserved — we\'re driving you there!'},
   marin:     {name:'Marin Headlands',         emoji:'🏔️', time:'1:30 – 4:00 PM',     note:'Pairs great with Muir Woods — same direction.'},
   ggpark:    {name:'Golden Gate Park',        emoji:'🌿', time:'10:00 AM – 1:00 PM',  note:'Visit Japanese Tea Garden inside the park.'},
   baker:     {name:'Baker Beach',             emoji:'🏖️', time:'4:00 – 5:30 PM',     note:'Perfect golden hour before 5 PM dinner!'},
@@ -1120,6 +1137,8 @@ const AI = {
   alcatraz:  {name:'Alcatraz Island',         emoji:'🏝️', time:'10:30 AM – 2:00 PM', note:'⚠️ Book weeks ahead at alcatrazcruises.com!'},
   lombard:   {name:'Lombard St + Coit Tower', emoji:'🌸', time:'2:00 – 3:30 PM',     note:'Quick scenic stop before dinner at 5.'},
   castro:    {name:'Castro / Haight-Ashbury', emoji:'🏘️', time:'3:00 – 4:30 PM',     note:'Great window shopping + Victorian houses.'},
+  crissy:    {name:'Crissy Field + Palace of Fine Arts', emoji:'🏛️', time:'10:00 AM – 12:00 PM', note:'Flat waterfront walk + iconic Palace rotunda. Free!'},
+  cablecar:  {name:'Cable Car Ride',          emoji:'🚃', time:'Any time',            note:'Powell-Hyde line starts near us — ride to Fisherman\'s Wharf!'},
 };
 
 // ── SCHEDULE ─────────────────────────────────────────────────────────────────
@@ -1139,7 +1158,7 @@ function renderSched() {
       rows:[
         {time:'6:00 AM',   label:'Depart Bismarck (BIS)',          note:'UA4738 → Denver', dot:'d-f'},
         {time:'9:35 AM',   label:'Land at SFO ✈️',                 note:'UA2391 arrives from Denver', dot:'d-f'},
-        {time:'~10:15 AM', label:'We pick you up at SFO 🚗',        note:'Terminal 3 — allow 20–30 min for bags + walking', dot:'d-t'},
+        {time:'~10:15 AM', label:'Rideshare to 1221 Jones St',     note:'Uber / Lyft / Waymo — see Getting Here tab', dot:'d-t'},
         {time:'~11:00 AM', label:'Welcome! Settle in 🎉',          note:'Snacks ready — rest up after the early start', dot:'d-r'},
         {time:'5:00 PM',   label:'Dinner',                         note:'', dot:'d-fd'},
         {time:'Evening',   label:'Bay Bridge lights from our deck 🌉', note:'', dot:'d-n'},
@@ -1161,7 +1180,7 @@ function renderSched() {
       sub:'Muir Woods morning · afternoon is yours',
       rows:[
         {time:'7:30 AM',   label:'Early start + coffee for the road', note:'Muir gets busy — earlier is better', dot:'d-fd'},
-        {time:'9:00 AM',   label:'🌲 Muir Woods — entry reserved!',   note:'Locked in · we drive you there ✅', dot:'d-a'},
+        {time:'9:00 AM',   label:'🌲 Muir Woods — entry reserved!',   note:'Locked in — we\'re driving you there ✅', dot:'d-a'},
         {time:'~1:00 PM',  label:'Return to SF',                      note:'', dot:'d-t'},
         {time:'Afternoon', label:'— yours to fill —',                 note:'Rest up or keep going — check the Activities tab', dot:'d-r'},
         {time:'5:00 PM',   label:'Dinner',                            note:'', dot:'d-fd'},
