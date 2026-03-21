@@ -626,10 +626,14 @@
 <!-- ===== ACTIVITIES ===== -->
 <div id="panel-activities" class="panel">
   <p class="section-title">Choose Your Adventures</p>
+  <p class="section-sub">Tap any card below to add it to your schedule. Tap again to remove it. Then check the <strong>Schedule</strong> tab to see your days take shape.</p>
 
-  <div class="ear-banner">
-    <h3>🎲 No pressure — it's your trip!</h3>
-    <p>These are ideas, not a checklist. Tap things that look fun, skip what doesn't interest you, and feel free to discover something completely spontaneous. The best SF memories often come from just wandering.</p>
+  <div style="background:linear-gradient(135deg,var(--ocean),#0D2F45);color:white;border-radius:var(--radius);padding:16px 20px;margin-bottom:16px;display:flex;gap:14px;align-items:center;">
+    <span style="font-size:28px;flex-shrink:0;">👆</span>
+    <div>
+      <div style="font-size:14px;font-weight:700;margin-bottom:4px;">How this works</div>
+      <div style="font-size:13px;opacity:0.9;line-height:1.5;">Tap a card to select it — it turns blue with a ✓. Tap it again to deselect. Once you've picked what looks fun, go to the <strong>Schedule tab</strong> to see them added to your days automatically. No pressure — skip anything that doesn't feel right.</div>
+    </div>
   </div>
 
   <div class="info-banner" id="activity-banner"><span class="ib-icon">🧭</span><span>You have <strong>Fri afternoon · Sat · Sun · Mon</strong> to explore. Dinner is around 5 PM. ★ = our top picks!</span></div>
@@ -637,6 +641,7 @@
 
   <div style="margin-bottom:14px;">
     <div class="snack-cat-title">🌲 Nature & Outdoors</div>
+    <div style="font-size:11.5px;color:var(--text-light);margin-bottom:8px;font-style:italic;">Tap a card to add it to your schedule · tap again to remove</div>
     <div class="activity-grid">
       <div class="activity-card our-pick selected" id="act-muir" onclick="togAct('muir')"><span class="activity-emoji">🌲</span><div class="activity-title">Muir Woods</div><div class="activity-desc">Ancient coastal redwoods — cathedral-like groves. A big reason for this trip. <strong>We've already reserved your entry!</strong></div><div class="activity-meta"><span class="tag tag-f">Half day</span><span class="tag tag-g">✅ Reserved by us!</span></div></div>
       <div class="activity-card" id="act-marin" onclick="togAct('marin')"><span class="activity-emoji">🏔️</span><div class="activity-title">Marin Headlands</div><div class="activity-desc">Dramatic Golden Gate views, rolling coastal hills. Perfect add-on after Muir Woods.</div><div class="activity-meta"><span class="tag tag-f">2–3 hrs</span></div></div>
@@ -668,7 +673,7 @@
   </div>
 
   <div style="text-align:center;margin-top:6px;">
-    <button class="btn btn-p" onclick="go('schedule')">Build My Schedule →</button>
+    <button class="btn btn-p" onclick="go('schedule')">See My Schedule with Selected Activities →</button>
   </div>
 </div>
 
