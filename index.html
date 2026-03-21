@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mike & Dez — SF Adventure 🌉</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold:#C9953A;--gold-light:#F5E6C8;--gold-pale:#FBF5E8;
+    --forest:#2D5A3D;--forest-light:#EAF3EE;
+    --ocean:#1A4A6B;--ocean-light:#E3EEF7;
+    --sand:#F7F0E3;--text:#1C1C1E;--text-mid:#5A5A5F;--text-light:#8E8E93;
+    --white:#FFFFFF;--border:#E5E0D5;
+    --shadow:0 2px 20px rgba(28,28,30,0.08);--radius:16px;--radius-sm:10px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'DM Sans',sans-serif;background:var(--sand);color:var(--text);min-height:100vh;line-height:1.6;}
+
+  .hero{background:linear-gradient(135deg,var(--ocean) 0%,#0D2F45 50%,var(--forest) 100%);color:white;padding:48px 24px 40px;text-align:center;position:relative;overflow:hidden;}
+  .hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4z'/%3E%3C/g%3E%3C/svg%3E");}
+  .hero-badge{display:inline-block;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);border-radius:24px;padding:6px 18px;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;font-weight:500;margin-bottom:20px;position:relative;}
+  .hero h1{font-family:'Playfair Display',serif;font-size:clamp(32px,6vw,52px);font-weight:700;line-height:1.15;margin-bottom:12px;position:relative;}
+  .hero h1 span{color:#F5C842;}
+  .hero p{font-size:15px;opacity:0.8;max-width:460px;margin:0 auto;position:relative;}
+  .hero-dates{display:flex;justify-content:center;gap:20px;margin-top:28px;flex-wrap:wrap;position:relative;}
+  .hero-date{background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);border-radius:12px;padding:12px 18px;text-align:center;min-width:120px;}
+  .hero-date .label{font-size:11px;text-transform:uppercase;letter-spacing:0.1em;opacity:0.7;}
+  .hero-date .val{font-size:15px;font-weight:600;margin-top:4px;}
+
+  .tab-nav{display:flex;background:var(--white);border-bottom:1px solid var(--border);overflow-x:auto;-webkit-overflow-scrolling:touch;position:sticky;top:0;z-index:100;box-shadow:0 2px 10px rgba(0,0,0,0.06);}
+  .tab-nav::-webkit-scrollbar{display:none;}
+  .tab-btn{flex:none;padding:14px 16px;background:none;border:none;border-bottom:3px solid transparent;font-family:'DM Sans',sans-serif;font-size:12.5px;font-weight:500;color:var(--text-mid);cursor:pointer;white-space:nowrap;transition:all 0.2s;}
+  .tab-btn:hover{color:var(--text);background:var(--sand);}
+  .tab-btn.active{color:var(--ocean);border-bottom-color:var(--ocean);font-weight:600;}
+
+  .panel{display:none;padding:22px;max-width:800px;margin:0 auto;}
+  .panel.active{display:block;}
+  .section-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;margin-bottom:5px;}
+  .section-sub{font-size:14px;color:var(--text-mid);margin-bottom:18px;}
+
+  /* WEATHER */
+  .weather-strip{display:flex;gap:7px;overflow-x:auto;padding-bottom:4px;margin-bottom:10px;}
+  .weather-strip::-webkit-scrollbar{display:none;}
+  .weather-day{flex:none;background:var(--white);border-radius:13px;border:1px solid var(--border);padding:11px 13px;text-align:center;min-width:100px;box-shadow:var(--shadow);}
+  .weather-day.hi{border-color:var(--gold);background:var(--gold-pale);}
+  .wd-date{font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;color:var(--text-light);margin-bottom:4px;}
+  .wd-icon{font-size:20px;margin-bottom:4px;display:block;}
+  .wd-temp{font-size:16px;font-weight:700;}
+  .wd-lo{font-size:11px;color:var(--text-mid);}
+  .wd-desc{font-size:10.5px;color:var(--text-mid);margin-top:3px;line-height:1.3;}
+  .weather-note{font-size:12px;color:var(--text-mid);background:var(--sand);border-radius:var(--radius-sm);padding:9px 13px;margin-bottom:18px;border:1px solid var(--border);}
+
+  /* FLIGHTS */
+  .flight-card{background:var(--white);border-radius:var(--radius);border:1px solid var(--border);padding:18px;margin-bottom:12px;box-shadow:var(--shadow);}
+  .flight-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:7px;}
+  .flight-num{font-size:11px;font-weight:600;letter-spacing:0.08em;color:var(--text-light);text-transform:uppercase;}
+  .flight-badge{font-size:11px;font-weight:600;padding:3px 11px;border-radius:20px;}
+  .fb-out{background:var(--forest-light);color:var(--forest);}
+  .fb-ret{background:var(--ocean-light);color:var(--ocean);}
+  .flight-body{display:flex;align-items:center;gap:10px;}
+  .flight-city{flex:1;}
+  .fc-time{font-size:22px;font-weight:700;font-family:'Playfair Display',serif;}
+  .fc-code{font-size:17px;font-weight:600;color:var(--ocean);}
+  .fc-city{font-size:11px;color:var(--text-mid);margin-top:1px;}
+  .flight-mid{text-align:center;flex:1;}
+  .flight-line{border-top:2px dashed var(--border);margin:5px 0;position:relative;}
+  .flight-line::after{content:'✈';position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:var(--white);padding:0 4px;font-size:12px;color:var(--text-light);}
+  .flight-date{font-size:11px;color:var(--text-light);margin-top:2px;}
+  .flight-note{font-size:11.5px;color:var(--text-light);margin-top:9px;font-style:italic;border-top:1px solid var(--border);padding-top:7px;}
+
+  /* RIDESHARE */
+  .address-box{background:var(--forest-light);border:1px solid #9FE1CB;border-radius:var(--radius-sm);padding:13px 15px;margin:14px 0;}
+  .address-box .ab-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--forest);margin-bottom:3px;}
+  .address-box .ab-addr{font-size:17px;font-weight:700;}
+  .address-box .ab-sub{font-size:12px;color:var(--text-mid);margin-top:2px;}
+  .waymo-banner{background:linear-gradient(135deg,#1a1a2e,#16213e);color:white;border-radius:var(--radius);padding:15px 18px;margin-bottom:14px;display:flex;gap:13px;align-items:flex-start;}
+  .wb-icon{font-size:24px;flex-shrink:0;}
+  .wb-title{font-size:13px;font-weight:600;margin-bottom:3px;}
+  .wb-desc{font-size:12px;opacity:0.82;line-height:1.5;}
+  .app-choice{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:18px;}
+  @media(max-width:400px){.app-choice{grid-template-columns:1fr 1fr;}}
+  .app-card{background:var(--white);border:2px solid var(--border);border-radius:var(--radius);padding:13px;text-align:center;cursor:pointer;transition:all 0.15s;}
+  .app-card:hover{border-color:var(--ocean);}
+  .app-card.selected{border-color:var(--ocean);background:var(--ocean-light);}
+  .app-logo{font-size:24px;margin-bottom:4px;display:block;}
+  .app-name{font-size:13px;font-weight:600;}
+  .app-desc{font-size:11px;color:var(--text-mid);margin-top:2px;}
+  .step-list{margin-top:2px;}
+  .step{display:flex;gap:11px;margin-bottom:13px;align-items:flex-start;}
+  .step-num{width:26px;height:26px;background:var(--ocean);color:white;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+  .step-title{font-size:13px;font-weight:600;margin-bottom:1px;}
+  .step-desc{font-size:12px;color:var(--text-mid);line-height:1.5;}
+  .step-desc code{background:var(--gold-light);color:#7A5820;padding:1px 5px;border-radius:4px;font-family:'Courier New',monospace;font-size:11px;}
+  .airtrain-note{background:#FBF0FF;border:1px solid #D4A8E8;border-radius:var(--radius-sm);padding:11px 14px;font-size:12px;color:#6B3A8A;margin:10px 0;display:flex;gap:8px;align-items:flex-start;}
+
+  /* FOOD CARDS */
+  .food-section-title{font-size:11.5px;font-weight:600;letter-spacing:0.09em;text-transform:uppercase;color:var(--text-light);margin:20px 0 10px;padding-bottom:7px;border-bottom:1px solid var(--border);}
+  .rest-card{background:var(--white);border-radius:var(--radius);border:1px solid var(--border);padding:16px 18px;margin-bottom:10px;box-shadow:var(--shadow);}
+  .rest-card.our-fave{border-left:4px solid var(--gold);}
+  .rest-card.walkable{border-left:4px solid var(--forest);}
+  .rest-header{display:flex;gap:13px;align-items:flex-start;margin-bottom:9px;}
+  .rest-emoji{font-size:26px;flex-shrink:0;margin-top:1px;}
+  .rest-name{font-size:15px;font-weight:700;margin-bottom:2px;}
+  .rest-meta{font-size:11.5px;color:var(--text-mid);margin-bottom:0;}
+  .rest-badges{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px;}
+  .badge{font-size:10.5px;padding:2px 8px;border-radius:6px;font-weight:600;}
+  .badge-gold{background:var(--gold-light);color:#8A6020;}
+  .badge-forest{background:var(--forest-light);color:var(--forest);}
+  .badge-ocean{background:var(--ocean-light);color:var(--ocean);}
+  .badge-purple{background:#F0E8FF;color:#6B3A8A;}
+  .badge-red{background:#FDECEA;color:#9B2020;}
+  .rest-desc{font-size:12.5px;color:var(--text-mid);line-height:1.55;margin-bottom:8px;}
+  .menu-highlights{background:var(--sand);border-radius:var(--radius-sm);padding:9px 12px;margin-top:2px;}
+  .menu-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-light);margin-bottom:6px;}
+  .menu-items{display:flex;flex-wrap:wrap;gap:5px;}
+  .menu-item{font-size:11.5px;background:var(--white);border:1px solid var(--border);border-radius:6px;padding:3px 9px;color:var(--text);}
+
+  /* PLAY IT BY EAR BANNER */
+  .ear-banner{background:linear-gradient(135deg,var(--forest),#1E5030);color:white;border-radius:var(--radius);padding:16px 20px;margin-bottom:20px;}
+  .ear-banner h3{font-family:'Playfair Display',serif;font-size:16px;margin-bottom:5px;}
+  .ear-banner p{font-size:13px;opacity:0.88;line-height:1.55;}
+
+  /* NIGHT VIEW */
+  .view-card{background:linear-gradient(135deg,#0D1B2A,#1A3A5C);color:white;border-radius:var(--radius);padding:18px 20px;margin-bottom:14px;}
+  .view-card h3{font-family:'Playfair Display',serif;font-size:17px;margin-bottom:5px;}
+  .view-card p{font-size:13px;opacity:0.85;line-height:1.55;}
+
+  /* ACTIVITIES */
+  .activity-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px;}
+  @media(max-width:500px){.activity-grid{grid-template-columns:1fr;}}
+  .activity-card{background:var(--white);border-radius:var(--radius);border:2px solid var(--border);padding:14px;cursor:pointer;transition:all 0.18s;position:relative;overflow:hidden;}
+  .activity-card:hover{border-color:var(--ocean);box-shadow:var(--shadow);transform:translateY(-1px);}
+  .activity-card.selected{border-color:var(--ocean);background:var(--ocean-light);}
+  .activity-card.selected::after{content:'✓';position:absolute;top:9px;right:10px;width:20px;height:20px;background:var(--ocean);color:white;border-radius:50%;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;line-height:20px;text-align:center;}
+  .activity-card.our-pick{border-color:var(--gold);}
+  .activity-card.our-pick::before{content:'★ Our Pick';position:absolute;top:0;left:0;background:var(--gold);color:white;font-size:9.5px;font-weight:700;padding:2px 9px;border-radius:0 0 6px 0;letter-spacing:0.04em;}
+  .activity-emoji{font-size:24px;margin-bottom:6px;display:block;}
+  .activity-title{font-size:13.5px;font-weight:600;margin-bottom:2px;}
+  .activity-desc{font-size:11.5px;color:var(--text-mid);line-height:1.4;}
+  .activity-meta{display:flex;gap:4px;margin-top:6px;flex-wrap:wrap;}
+  .tag{font-size:10.5px;padding:2px 7px;border-radius:6px;font-weight:500;}
+  .tag-f{background:var(--forest-light);color:var(--forest);}
+  .tag-o{background:var(--ocean-light);color:var(--ocean);}
+  .tag-g{background:var(--gold-light);color:#8A6020;}
+  .act-sel-preview{background:var(--forest-light);border:1px solid #9FE1CB;border-radius:var(--radius-sm);padding:10px 13px;font-size:13px;color:var(--forest);margin-bottom:14px;}
+
+  /* SCHEDULE */
+  .schedule-day{background:var(--white);border-radius:var(--radius);border:1px solid var(--border);overflow:hidden;margin-bottom:16px;box-shadow:var(--shadow);}
+  .sdh{padding:13px 17px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+  .sdh.arr{background:linear-gradient(135deg,var(--forest),#1E4028);color:white;}
+  .sdh.exp{background:linear-gradient(135deg,var(--ocean),#0D2F45);color:white;}
+  .sdh.dep{background:linear-gradient(135deg,#6B3A1A,#8A5020);color:white;}
+  .day-emoji{font-size:21px;}
+  .day-title{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;}
+  .day-sub{font-size:11.5px;opacity:0.8;}
+  .day-wx{margin-left:auto;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.22);border-radius:20px;padding:4px 10px;font-size:11px;white-space:nowrap;}
+  .sr{display:flex;border-bottom:1px solid var(--border);padding:11px 17px;gap:13px;align-items:flex-start;}
+  .sr:last-child{border-bottom:none;}
+  .sr-time{font-size:12px;font-weight:600;color:var(--ocean);min-width:65px;padding-top:2px;}
+  .sr-dot{width:8px;height:8px;border-radius:50%;margin-top:5px;flex-shrink:0;}
+  .d-f{background:var(--ocean);}
+  .d-fd{background:var(--gold);}
+  .d-a{background:var(--forest);}
+  .d-r{background:#B0A090;}
+  .d-t{background:#9B59B6;}
+  .d-n{background:#1A1A2E;}
+  .sr-label{font-size:13px;font-weight:600;margin-bottom:1px;}
+  .sr-note{font-size:11.5px;color:var(--text-mid);}
+
+  /* SNACKS */
+  .snack-cat-title{font-size:11.5px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-light);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--border);}
+  .snack-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:16px;}
+  @media(max-width:400px){.snack-grid{grid-template-columns:1fr;}}
+  .snack-item{display:flex;align-items:center;gap:8px;padding:8px 10px;background:var(--white);border-radius:var(--radius-sm);border:1px solid var(--border);cursor:pointer;transition:all 0.13s;}
+  .snack-item:hover{border-color:var(--gold);}
+  .snack-item.checked{background:var(--gold-pale);border-color:var(--gold);}
+  .snack-item.checked .snack-check{background:var(--gold);border-color:var(--gold);color:white;}
+  .snack-emoji{font-size:16px;flex-shrink:0;}
+  .snack-name{flex:1;font-size:12px;}
+  .snack-check{width:17px;height:17px;border-radius:5px;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:10px;color:transparent;transition:all 0.13s;flex-shrink:0;}
+  .snack-add-row{display:flex;gap:6px;margin-bottom:18px;}
+  .snack-add-row input{flex:1;padding:8px 12px;border:1px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:12px;background:var(--white);outline:none;}
+  .snack-add-row input:focus{border-color:var(--gold);}
+
+  .btn{padding:9px 17px;border:none;border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all 0.13s;}
+  .btn-p{background:var(--ocean);color:white;}
+  .btn-p:hover{background:#123A56;}
+  .btn-g{background:var(--gold);color:white;}
+  .btn-g:hover{background:#A87A28;}
+  .btn-f{background:var(--forest);color:white;}
+  .btn-f:hover{background:#1E4028;}
+  .btn-o{background:none;border:1.5px solid var(--border);color:var(--text);}
+  .btn-o:hover{border-color:var(--ocean);color:var(--ocean);}
+  .btn-sm{padding:6px 12px;font-size:11.5px;}
+  .flex-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+  .divider{border:none;border-top:1px solid var(--border);margin:16px 0;}
+  .card{background:var(--white);border-radius:var(--radius);border:1px solid var(--border);padding:17px;margin-bottom:13px;box-shadow:var(--shadow);}
+  textarea{width:100%;padding:11px;border:1px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:12.5px;line-height:1.6;background:var(--white);resize:vertical;min-height:95px;outline:none;color:var(--text);}
+  textarea:focus{border-color:var(--ocean);}
+  .info-banner{background:var(--ocean-light);border:1px solid #B5D4F4;border-radius:var(--radius-sm);padding:10px 14px;font-size:13px;color:var(--ocean);margin-bottom:13px;display:flex;gap:8px;align-items:flex-start;}
+  .ib-icon{font-size:14px;flex-shrink:0;margin-top:1px;}
+  .summary-box{background:linear-gradient(135deg,var(--ocean) 0%,var(--forest) 100%);border-radius:var(--radius);padding:20px;color:white;margin-bottom:16px;}
+  .summary-box h3{font-family:'Playfair Display',serif;font-size:19px;margin-bottom:6px;}
+  .summary-box p{opacity:0.85;font-size:13px;margin-bottom:12px;}
+  .copy-area{background:#F7F5F0;border:1px solid var(--border);border-radius:var(--radius-sm);padding:13px;font-size:11px;font-family:'Courier New',monospace;white-space:pre-wrap;margin-bottom:13px;color:var(--text);max-height:280px;overflow-y:auto;line-height:1.75;}
+  .success-toast{display:none;background:var(--forest);color:white;padding:11px 16px;border-radius:var(--radius-sm);font-size:13px;font-weight:500;margin-bottom:12px;align-items:center;gap:8px;}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-badge">🌉 Bay Area Visit Planner</div>
+  <h1>Welcome,<br><span>Mike & Dez!</span></h1>
+  <p>Your San Francisco adventure is almost here — here's everything you need, and then some. Play it by ear and make it yours!</p>
+  <div class="hero-dates">
+    <div class="hero-date"><div class="label">Arrive</div><div class="val">Fri, May 15</div></div>
+    <div class="hero-date"><div class="label">Stay</div><div class="val">Nob Hill, SF</div></div>
+    <div class="hero-date"><div class="label">Depart</div><div class="val">Tue, May 19</div></div>
+  </div>
+</div>
+
+<nav class="tab-nav">
+  <button class="tab-btn active" onclick="go('flights')">✈️ Flights</button>
+  <button class="tab-btn" onclick="go('rideshare')">🚗 Getting Here</button>
+  <button class="tab-btn" onclick="go('food')">🍽️ Food & Fun</button>
+  <button class="tab-btn" onclick="go('activities')">🗺️ Activities</button>
+  <button class="tab-btn" onclick="go('schedule')">📅 Schedule</button>
+  <button class="tab-btn" onclick="go('snacks')">🧺 Snack Prep</button>
+  <button class="tab-btn" onclick="go('save')">💾 Save & Share</button>
+</nav>
+
+<!-- ===== FLIGHTS ===== -->
+<div id="panel-flights" class="panel active">
+  <p class="section-title">Flight Details</p>
+  <p class="section-sub">All times local. Arrive 9:35 AM Friday · Depart 5:40 PM Tuesday.</p>
+
+  <p style="font-size:11.5px;font-weight:600;color:var(--text-mid);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.07em;">🌤️ SF Weather — Historical Averages</p>
+  <div class="weather-strip">
+    <div class="weather-day"><div class="wd-date">Fri May 15</div><span class="wd-icon">⛅</span><div class="wd-temp">66°F</div><div class="wd-lo">Lo 55°F</div><div class="wd-desc">Partly cloudy, breezy</div></div>
+    <div class="weather-day hi"><div class="wd-date">Sat May 16</div><span class="wd-icon">🌤️</span><div class="wd-temp">68°F</div><div class="wd-lo">Lo 54°F</div><div class="wd-desc">Mostly sunny!</div></div>
+    <div class="weather-day"><div class="wd-date">Sun May 17</div><span class="wd-icon">☀️</span><div class="wd-temp">67°F</div><div class="wd-lo">Lo 47°F</div><div class="wd-desc">Sunny, cool eve</div></div>
+    <div class="weather-day"><div class="wd-date">Mon May 18</div><span class="wd-icon">🌥️</span><div class="wd-temp">60°F</div><div class="wd-lo">Lo 47°F</div><div class="wd-desc">Marine layer AM</div></div>
+    <div class="weather-day"><div class="wd-date">Tue May 19</div><span class="wd-icon">⛅</span><div class="wd-temp">60°F</div><div class="wd-lo">Lo 48°F</div><div class="wd-desc">Partly cloudy, mild</div></div>
+  </div>
+  <div class="weather-note">🧥 <strong>Pack layers every day.</strong> SF May = 55–68°F. Mornings are cool and foggy, afternoons warm up. Always breezy near the water, bridge, and Muir Woods. A light jacket is essential — especially for evening walks and the Bay Bridge view from home!</div>
+
+  <div class="flight-card">
+    <div class="flight-header"><div><div class="flight-num">Flight 1 of 4 · UA4738</div><div style="font-size:10px;color:var(--text-light);margin-top:1px;">SkyWest dba United Express</div></div><div class="flight-badge fb-out">Outbound Leg 1</div></div>
+    <div class="flight-body">
+      <div class="flight-city"><div class="fc-time">6:00 AM</div><div class="fc-code">BIS</div><div class="fc-city">Bismarck, ND</div></div>
+      <div class="flight-mid"><div class="flight-line"></div><div class="flight-date">Fri, May 15</div></div>
+      <div class="flight-city" style="text-align:right;"><div class="fc-time">6:57 AM</div><div class="fc-code">DEN</div><div class="fc-city">Denver, CO</div></div>
+    </div>
+    <div class="flight-note">48 min layover in Denver — tight but doable!</div>
+  </div>
+  <div class="flight-card">
+    <div class="flight-header"><div><div class="flight-num">Flight 2 of 4 · UA2391</div></div><div class="flight-badge fb-out">Outbound Leg 2</div></div>
+    <div class="flight-body">
+      <div class="flight-city"><div class="fc-time">7:45 AM</div><div class="fc-code">DEN</div><div class="fc-city">Denver, CO</div></div>
+      <div class="flight-mid"><div class="flight-line"></div><div class="flight-date">Fri, May 15</div></div>
+      <div class="flight-city" style="text-align:right;"><div class="fc-time">9:35 AM</div><div class="fc-code">SFO</div><div class="fc-city">San Francisco, CA</div></div>
+    </div>
+    <div class="flight-note">🎉 Lands in SF! See the <strong>Getting Here</strong> tab for step-by-step rideshare instructions.</div>
+  </div>
+  <div class="flight-card">
+    <div class="flight-header"><div><div class="flight-num">Flight 3 of 4 · UA1604</div></div><div class="flight-badge fb-ret">Return Leg 1</div></div>
+    <div class="flight-body">
+      <div class="flight-city"><div class="fc-time">11:10 AM</div><div class="fc-code">SFO</div><div class="fc-city">San Francisco, CA</div></div>
+      <div class="flight-mid"><div class="flight-line"></div><div class="flight-date">Tue, May 19</div></div>
+      <div class="flight-city" style="text-align:right;"><div class="fc-time">2:59 PM</div><div class="fc-code">DEN</div><div class="fc-city">Denver, CO</div></div>
+    </div>
+    <div class="flight-note">⚠️ Leave for SFO by 8:30 AM — SFO security needs a 90 min buffer.</div>
+  </div>
+  <div class="flight-card">
+    <div class="flight-header"><div><div class="flight-num">Flight 4 of 4 · UA4665</div></div><div class="flight-badge fb-ret">Return Leg 2</div></div>
+    <div class="flight-body">
+      <div class="flight-city"><div class="fc-time">5:40 PM</div><div class="fc-code">DEN</div><div class="fc-city">Denver, CO</div></div>
+      <div class="flight-mid"><div class="flight-line"></div><div class="flight-date">Tue, May 19</div></div>
+      <div class="flight-city" style="text-align:right;"><div class="fc-time">8:31 PM</div><div class="fc-code">BIS</div><div class="fc-city">Bismarck, ND</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== RIDESHARE ===== -->
+<div id="panel-rideshare" class="panel">
+  <p class="section-title">Getting from SFO to Us</p>
+  <p class="section-sub">Step-by-step guide — easy! About 30–45 min and $35–55.</p>
+
+  <div class="address-box">
+    <div class="ab-label">Your Destination</div>
+    <div class="ab-addr">1221 Jones Street</div>
+    <div class="ab-sub">San Francisco, CA 94109 · Nob Hill</div>
+  </div>
+
+  <div class="waymo-banner">
+    <div class="wb-icon">🤖</div>
+    <div>
+      <div class="wb-title">✨ Try a Waymo (Fully Driverless Robotaxi!)</div>
+      <div class="wb-desc">Waymo is available at SFO and operates all over SF — no driver, ever. It's one of the most uniquely SF experiences you can have. We love taking a Waymo to Yank Sing on Sunday — it's a fun way to arrive! Download <strong>Waymo One</strong> app at home before you fly.</div>
+    </div>
+  </div>
+
+  <div class="airtrain-note">
+    <span style="font-size:18px;flex-shrink:0;">🚇</span>
+    <div>
+      <strong>Important SFO note for Waymo:</strong> Waymo picks up from the <strong>Rental Car Center (RCC)</strong> at SFO — not the main terminals. After landing, take the free <strong>AirTrain</strong> (the automated people mover) to the Rental Car Center stop. It runs every few minutes and takes about 5 min. Then request your Waymo from there. The app will show you exactly where to wait.
+    </div>
+  </div>
+
+  <div style="font-size:13px;font-weight:600;margin-bottom:9px;">Choose your ride app:</div>
+  <div class="app-choice">
+    <div class="app-card selected" id="app-uber" onclick="selApp('uber')"><span class="app-logo">⚫</span><div class="app-name">Uber</div><div class="app-desc">Most popular</div></div>
+    <div class="app-card" id="app-lyft" onclick="selApp('lyft')"><span class="app-logo">🩷</span><div class="app-name">Lyft</div><div class="app-desc">Great alternative</div></div>
+    <div class="app-card" id="app-waymo" onclick="selApp('waymo')"><span class="app-logo">🤖</span><div class="app-name">Waymo One</div><div class="app-desc">Driverless! So cool</div></div>
+    <div class="app-card" id="app-all" onclick="selApp('all')"><span class="app-logo">📱</span><div class="app-name">All Three</div><div class="app-desc">Compare & pick</div></div>
+  </div>
+
+  <div id="steps-uber">
+    <div class="step-list">
+      <div class="step"><div class="step-num">1</div><div><div class="step-title">Download Uber before you fly</div><div class="step-desc">App Store (iPhone) or Google Play (Android). Create a free account and add a credit or debit card for payment.</div></div></div>
+      <div class="step"><div class="step-num">2</div><div><div class="step-title">At SFO — follow Rideshare signs to Level 5</div><div class="step-desc">After baggage claim, follow <code>Rideshare / TNC</code> signs. Take the elevator or escalator to <strong>Level 5 — Departures</strong>. This is where all Ubers and Lyfts pick up.</div></div></div>
+      <div class="step"><div class="step-num">3</div><div><div class="step-title">Request your ride</div><div class="step-desc">Open Uber → tap the search bar → type <code>1221 Jones Street San Francisco</code> → choose UberX (standard) or Uber Comfort (more legroom) → tap <strong>Request</strong>.</div></div></div>
+      <div class="step"><div class="step-num">4</div><div><div class="step-title">Match your driver by name + plate</div><div class="step-desc">The app shows the driver's name, photo, car, and license plate. Confirm the plate before getting in. Tap <strong>Contact</strong> to call or text if needed.</div></div></div>
+      <div class="step"><div class="step-num">5</div><div><div class="step-title">Enjoy the ride — payment is automatic!</div><div class="step-desc">No cash needed ever. The driver sees your destination. Card is charged at the end. Tip optional in-app. Est. <strong>$35–55 · ~30–45 min</strong> to Nob Hill.</div></div></div>
+    </div>
+  </div>
+  <div id="steps-lyft" style="display:none;">
+    <div class="step-list">
+      <div class="step"><div class="step-num">1</div><div><div class="step-title">Download Lyft before you fly</div><div class="step-desc">Search "Lyft" in the App Store or Google Play. Create an account and add a payment method.</div></div></div>
+      <div class="step"><div class="step-num">2</div><div><div class="step-title">At SFO — Level 5 Rideshare pickup</div><div class="step-desc">Same pickup area as Uber — follow <code>Rideshare / TNC</code> signs to <strong>Level 5</strong> after baggage claim.</div></div></div>
+      <div class="step"><div class="step-num">3</div><div><div class="step-title">Request your ride</div><div class="step-desc">Open Lyft → tap "Where to?" → type <code>1221 Jones Street San Francisco</code> → choose "Lyft" → tap <strong>Confirm Lyft</strong>.</div></div></div>
+      <div class="step"><div class="step-num">4</div><div><div class="step-title">4-digit PIN confirms your driver</div><div class="step-desc">Lyft gives you a PIN to confirm it's the right car. Tap <strong>I'm Here</strong> at the pickup zone.</div></div></div>
+      <div class="step"><div class="step-num">5</div><div><div class="step-title">No cash — automatic payment</div><div class="step-desc">Card on file is charged at the end. Tip optional in-app. Est. <strong>$35–55 · ~30–45 min</strong>.</div></div></div>
+    </div>
+  </div>
+  <div id="steps-waymo" style="display:none;">
+    <div class="airtrain-note">
+      <span style="font-size:16px;flex-shrink:0;">🚇</span>
+      <div><strong>First:</strong> After landing, take the free <strong>AirTrain</strong> to the <strong>Rental Car Center</strong>. Follow "AirTrain" signs from baggage claim — it's automated, runs every few minutes, and takes ~5 min. Waymo picks up from the RCC, not the main terminal.</div>
+    </div>
+    <div class="step-list">
+      <div class="step"><div class="step-num">1</div><div><div class="step-title">Download Waymo One at home first</div><div class="step-desc">Search "Waymo One" in your app store. Create an account and add payment. Much easier on WiFi at home than at the airport.</div></div></div>
+      <div class="step"><div class="step-num">2</div><div><div class="step-title">Take the AirTrain to Rental Car Center</div><div class="step-desc">After landing at SFO, follow <code>AirTrain</code> signs. Board the free automated train and ride to the <strong>Rental Car Center (RCC)</strong> stop. This is Waymo's pickup zone at SFO.</div></div></div>
+      <div class="step"><div class="step-num">3</div><div><div class="step-title">Request in the app — walk to the pin</div><div class="step-desc">Open Waymo One → enter destination: <code>1221 Jones Street San Francisco</code>. The app shows a specific pickup pin location in the RCC. Walk to that exact spot and wait.</div></div></div>
+      <div class="step"><div class="step-num">4</div><div><div class="step-title">The car arrives — no driver whatsoever!</div><div class="step-desc">Tap <strong>Unlock</strong> in the app. Get in, buckle up, tap <strong>Start Ride</strong>. The car drives entirely itself. There's an in-car button to reach a live remote operator if you ever need help.</div></div></div>
+      <div class="step"><div class="step-num">5</div><div><div class="step-title">Enjoy the most SF experience possible 🤖</div><div class="step-desc">Watch the Jaguar navigate SF traffic with zero human input. It's surreal at first, then remarkably relaxing. Take a video! Payment is automatic at the end.</div></div></div>
+    </div>
+  </div>
+  <div id="steps-all" style="display:none;">
+    <div class="info-banner"><span class="ib-icon">📱</span><span>Install <strong>Uber</strong>, <strong>Lyft</strong>, and <strong>Waymo One</strong> at home before flying. At SFO compare wait times and prices — pick the best deal. Note: Waymo requires the AirTrain to the Rental Car Center first (see Waymo tab for details).</span></div>
+    <div class="step-list">
+      <div class="step"><div class="step-num">1</div><div><div class="step-title">Install all three apps at home</div><div class="step-desc">Add payment to each. 10 minutes at home beats fumbling at the airport.</div></div></div>
+      <div class="step"><div class="step-num">2</div><div><div class="step-title">Uber & Lyft → Level 5 at main terminal. Waymo → AirTrain to Rental Car Center</div><div class="step-desc">For Uber or Lyft: follow <code>Rideshare / TNC</code> signs to Level 5. For Waymo: follow <code>AirTrain</code> signs and ride to the Rental Car Center stop (~5 min).</div></div></div>
+      <div class="step"><div class="step-num">3</div><div><div class="step-title">Enter: 1221 Jones Street San Francisco</div><div class="step-desc">Same destination in all three apps. Pick the one with the best price + wait time. Budget <strong>$35–55 · ~30–45 min</strong>.</div></div></div>
+    </div>
+  </div>
+
+  <div class="info-banner" style="margin-top:14px;">
+    <span class="ib-icon">💡</span>
+    <span>We can also pick you up! UA2391 lands ~9:35 AM at <strong>Terminal 3</strong>. Pickup is <strong>Level 2, Arrivals</strong>. Allow 20–30 min for bags + walking.</span>
+  </div>
+</div>
+
+<!-- ===== FOOD & FUN ===== -->
+<div id="panel-food" class="panel">
+  <p class="section-title">Food & Fun — Our Picks</p>
+
+  <div style="background:linear-gradient(135deg,#1E4028,#2D5A3D);color:white;border-radius:var(--radius);padding:18px 20px;margin-bottom:16px;">
+    <div style="display:flex;gap:13px;align-items:flex-start;">
+      <span style="font-size:32px;flex-shrink:0;">🌲</span>
+      <div>
+        <div style="font-family:'Playfair Display',serif;font-size:17px;font-weight:700;margin-bottom:5px;">Muir Woods — The Big One</div>
+        <div style="font-size:13px;opacity:0.88;line-height:1.55;">One of the main reasons for this trip — ancient coastal redwoods with groves so tall and quiet they feel like a cathedral. <strong>We've already reserved your timed entry</strong>, so all you have to do is show up and be in awe. Plan a full morning there, and consider tacking on the Marin Headlands afterward for jaw-dropping Golden Gate views on the drive back.</div>
+        <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap;">
+          <span style="background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.3);border-radius:6px;font-size:11px;padding:2px 9px;font-weight:600;">✅ Entry reserved</span>
+          <span style="background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.3);border-radius:6px;font-size:11px;padding:2px 9px;font-weight:600;">Sunday morning</span>
+          <span style="background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.3);border-radius:6px;font-size:11px;padding:2px 9px;font-weight:600;">Bring a jacket</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ear-banner">
+    <h3>🎲 Play it by ear — this is YOUR trip!</h3>
+    <p>These are our suggestions and favorites but there's zero pressure to follow any schedule. Sleep in, wander, discover something random, or just sit on our deck and watch the Bay Bridge lights come on. Whatever feels right is the right plan.</p>
+  </div>
+
+  <div class="food-section-title">☕ Morning Coffee & Breakfast</div>
+
+  <div class="rest-card our-fave">
+    <div class="rest-header">
+      <div class="rest-emoji">☕</div>
+      <div><div class="rest-name">St. Frank Coffee</div><div class="rest-meta">Coffee bar · Nob Hill · walkable from us</div></div>
+    </div>
+    <div class="rest-badges"><span class="badge badge-forest">Walking distance</span><span class="badge badge-gold">Our neighborhood spot</span></div>
+    <div class="rest-desc">A beautiful, thoughtful coffee bar right in the neighborhood. Exceptional single-origin pour-overs, great espresso, and a calm atmosphere — the perfect start to a SF morning.</div>
+    <div class="menu-highlights"><div class="menu-title">Order This</div><div class="menu-items"><span class="menu-item">Single-origin pour-over</span><span class="menu-item">Cortado</span><span class="menu-item">Seasonal latte</span></div></div>
+  </div>
+
+  <div class="rest-card our-fave">
+    <div class="rest-header">
+      <div class="rest-emoji">🥐</div>
+      <div><div class="rest-name">Tartine Bakery</div><div class="rest-meta">Legendary bakery · Mission District · 15 min away</div></div>
+    </div>
+    <div class="rest-badges"><span class="badge badge-gold">SF institution</span><span class="badge badge-ocean">Breakfast / Brunch</span><span class="badge badge-red">Line is worth it</span></div>
+    <div class="rest-desc">Called "the best bakery in the US" by the New York Times. Country sourdough loaves come out of the oven at 4:30 PM daily. The morning bun — caramelized, cinnamon sugar, with a hint of orange zest — is famous. Go early or expect a short wait that moves fast.</div>
+    <div class="menu-highlights"><div class="menu-title">Must Order</div><div class="menu-items"><span class="menu-item">Morning bun (🌟)</span><span class="menu-item">Country sourdough loaf</span><span class="menu-item">Almond croissant</span><span class="menu-item">Pain au chocolat</span><span class="menu-item">Egg custard tart</span></div></div>
+  </div>
+
+  <div class="food-section-title">🍽️ Sit-Down Restaurants</div>
+
+  <div class="rest-card our-fave">
+    <div class="rest-header">
+      <div class="rest-emoji">🥟</div>
+      <div><div class="rest-name">Yank Sing</div><div class="rest-meta">Michelin-recognized dim sum · California St & Rincon Hill</div></div>
+    </div>
+    <div class="rest-badges"><span class="badge badge-gold">★ Sunday tradition</span><span class="badge badge-forest">Book a Waymo here!</span><span class="badge badge-red">Book ahead</span></div>
+    <div class="rest-desc">One of the finest dim sum experiences in the entire country — Michelin-recognized, family-owned since 1958. Over 100 rotating dishes served from traditional carts. Sunday is the classic time. The California Street location is easy to Waymo to for a fun arrival experience.</div>
+    <div class="menu-highlights"><div class="menu-title">Must Try</div><div class="menu-items"><span class="menu-item">Shanghai XLB soup dumplings 🌟</span><span class="menu-item">Peking duck in steamed bun</span><span class="menu-item">Har gow (shrimp dumpling)</span><span class="menu-item">Char siu bao (BBQ pork bun)</span><span class="menu-item">Shu mai</span><span class="menu-item">Crab claw croquette</span><span class="menu-item">Egg custard tart</span></div></div>
+  </div>
+
+  <div class="rest-card our-fave">
+    <div class="rest-header">
+      <div class="rest-emoji">🔥</div>
+      <div><div class="rest-name">Brother's Korean BBQ</div><div class="rest-meta">Korean BBQ · SF's go-to · Must-do for this trip</div></div>
+    </div>
+    <div class="rest-badges"><span class="badge badge-red">Must-do!</span><span class="badge badge-ocean">Dinner</span><span class="badge badge-gold">Group experience</span></div>
+    <div class="rest-desc">Our pick for Korean BBQ in SF — grilling your own meat at the table is one of the most fun group dining experiences you'll have. Order a mix of galbi, pork belly, bulgogi, and the banchan sides keep coming. Interactive, social, and endlessly delicious. Book ahead for a group.</div>
+    <div class="menu-highlights"><div class="menu-title">Order This</div><div class="menu-items"><span class="menu-item">Galbi (short ribs) 🌟</span><span class="menu-item">Pork belly (samgyeopsal)</span><span class="menu-item">Bulgogi</span><span class="menu-item">Banchan sides (keep 'em coming)</span><span class="menu-item">Stone bowl bibimbap</span><span class="menu-item">Seafood pajeon (pancake)</span></div></div>
+  </div>
+
+  <div class="rest-card our-fave">
+    <div class="rest-header">
+      <div class="rest-emoji">🥩</div>
+      <div><div class="rest-name">Osso Steakhouse</div><div class="rest-meta">Fine dining steakhouse · 1177 California St · Nob Hill</div></div>
+    </div>
+    <div class="rest-badges"><span class="badge badge-purple">Splurge night</span><span class="badge badge-ocean">Dinner only (5 PM+)</span><span class="badge badge-red">Book ahead</span></div>
+    <div class="rest-desc">Right here on California Street atop Nob Hill — one of SF's top steakhouses with Art Deco elegance and impeccable service. Dry-aged prime beef, Dungeness crab, and a Wine Spectator award-winning list. Perfect for a special night out.</div>
+    <div class="menu-highlights"><div class="menu-title">Standouts</div><div class="menu-items"><span class="menu-item">Bone-in ribeye (voted #1) 🌟</span><span class="menu-item">Bone-in filet mignon</span><span class="menu-item">House cheese bread</span><span class="menu-item">Dungeness crab garlic sauce</span><span class="menu-item">Creamed spinach</span><span class="menu-item">Mac & cheese</span></div></div>
+  </div>
+
+  <div class="rest-card walkable">
+    <div class="rest-header">
+      <div class="rest-emoji">🍕</div>
+      <div><div class="rest-name">Back2Back</div><div class="rest-meta">Natural wine · Wood-fired pizza · Right around the corner 🚶</div></div>
+    </div>
+    <div class="rest-badges"><span class="badge badge-forest">We walk there together</span><span class="badge badge-gold">Group favorite</span><span class="badge badge-ocean">Dinner</span></div>
+    <div class="rest-desc">Natural wine and wood-fired pizza — it's right around the corner from our place so we literally just walk out the door. Great vibe, great food, and zero logistics. Our kind of neighborhood night out.</div>
+    <div class="menu-highlights"><div class="menu-title">The Move</div><div class="menu-items"><span class="menu-item">Wood-fired pizzas 🌟</span><span class="menu-item">Natural wine pours</span><span class="menu-item">Seasonal small plates</span></div></div>
+  </div>
+
+  <div class="rest-card">
+    <div class="rest-header">
+      <div class="rest-emoji">🌮</div>
+      <div><div class="rest-name">Señor Sisig</div><div class="rest-meta">Filipino-Mexican fusion · Multiple SF locations</div></div>
+    </div>
+    <div class="rest-badges"><span class="badge badge-gold">SF original</span><span class="badge badge-ocean">Lunch or casual dinner</span></div>
+    <div class="rest-desc">A Filipino-Mexican mashup SF invented — sisig burritos, crispy pork tacos, amazing bowls. Born as a food truck, now a beloved local name. Loud, fun, and absolutely delicious.</div>
+    <div class="menu-highlights"><div class="menu-title">Order This</div><div class="menu-items"><span class="menu-item">Sisig burrito 🌟</span><span class="menu-item">Pork belly tacos</span><span class="menu-item">Garlic fried rice bowl</span></div></div>
+  </div>
+
+  <div class="food-section-title">🏛️ Markets & Nightlife</div>
+
+  <div class="rest-card our-fave">
+    <div class="rest-header">
+      <div class="rest-emoji">🧺</div>
+      <div><div class="rest-name">Ferry Building Farmers Market</div><div class="rest-meta">Saturday mornings only · Embarcadero waterfront</div></div>
+    </div>
+    <div class="rest-badges"><span class="badge badge-red">Saturday only!</span><span class="badge badge-forest">Arrive early</span></div>
+    <div class="rest-desc">The best farmers market in SF — artisan cheese, fresh-baked bread, oysters, pastries, and stunning bay views. Saturday morning is the full market experience.</div>
+    <div class="menu-highlights"><div class="menu-title">Don't Miss</div><div class="menu-items"><span class="menu-item">Acme sourdough samples</span><span class="menu-item">Hog Island oysters</span><span class="menu-item">Cowgirl Creamery cheese</span><span class="menu-item">Blue Bottle Coffee</span></div></div>
+  </div>
+
+  <div class="rest-card our-fave">
+    <div class="rest-header">
+      <div class="rest-emoji">🦈</div>
+      <div><div class="rest-name">California Academy of Sciences</div><div class="rest-meta">Daytime · Golden Gate Park · Sat, Sun, or Mon</div></div>
+    </div>
+    <div class="rest-badges"><span class="badge badge-ocean">Open daily</span><span class="badge badge-gold">World-class</span><span class="badge badge-forest">Book tickets</span></div>
+    <div class="rest-desc">One of the most extraordinary natural history museums in the world — the Steinhart Aquarium (living coral reef + shark tank), a 4-story living rainforest dome with free-flying birds and butterflies, and the Osher Planetarium with immersive dome shows about the universe. Plus a famous living roof of native California plants you can walk on. Easily 2–3 hours. Pairs perfectly with a stroll through Golden Gate Park.</div>
+    <div class="menu-highlights"><div class="menu-title">Don't Miss</div><div class="menu-items"><span class="menu-item">Steinhart Aquarium coral reef 🌟</span><span class="menu-item">4-story living rainforest dome</span><span class="menu-item">Osher Planetarium dome show 🌌</span><span class="menu-item">Living roof rooftop walk</span><span class="menu-item">Philippine coral reef tank</span></div></div>
+  </div>
+
+  <div class="view-card">
+    <h3>🌉 Our Bay Bridge View at Night</h3>
+    <p>We have a spectacular view of the Bay Bridge and the Bay Lights installation from our place — the lights illuminate the entire western span of the bridge every night. Grab a drink, sit on the deck, and just take it in. It's one of the best free shows in the city and you'll have it from our living room.</p>
+  </div>
+
+  <div class="food-section-title">🍿 Movie Night Options</div>
+
+  <div class="rest-card">
+    <div class="rest-header">
+      <div class="rest-emoji">🎬</div>
+      <div><div class="rest-name">Movie Night In</div><div class="rest-meta">Cozy night · Deck view of the Bay Bridge lights</div></div>
+    </div>
+    <div class="rest-badges"><span class="badge badge-forest">Anytime</span><span class="badge badge-ocean">Great after a big day</span></div>
+    <div class="rest-desc">Sometimes the best SF evening is right at home. Order delivery, pop it on the big screen, and watch the Bay Bridge light up outside the window. Perfect after a long day of exploring.</div>
+  </div>
+
+  <div class="food-section-title">🚚 Delivery — Nights In</div>
+
+  <div class="rest-card">
+    <div class="rest-header">
+      <div class="rest-emoji">🍔</div>
+      <div><div class="rest-name">Super Duper Burgers</div><div class="rest-meta">SF-born burger chain · delivers to us</div></div>
+    </div>
+    <div class="rest-badges"><span class="badge badge-gold">Delivery!</span><span class="badge badge-red">Real ice cream shakes 🌟</span></div>
+    <div class="rest-desc">A beloved local SF burger brand — juicy patties, fresh ingredients, and milkshakes made with <em>real ice cream</em>. Far above typical fast food. Great for a casual delivery night.</div>
+    <div class="menu-highlights"><div class="menu-title">Order This</div><div class="menu-items"><span class="menu-item">Super burger</span><span class="menu-item">Garlic fries</span><span class="menu-item">Real ice cream milkshake 🌟</span></div></div>
+  </div>
+
+  <div class="rest-card">
+    <div class="rest-header">
+      <div class="rest-emoji">🌊</div>
+      <div><div class="rest-name">Gott's Roadside</div><div class="rest-meta">California-style roadside diner · delivery or Embarcadero</div></div>
+    </div>
+    <div class="rest-badges"><span class="badge badge-gold">Delivery!</span><span class="badge badge-ocean">Also at Ferry Building</span></div>
+    <div class="rest-desc">A Napa-born California roadside diner done right — Wagyu burgers, ahi tuna tacos, and phenomenal shakes. Also right at the Ferry Building if you're over there on Saturday.</div>
+    <div class="menu-highlights"><div class="menu-title">Order This</div><div class="menu-items"><span class="menu-item">Wagyu cheeseburger 🌟</span><span class="menu-item">Ahi tuna tacos</span><span class="menu-item">Onion rings</span><span class="menu-item">Chocolate shake</span></div></div>
+  </div>
+
+  <div class="rest-card">
+    <div class="rest-header">
+      <div class="rest-emoji">🍕</div>
+      <div><div class="rest-name">Outta Sight Pizza</div><div class="rest-meta">NY-style pizza · delivery</div></div>
+    </div>
+    <div class="rest-badges"><span class="badge badge-gold">Delivery!</span></div>
+    <div class="rest-desc">Great NY-style pizza delivered to the door — perfect for a relaxed evening in.</div>
+  </div>
+
+  <div class="rest-card">
+    <div class="rest-header">
+      <div class="rest-emoji">⭐</div>
+      <div><div class="rest-name">Little Star Pizza</div><div class="rest-meta">Deep dish + thin crust · delivery or dine-in</div></div>
+    </div>
+    <div class="rest-badges"><span class="badge badge-gold">Delivery!</span><span class="badge badge-forest">Deep dish</span></div>
+    <div class="rest-desc">SF's beloved deep dish institution. Thick, cheesy, and incredibly satisfying. A classic for a cozy movie night.</div>
+    <div class="menu-highlights"><div class="menu-title">Order This</div><div class="menu-items"><span class="menu-item">Classic deep dish 🌟</span><span class="menu-item">Little Star thin crust</span></div></div>
+  </div>
+
+  <div class="rest-card walkable">
+    <div class="rest-header">
+      <div class="rest-emoji">🍗</div>
+      <div><div class="rest-name">Hot Sauce & Panko</div><div class="rest-meta">Panko-crusted wings + waffles · 1468 Hyde St · Nob Hill</div></div>
+    </div>
+    <div class="rest-badges"><span class="badge badge-forest">Walking distance</span><span class="badge badge-red">Takeout only</span><span class="badge badge-gold">Hidden gem</span></div>
+    <div class="rest-desc">A Nob Hill cult favorite — chicken wings hand-coated in Japanese panko breadcrumbs with a rotating lineup of house-made sauces. Takeout only, tiny spot, but worth every minute of the wait. Also delivers.</div>
+    <div class="menu-highlights"><div class="menu-title">Must Try</div><div class="menu-items"><span class="menu-item">Korean Gochujang wings 🌟</span><span class="menu-item">Thai Sweet Chili wings</span><span class="menu-item">Panko Chicken Sandwich</span><span class="menu-item">Belgian waffle (to cool the heat)</span><span class="menu-item">Ghost pepper wings (brave!)</span></div></div>
+  </div>
+
+  <div class="food-section-title">🍝 Neighborhood Italian</div>
+
+  <div class="rest-card our-fave">
+    <div class="rest-header">
+      <div class="rest-emoji">🍝</div>
+      <div><div class="rest-name">Seven Hills</div><div class="rest-meta">Farm-to-table Italian · 1896 Hyde St · Russian Hill · walkable</div></div>
+    </div>
+    <div class="rest-badges"><span class="badge badge-forest">Walking distance</span><span class="badge badge-purple">Dinner only (5 PM+)</span><span class="badge badge-red">Book ahead</span><span class="badge badge-gold">Local legend</span></div>
+    <div class="rest-desc">One of the best neighborhood Italian restaurants in the entire city — voted top 100 by OpenTable, a favorite of NBA coach Gregg Popovich, and beloved by locals for over a decade. Chef Anthony Florian makes everything in-house including the pasta and salumi. Right on Hyde St, the cable car rattles past the window. Intimate, cozy, and deeply delicious.</div>
+    <div class="menu-highlights"><div class="menu-title">Must Order</div><div class="menu-items"><span class="menu-item">House-made focaccia 🌟</span><span class="menu-item">Maccheroncelli with tomato & ricotta</span><span class="menu-item">Truffle ravioli</span><span class="menu-item">Dungeness crab pasta (when available)</span><span class="menu-item">Tomato-braised meatballs</span><span class="menu-item">Chocolate budino</span></div></div>
+  </div>
+
+  <div class="food-section-title">🍦 Dessert — You Can Walk There</div>
+
+  <div class="rest-card our-fave">
+    <div class="rest-header">
+      <div class="rest-emoji">🍦</div>
+      <div><div class="rest-name">Swensen's Ice Cream</div><div class="rest-meta">The original location · 1999 Hyde St · Est. 1948 · walkable</div></div>
+    </div>
+    <div class="rest-badges"><span class="badge badge-forest">We can walk!</span><span class="badge badge-gold">SF icon since 1948</span><span class="badge badge-red">Last one in the USA</span></div>
+    <div class="rest-desc">This is where Swensen's was born — the original shop at the corner of Union and Hyde, right on the Powell-Hyde cable car line, opened in 1948. All ice cream is still made by hand on-site using the original recipes. It's the <em>last remaining Swensen's in the entire United States</em>. A perfect after-dinner walk and a true SF institution.</div>
+    <div class="menu-highlights"><div class="menu-title">Must Get</div><div class="menu-items"><span class="menu-item">Swiss Orange Chip 🌟 (the legendary flavor)</span><span class="menu-item">Sticky Chewy Chocolate</span><span class="menu-item">Cookie Dough</span><span class="menu-item">Handmade waffle cone</span><span class="menu-item">Banana split</span></div></div>
+  </div>
+</div>
+
+<!-- ===== ACTIVITIES ===== -->
+<div id="panel-activities" class="panel">
+  <p class="section-title">Choose Your Adventures</p>
+
+  <div class="ear-banner">
+    <h3>🎲 No pressure — it's your trip!</h3>
+    <p>These are ideas, not a checklist. Tap things that look fun, skip what doesn't interest you, and feel free to discover something completely spontaneous. The best SF memories often come from just wandering.</p>
+  </div>
+
+  <div class="info-banner" id="activity-banner"><span class="ib-icon">🧭</span><span>You have <strong>Fri afternoon · Sat · Sun · Mon</strong> to explore. Dinner is around 5 PM. ★ = our top picks!</span></div>
+  <div id="activity-counter" class="act-sel-preview" style="display:none;"></div>
+
+  <div style="margin-bottom:14px;">
+    <div class="snack-cat-title">🌲 Nature & Outdoors</div>
+    <div class="activity-grid">
+      <div class="activity-card our-pick selected" id="act-muir" onclick="togAct('muir')"><span class="activity-emoji">🌲</span><div class="activity-title">Muir Woods</div><div class="activity-desc">Ancient coastal redwoods — cathedral-like groves. A big reason for this trip. <strong>We've already reserved your entry!</strong></div><div class="activity-meta"><span class="tag tag-f">Half day</span><span class="tag tag-g">✅ Reserved by us!</span></div></div>
+      <div class="activity-card" id="act-marin" onclick="togAct('marin')"><span class="activity-emoji">🏔️</span><div class="activity-title">Marin Headlands</div><div class="activity-desc">Dramatic Golden Gate views, rolling coastal hills. Perfect add-on after Muir Woods.</div><div class="activity-meta"><span class="tag tag-f">2–3 hrs</span></div></div>
+      <div class="activity-card" id="act-ggpark" onclick="togAct('ggpark')"><span class="activity-emoji">🌿</span><div class="activity-title">Golden Gate Park</div><div class="activity-desc">Botanical garden, Japanese Tea Garden, buffalo paddock — a city park like no other.</div><div class="activity-meta"><span class="tag tag-f">2–4 hrs</span></div></div>
+      <div class="activity-card" id="act-baker" onclick="togAct('baker')"><span class="activity-emoji">🏖️</span><div class="activity-title">Baker Beach</div><div class="activity-desc">Sandy beach with stunning Golden Gate views. Best at golden hour before dinner.</div><div class="activity-meta"><span class="tag tag-o">1–2 hrs</span></div></div>
+    </div>
+  </div>
+
+  <div style="margin-bottom:14px;">
+    <div class="snack-cat-title">🐠 Aquariums & Sea Life</div>
+    <div class="activity-grid">
+      <div class="activity-card our-pick" id="act-aquarium" onclick="togAct('aquarium')"><span class="activity-emoji">🦈</span><div class="activity-title">Aquarium of the Bay</div><div class="activity-desc">Walk-through tunnels with bay sharks and rays at Fisherman's Wharf.</div><div class="activity-meta"><span class="tag tag-o">1.5 hrs</span></div></div>
+      <div class="activity-card our-pick" id="act-steinhart" onclick="togAct('steinhart')"><span class="activity-emoji">🪸</span><div class="activity-title">Cal Academy of Sciences</div><div class="activity-desc">Steinhart Aquarium + 4-story rainforest + planetarium + living roof. One of the world's best natural history museums.</div><div class="activity-meta"><span class="tag tag-o">2–3 hrs</span><span class="tag tag-g">Book tickets</span></div></div>
+      <div class="activity-card" id="act-seals" onclick="togAct('seals')"><span class="activity-emoji">🦭</span><div class="activity-title">Pier 39 Sea Lions</div><div class="activity-desc">Wild sea lions lazing on the docks — always fun and always free!</div><div class="activity-meta"><span class="tag tag-o">30–60 min</span><span class="tag tag-g">Free!</span></div></div>
+      <div class="activity-card" id="act-monterey" onclick="togAct('monterey')"><span class="activity-emoji">🐙</span><div class="activity-title">Monterey Bay Aquarium</div><div class="activity-desc">World-class — 2 hrs south. Kelp forest, sea otters, open ocean tank. Worth the drive.</div><div class="activity-meta"><span class="tag tag-o">Full day trip</span><span class="tag tag-g">Book ahead!</span></div></div>
+    </div>
+  </div>
+
+  <div style="margin-bottom:14px;">
+    <div class="snack-cat-title">🏙️ Iconic SF</div>
+    <div class="activity-grid">
+      <div class="activity-card" id="act-ggbridge" onclick="togAct('ggbridge')"><span class="activity-emoji">🌁</span><div class="activity-title">Golden Gate Bridge Walk</div><div class="activity-desc">Walk or bike the bridge. Incredible views. Dress warm — it's always windy!</div><div class="activity-meta"><span class="tag tag-o">1.5–2 hrs</span></div></div>
+      <div class="activity-card" id="act-alcatraz" onclick="togAct('alcatraz')"><span class="activity-emoji">🏝️</span><div class="activity-title">Alcatraz Island</div><div class="activity-desc">Haunting and fascinating. The audio tour is excellent. Book weeks in advance!</div><div class="activity-meta"><span class="tag tag-o">Half day</span><span class="tag tag-g">Book early!</span></div></div>
+      <div class="activity-card" id="act-lombard" onclick="togAct('lombard')"><span class="activity-emoji">🌸</span><div class="activity-title">Lombard St + Coit Tower</div><div class="activity-desc">The famous crooked street, then Coit Tower for panoramic bay views.</div><div class="activity-meta"><span class="tag tag-o">1.5 hrs</span></div></div>
+      <div class="activity-card" id="act-castro" onclick="togAct('castro')"><span class="activity-emoji">🏘️</span><div class="activity-title">Castro / Haight-Ashbury</div><div class="activity-desc">Colorful Victorians, unique shops, and great people-watching in historic neighborhoods.</div><div class="activity-meta"><span class="tag tag-f">2 hrs</span></div></div>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin-top:6px;">
+    <button class="btn btn-p" onclick="go('schedule')">Build My Schedule →</button>
+  </div>
+</div>
+
+<!-- ===== SCHEDULE ===== -->
+<div id="panel-schedule" class="panel">
+  <p class="section-title">Trip Schedule</p>
+  <p class="section-sub">A loose guide — dinner around 5 PM each day. Everything else is flexible!</p>
+  <div class="ear-banner" style="margin-bottom:16px;">
+    <h3>🎲 Remember: play it by ear!</h3>
+    <p>This is a suggested flow, not a binding contract. Sleep in if you want. Skip something if you're tired. Add a spontaneous stop. This is your vacation — the goal is joy, not a checklist.</p>
+  </div>
+  <div id="schedule-container"></div>
+  <div class="info-banner"><span class="ib-icon">📋</span><span>Go to <strong>Save & Share</strong> to copy or print this for Mike & Dez!</span></div>
+</div>
+
+<!-- ===== SNACKS ===== -->
+<div id="panel-snacks" class="panel">
+  <p class="section-title">Snack & Drink Prep</p>
+  <p class="section-sub">Check off what you'll have ready. All non-alcoholic — Mike & Dez will love the Poppi sodas and David bars!</p>
+
+  <div class="snack-cat-title">🥤 Drinks (Non-Alcoholic)</div>
+  <div class="snack-grid" id="drinks-grid"></div>
+  <div class="snack-add-row"><input type="text" id="drinks-custom" placeholder="Add a drink..." /><button class="btn btn-o btn-sm" onclick="addSnack('drinks')">+ Add</button></div>
+
+  <div class="snack-cat-title">⚡ Favorite Brands</div>
+  <div class="snack-grid" id="brands-grid"></div>
+  <div class="snack-add-row"><input type="text" id="brands-custom" placeholder="Add a brand snack..." /><button class="btn btn-o btn-sm" onclick="addSnack('brands')">+ Add</button></div>
+
+  <div class="snack-cat-title">🧀 Savory Snacks</div>
+  <div class="snack-grid" id="savory-grid"></div>
+  <div class="snack-add-row"><input type="text" id="savory-custom" placeholder="Add a savory snack..." /><button class="btn btn-o btn-sm" onclick="addSnack('savory')">+ Add</button></div>
+
+  <div class="snack-cat-title">🍪 Sweet Treats</div>
+  <div class="snack-grid" id="sweet-grid"></div>
+  <div class="snack-add-row"><input type="text" id="sweet-custom" placeholder="Add a sweet treat..." /><button class="btn btn-o btn-sm" onclick="addSnack('sweet')">+ Add</button></div>
+
+  <div class="snack-cat-title">🥙 Breakfast & Meals</div>
+  <div class="snack-grid" id="meals-grid"></div>
+  <div class="snack-add-row"><input type="text" id="meals-custom" placeholder="Add a meal item..." /><button class="btn btn-o btn-sm" onclick="addSnack('meals')">+ Add</button></div>
+
+  <div style="margin-top:4px;padding-top:13px;border-top:1px solid var(--border);">
+    <div style="font-size:12px;font-weight:600;color:var(--text-mid);margin-bottom:6px;">📝 Host notes (allergies, preferences, reminders)</div>
+    <textarea id="snack-notes" placeholder="e.g. Mike & Dez don't drink alcohol. Any food allergies or preferences..."></textarea>
+  </div>
+</div>
+
+<!-- ===== SAVE & SHARE ===== -->
+<div id="panel-save" class="panel">
+  <p class="section-title">Save & Share</p>
+  <p class="section-sub">Your selections auto-save in your browser. Share a live link so Mike, Dez, and you always see the same plan.</p>
+
+  <div id="autosave-bar" style="background:var(--forest-light);border:1px solid #9FE1CB;border-radius:var(--radius-sm);padding:10px 14px;font-size:12.5px;color:var(--forest);margin-bottom:14px;display:flex;align-items:center;gap:8px;">
+    <span id="save-icon">💾</span>
+    <span id="save-status">All changes auto-save to your browser.</span>
+  </div>
+
+  <div style="background:linear-gradient(135deg,#1a1a2e,#16213e);color:white;border-radius:var(--radius);padding:18px 20px;margin-bottom:14px;">
+    <div style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;margin-bottom:5px;">🔗 Share a Live Link</div>
+    <div style="font-size:13px;opacity:0.85;margin-bottom:13px;">Click to generate a shareable URL with your current selections baked in. Send it to Mike & Dez — they open the same plan you built.</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+      <button class="btn btn-g" onclick="copyShareLink()">🔗 Copy Share Link</button>
+      <button class="btn" style="background:rgba(255,255,255,0.15);color:white;border:1px solid rgba(255,255,255,0.3);" onclick="openEmail()">📧 Email to Everyone</button>
+    </div>
+    <div id="link-toast" style="display:none;margin-top:10px;font-size:12px;opacity:0.9;">✅ Link copied! Send it to Mike & Dez.</div>
+  </div>
+
+  <div class="summary-box">
+    <h3>Generate Printable Summary</h3>
+    <p>Full text version — flights, weather, rideshare, activities, schedule, and snack checklist.</p>
+    <button class="btn btn-g" onclick="genSummary()">✨ Generate Summary</button>
+  </div>
+
+  <div id="summary-output" style="display:none;">
+    <div class="copy-area" id="summary-text"></div>
+    <div class="flex-row" style="margin-bottom:13px;">
+      <button class="btn btn-p" onclick="copySummary()">📋 Copy to Clipboard</button>
+      <button class="btn btn-f" onclick="window.print()">🖨️ Print</button>
+    </div>
+    <div class="success-toast" id="copy-toast">✅ Copied to clipboard!</div>
+  </div>
+  <div class="divider"></div>
+  <div class="card">
+    <div style="font-size:14px;font-weight:600;margin-bottom:3px;">📝 Personal Host Notes</div>
+    <div style="font-size:12px;color:var(--text-mid);margin-bottom:8px;">Reminders, pickup logistics, reservation confirmations — anything extra. Auto-saved.</div>
+    <textarea id="personal-notes" placeholder="e.g. Pick up at SFO Terminal 3 Level 2 around 10 AM. Yank Sing res: Sun 10:30 AM conf #12345. Osso booked Friday 5 PM..." oninput="saveNotes()"></textarea>
+  </div>
+
+  <div class="divider"></div>
+  <div style="font-size:12px;color:var(--text-light);text-align:center;padding-bottom:8px;">
+    <strong>How sharing works:</strong> Selections + notes are saved in <em>your</em> browser automatically. The Share Link encodes everything into the URL so anyone who opens it sees your exact plan — no account needed.
+  </div>
+</div>
+
+<script>
+// ── PERSISTENCE KEYS ─────────────────────────────────────────────────────────
+const LS_ACTS   = 'mddez_acts';
+const LS_SNACKS = 'mddez_snacks';
+const LS_NOTES  = 'mddez_notes';
+const LS_PNOTES = 'mddez_pnotes';
+const LS_CUSTOM = 'mddez_custom';
+
+// ── STATE ────────────────────────────────────────────────────────────────────
+const selActs   = new Set(['muir']);
+const selSnacks = new Set();
+
+// ── SNACK DATA (defined early so loadFromLS can add customs) ─────────────────
+const snackData = {
+  drinks: [
+    {e:'🥤',n:'Poppi Prebiotic Soda ⭐ (our fave!)'},
+    {e:'🍋',n:'Sparkling water (LaCroix / Topo Chico)'},
+    {e:'☕',n:'Coffee & creamer'},
+    {e:'🍵',n:'Tea selection'},
+    {e:'🧃',n:'Orange juice / apple juice'},
+    {e:'💧',n:'Still / filtered water'},
+    {e:'🥛',n:'Oat milk / almond milk'},
+    {e:'🍹',n:'NA sparkling mocktail'},
+  ],
+  brands: [
+    {e:'💪',n:'David Protein Bars ⭐'},
+    {e:'🥤',n:'Poppi Soda variety pack ⭐'},
+    {e:'🍫',n:'RXBAR / Larabar'},
+    {e:'🥜',n:"Justin's Nut Butter packs"},
+    {e:'🌾',n:'Kind Bars'},
+    {e:'🫙',n:'Chomps meat sticks'},
+    {e:'🫙',n:'Perfect Bars (refrigerated)'},
+    {e:'🌽',n:'Siete grain-free chips'},
+  ],
+  savory: [
+    {e:'🧀',n:'Cheese board + crackers'},
+    {e:'🫒',n:'Olives & pickles'},
+    {e:'🥜',n:'Mixed nuts'},
+    {e:'🌽',n:'Chips & salsa / guac'},
+    {e:'🫙',n:'Hummus & veggies'},
+    {e:'🥖',n:'Artisan bread / baguette'},
+    {e:'🥩',n:'Charcuterie / deli meats'},
+    {e:'🥨',n:'Pretzels / pita chips'},
+  ],
+  sweet: [
+    {e:'🍫',n:'Dark chocolate'},
+    {e:'🍪',n:'Cookies / biscotti'},
+    {e:'🍇',n:'Fresh fruit (grapes, berries)'},
+    {e:'🍓',n:'Strawberries'},
+    {e:'🧁',n:'Pastries / muffins'},
+    {e:'🍮',n:'Caramel / toffee treats'},
+  ],
+  meals: [
+    {e:'🥚',n:'Eggs (for breakfast)'},
+    {e:'🥓',n:'Bacon / turkey sausage'},
+    {e:'🫐',n:'Pancake / waffle mix'},
+    {e:'🥑',n:'Avocados for toast'},
+    {e:'🥐',n:'Bakery croissants / pastries'},
+    {e:'🧈',n:'Good butter & jam'},
+    {e:'🥗',n:'Salad fixings'},
+    {e:'🍝',n:'Pasta for easy dinner night'},
+  ]
+};
+
+// ── URL HASH ENCODING ────────────────────────────────────────────────────────
+function encodeState() {
+  const state = {
+    a: [...selActs],
+    s: [...selSnacks],
+    n: document.getElementById('snack-notes')?.value || '',
+    p: document.getElementById('personal-notes')?.value || '',
+    d: {},
+    c: {}
+  };
+  ['fri','sat','sun','mon','tue'].forEach(k => {
+    const v = getDayNote(k, true);
+    if (v) state.d[k] = v;
+  });
+  ['drinks','brands','savory','sweet','meals'].forEach(cat => {
+    const extras = snackData[cat].filter(i => i._custom).map(i => i.n);
+    if (extras.length) state.c[cat] = extras;
+  });
+  return btoa(unescape(encodeURIComponent(JSON.stringify(state))));
+}
+
+function decodeState(encoded) {
+  try { return JSON.parse(decodeURIComponent(escape(atob(encoded)))); }
+  catch { return null; }
+}
+
+function applyState(state) {
+  if (!state) return;
+  selActs.clear();
+  (state.a || ['muir']).forEach(id => selActs.add(id));
+  selSnacks.clear();
+  (state.s || []).forEach(k => selSnacks.add(k));
+  if (state.c) {
+    Object.entries(state.c).forEach(([cat, items]) => {
+      items.forEach(n => {
+        if (snackData[cat] && !snackData[cat].find(i => i.n === n))
+          snackData[cat].push({e:'➕', n, _custom:true});
+      });
+    });
+  }
+  window._pendingNotes  = state.n || '';
+  window._pendingPNotes = state.p || '';
+  window._pendingDNotes = state.d || {};
+}
+
+// ── LOCALSTORAGE ─────────────────────────────────────────────────────────────
+function persist() {
+  try {
+    localStorage.setItem(LS_ACTS,   JSON.stringify([...selActs]));
+    localStorage.setItem(LS_SNACKS, JSON.stringify([...selSnacks]));
+    localStorage.setItem(LS_NOTES,  document.getElementById('snack-notes')?.value || '');
+    localStorage.setItem(LS_PNOTES, document.getElementById('personal-notes')?.value || '');
+    const custom = {};
+    ['drinks','brands','savory','sweet','meals'].forEach(cat => {
+      const extras = snackData[cat].filter(i => i._custom).map(i => i.n);
+      if (extras.length) custom[cat] = extras;
+    });
+    localStorage.setItem(LS_CUSTOM, JSON.stringify(custom));
+    flashSaved();
+  } catch(e) {}
+}
+
+function loadFromLS() {
+  try {
+    const acts = JSON.parse(localStorage.getItem(LS_ACTS) || '["muir"]');
+    selActs.clear(); acts.forEach(id => selActs.add(id));
+    const snacks = JSON.parse(localStorage.getItem(LS_SNACKS) || '[]');
+    selSnacks.clear(); snacks.forEach(k => selSnacks.add(k));
+    const custom = JSON.parse(localStorage.getItem(LS_CUSTOM) || '{}');
+    Object.entries(custom).forEach(([cat, items]) => {
+      if (!snackData[cat]) return;
+      items.forEach(n => {
+        if (!snackData[cat].find(i => i.n === n)) snackData[cat].push({e:'➕', n, _custom:true});
+      });
+    });
+    window._pendingNotes  = localStorage.getItem(LS_NOTES)  || '';
+    window._pendingPNotes = localStorage.getItem(LS_PNOTES) || '';
+  } catch(e) {}
+}
+
+function getDayNote(key, fromLS) {
+  if (fromLS) {
+    try { return localStorage.getItem('mddez_dnote_' + key) || ''; } catch { return ''; }
+  }
+  // from rendered textarea
+  const ta = document.querySelector(`[data-daykey="${key}"]`);
+  return ta ? ta.value : '';
+}
+
+function saveDayNote(key, val) {
+  try { localStorage.setItem('mddez_dnote_' + key, val); flashSaved(); } catch {}
+}
+
+function flashSaved() {
+  const el = document.getElementById('save-status');
+  const ic = document.getElementById('save-icon');
+  if (!el) return;
+  el.textContent = 'Saved!';
+  if (ic) ic.textContent = '✅';
+  clearTimeout(window._saveTimer);
+  window._saveTimer = setTimeout(() => {
+    el.textContent = 'All changes auto-save to your browser.';
+    if (ic) ic.textContent = '💾';
+  }, 2200);
+}
+
+// ── SHARE LINK ───────────────────────────────────────────────────────────────
+function copyShareLink() {
+  const encoded = encodeState();
+  const base = 'https://philfna.github.io/mikeanddez/';
+  const url  = base + '#state=' + encoded;
+  navigator.clipboard.writeText(url).then(() => {
+    const t = document.getElementById('link-toast');
+    if (t) { t.style.display='block'; setTimeout(()=>t.style.display='none', 3500); }
+  });
+}
+
+function openEmail() {
+  const encoded = encodeState();
+  const base = 'https://philfna.github.io/mikeanddez/';
+  const url  = base + '#state=' + encoded;
+  const subject = encodeURIComponent('Mike & Dez — SF Trip Plan 🌉');
+  const body = encodeURIComponent(
+    'Hey! Here\'s our SF trip planner with everything you need — flights, rideshare to our place, schedule, restaurants, and activities.\n\n' +
+    'Open this link:\n' + url + '\n\n' +
+    'Tap any activity card to add it to your schedule. Use the Save & Share tab to grab a printable summary. Your selections save automatically in the link.\n\n' +
+    'Can\'t wait to see you both! 🌁'
+  );
+  window.location.href = 'mailto:?subject=' + subject + '&body=' + body;
+}
+
+// ── TABS ─────────────────────────────────────────────────────────────────────
+function go(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    if (b.getAttribute('onclick') && b.getAttribute('onclick').includes("'" + id + "'")) b.classList.add('active');
+  });
+  if (id === 'schedule') renderSched();
+}
+
+function selApp(a) {
+  ['uber','lyft','waymo','all'].forEach(x => {
+    document.getElementById('app-' + x).classList.remove('selected');
+    const el = document.getElementById('steps-' + x);
+    if (el) el.style.display = 'none';
+  });
+  document.getElementById('app-' + a).classList.add('selected');
+  document.getElementById('steps-' + a).style.display = 'block';
+}
+
+// ── ACTIVITIES ───────────────────────────────────────────────────────────────
+function togAct(id) {
+  const c = document.getElementById('act-' + id);
+  selActs.has(id) ? (selActs.delete(id), c.classList.remove('selected')) : (selActs.add(id), c.classList.add('selected'));
+  updateActCounter();
+  persist();
+  if (document.getElementById('panel-schedule').classList.contains('active')) renderSched();
+}
+
+function updateActCounter() {
+  const counter = document.getElementById('activity-counter');
+  const banner  = document.getElementById('activity-banner');
+  if (selActs.size === 0) { counter.style.display='none'; banner.style.display='flex'; return; }
+  banner.style.display = 'none'; counter.style.display = 'block';
+  counter.innerHTML = '<strong>' + selActs.size + ' selected:</strong> ' +
+    [...selActs].map(x => AI[x]?.name || x).join(', ') +
+    ' — <a href="#" onclick="go(\'schedule\');return false;" style="color:var(--forest);">View schedule →</a>';
+}
+
+const AI = {
+  muir:      {name:'Muir Woods',              emoji:'🌲', time:'9:00 AM – 1:00 PM',   note:'✅ Entry reserved — big reason for this trip!'},
+  marin:     {name:'Marin Headlands',         emoji:'🏔️', time:'1:30 – 4:00 PM',     note:'Pairs great with Muir Woods — same direction.'},
+  ggpark:    {name:'Golden Gate Park',        emoji:'🌿', time:'10:00 AM – 1:00 PM',  note:'Visit Japanese Tea Garden inside the park.'},
+  baker:     {name:'Baker Beach',             emoji:'🏖️', time:'4:00 – 5:30 PM',     note:'Perfect golden hour before 5 PM dinner!'},
+  aquarium:  {name:'Aquarium of the Bay',     emoji:'🦈', time:'11:00 AM – 12:30 PM', note:"At Fisherman's Wharf — great for fish fans!"},
+  steinhart: {name:'Cal Academy of Sciences',      emoji:'🪸', time:'10:00 AM – 1:00 PM',  note:'Aquarium + rainforest dome + Osher Planetarium show — book tickets ahead!'},
+  seals:     {name:'Pier 39 Sea Lions',       emoji:'🦭', time:'2:00 – 3:00 PM',     note:"Free! Combine with Fisherman's Wharf."},
+  monterey:  {name:'Monterey Bay Aquarium',   emoji:'🐙', time:'All day',             note:'2 hrs south on scenic Hwy 1 — book ahead!'},
+  ggbridge:  {name:'Golden Gate Bridge Walk', emoji:'🌁', time:'9:00 – 11:00 AM',    note:'Morning light is best. Very windy — dress warm!'},
+  alcatraz:  {name:'Alcatraz Island',         emoji:'🏝️', time:'10:30 AM – 2:00 PM', note:'⚠️ Book weeks ahead at alcatrazcruises.com!'},
+  lombard:   {name:'Lombard St + Coit Tower', emoji:'🌸', time:'2:00 – 3:30 PM',     note:'Quick scenic stop before dinner at 5.'},
+  castro:    {name:'Castro / Haight-Ashbury', emoji:'🏘️', time:'3:00 – 4:30 PM',     note:'Great window shopping + Victorian houses.'},
+};
+
+// ── SCHEDULE ─────────────────────────────────────────────────────────────────
+const WX = ['⛅ 66°F','🌤️ 68°F','☀️ 67°F','🌥️ 60°F','⛅ 60°F'];
+
+function getActs(candidates) {
+  return candidates.filter(id => selActs.has(id)).map(id => ({
+    time: AI[id].time, label: AI[id].emoji + ' ' + AI[id].name, note: AI[id].note, dot: 'd-a'
+  }));
+}
+
+function renderSched() {
+  const days = [
+    {
+      label:'Friday, May 15 — Arrival Day', emoji:'✈️', hc:'arr', wx:WX[0], key:'fri',
+      sub:'Bismarck → Denver → San Francisco',
+      rows:[
+        {time:'6:00 AM',      label:'Depart Bismarck (BIS)',                    note:'UA4738 → Denver', dot:'d-f'},
+        {time:'9:35 AM',      label:'Land at SFO ✈️',                           note:'UA2391 arrives from Denver', dot:'d-f'},
+        {time:'~10:15 AM',    label:'Rideshare to 1221 Jones St',               note:'Uber / Lyft / Waymo (AirTrain to RCC for Waymo)', dot:'d-t'},
+        {time:'~11:00 AM',    label:'Welcome! Settle in 🎉',                    note:'Poppi sodas and snacks ready', dot:'d-r'},
+        {time:'Afternoon',    label:'Rest or wander Nob Hill',                  note:'St. Frank Coffee is right nearby!', dot:'d-r'},
+        {time:'5:00 PM',      label:'Dinner — Osso Steakhouse or Back2Back 🍕', note:'Back2Back is a quick walk — natural wine + wood-fired pizza!', dot:'d-fd'},
+        {time:'After dinner', label:'Bay Bridge lights from our deck 🌉',       note:'The view is spectacular after dark', dot:'d-n'},
+      ]
+    },
+    {
+      label:'Saturday, May 16 — Ferry Building + City Day', emoji:'🌅', hc:'exp', wx:WX[1], key:'sat',
+      sub:'Best weather day — market morning + explore SF',
+      rows:[
+        {time:'8:30 AM',  label:'St. Frank Coffee + Tartine Bakery ☕',   note:'Morning buns + coffee — the perfect Saturday start', dot:'d-fd'},
+        {time:'9:30 AM',  label:'Ferry Building Farmers Market 🧺',      note:'Best market in SF — Hog Island oysters, Cowgirl Creamery, Blue Bottle', dot:'d-a'},
+        ...( getActs(['aquarium','seals','alcatraz','lombard','castro','ggbridge','ggpark']).length > 0
+              ? getActs(['aquarium','seals','alcatraz','lombard','castro','ggbridge','ggpark'])
+              : [{time:'Afternoon', label:'Your choice — best weather day!', note:'Wander wherever feels right 🎲', dot:'d-a'}] ),
+        {time:'5:00 PM',  label:"Dinner — Brother's Korean BBQ 🔥",       note:'Or stroll to Back2Back — natural wine + wood-fired pizza!', dot:'d-fd'},
+        {time:'Evening',  label:'Bay Bridge lights from home 🌉',          note:'Best viewed with something warm to drink', dot:'d-n'},
+      ]
+    },
+    {
+      label:'Sunday, May 17 — Muir Woods Day 🌲', emoji:'🌲', hc:'exp', wx:WX[2], key:'sun',
+      sub:'The big one — ancient redwoods + Yank Sing dim sum',
+      rows:[
+        {time:'7:30 AM',   label:'Early start — coffee for the road ☕',    note:'St. Frank Coffee — Muir gets busy, earlier is better', dot:'d-fd'},
+        {time:'9:00 AM',   label:'🌲 Muir Woods — entry reserved!',         note:'One of the main reasons for this trip. Cathedral redwood groves, pure magic.', dot:'d-a'},
+        {time:'~12:30 PM', label:'Marin Headlands (optional) 🏔️',          note:'5 min from Muir — jaw-dropping Golden Gate views on the drive back', dot:'d-a'},
+        {time:'~2:00 PM',  label:'Return to SF · Waymo to Yank Sing 🤖',   note:'Book Waymo One to the California St location — fun driverless arrival!', dot:'d-t'},
+        {time:'~2:30 PM',  label:'Yank Sing dim sum 🥟',                   note:'XLB soup dumplings + Peking duck bun + har gow — book ahead!', dot:'d-fd'},
+        {time:'5:00 PM',   label:'Dinner 🍽️',                             note:'Home delivery? Super Duper Burgers + shakes + movie night?', dot:'d-fd'},
+        {time:'Evening',   label:'Movie night option 🎬',                  note:'Bay Bridge view + delivery + big screen = perfect', dot:'d-n'},
+      ]
+    },
+    {
+      label:'Monday, May 18 — Last Full Day', emoji:'🌉', hc:'exp', wx:WX[3], key:'mon',
+      sub:'Make it whatever you want!',
+      rows:[
+        {time:'Morning', label:'Slow morning — your call',               note:'Sleep in! St. Frank Coffee? Neighborhood wander? Deck time?', dot:'d-r'},
+        ...( getActs(['ggbridge','baker','ggpark','monterey','alcatraz','aquarium','lombard','castro']).length > 0
+              ? getActs(['ggbridge','baker','ggpark','monterey','alcatraz','aquarium','lombard','castro'])
+              : [{time:'Day', label:'Adventure or relaxation — your choice!', note:'No plan is a great plan. Explore freely. 🎲', dot:'d-a'}] ),
+        {time:'5:00 PM', label:'Farewell dinner ❤️',                    note:"Brother's Korean BBQ? Osso splurge? Walk to Back2Back?", dot:'d-fd'},
+        {time:'Evening', label:'Last Bay Bridge view 🌉',                note:'Soak it all in — come back soon!', dot:'d-n'},
+      ]
+    },
+    {
+      label:'Tuesday, May 19 — Departure Day', emoji:'🧳', hc:'dep', wx:WX[4], key:'tue',
+      sub:'Homeward bound',
+      rows:[
+        {time:'7:00 AM',  label:'Breakfast + pack up',           note:"Check all rooms — don't forget anything!", dot:'d-fd'},
+        {time:'8:30 AM',  label:'Depart for SFO 🚗',            note:'45–60 min + 90 min security buffer for 11:10 flight', dot:'d-t'},
+        {time:'11:10 AM', label:'UA1604 departs SFO',            note:'→ Denver (DEN), arrives 2:59 PM', dot:'d-f'},
+        {time:'5:40 PM',  label:'UA4665 departs Denver',         note:'→ Bismarck (BIS)', dot:'d-f'},
+        {time:'8:31 PM',  label:'Home safe in Bismarck! 🏡',    note:'Safe travels — come back soon!', dot:'d-r'},
+      ]
+    },
+  ];
+
+  document.getElementById('schedule-container').innerHTML = days.map(day => {
+    let savedNote = '';
+    try { savedNote = localStorage.getItem('mddez_dnote_' + day.key) || ''; } catch {}
+    // Override with pending notes from URL state if first render
+    if (window._pendingDNotes && window._pendingDNotes[day.key]) {
+      savedNote = window._pendingDNotes[day.key];
+    }
+    return `
+    <div class="schedule-day">
+      <div class="sdh ${day.hc}">
+        <span class="day-emoji">${day.emoji}</span>
+        <div><div class="day-title">${day.label}</div><div class="day-sub">${day.sub}</div></div>
+        <div class="day-wx">${day.wx}</div>
+      </div>
+      ${day.rows.map(r => `
+        <div class="sr">
+          <div class="sr-time">${r.time}</div>
+          <div class="sr-dot ${r.dot}"></div>
+          <div><div class="sr-label">${r.label}</div>${r.note ? `<div class="sr-note">${r.note}</div>` : ''}</div>
+        </div>
+      `).join('')}
+      <div style="padding:10px 17px 14px;border-top:1px dashed var(--border);">
+        <div style="font-size:11px;font-weight:600;color:var(--text-light);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:5px;">📝 Notes for this day</div>
+        <textarea data-daykey="${day.key}" style="min-height:52px;font-size:12px;color:var(--text);" placeholder="Reservation confirmations, arrival times, reminders..." oninput="saveDayNote('${day.key}',this.value)">${savedNote}</textarea>
+      </div>
+    </div>`;
+  }).join('');
+  // Clear pending day notes after first render
+  window._pendingDNotes = {};
+}
+
+// ── SNACKS ───────────────────────────────────────────────────────────────────
+function renderSnacks() {
+  ['drinks','brands','savory','sweet','meals'].forEach(cat => {
+    const g = document.getElementById(cat + '-grid');
+    if (!g) return;
+    g.innerHTML = snackData[cat].map((item, i) => {
+      const k = cat + '-' + i, ch = selSnacks.has(k);
+      return `<div class="snack-item ${ch ? 'checked' : ''}" onclick="togSnack('${k}',this)">
+        <span class="snack-emoji">${item.e}</span><span class="snack-name">${item.n}</span>
+        <div class="snack-check" style="color:${ch ? 'white' : 'transparent'}">✓</div>
+      </div>`;
+    }).join('');
+  });
+}
+
+function togSnack(k, el) {
+  selSnacks.has(k)
+    ? (selSnacks.delete(k), el.classList.remove('checked'), el.querySelector('.snack-check').style.color = 'transparent')
+    : (selSnacks.add(k),    el.classList.add('checked'),    el.querySelector('.snack-check').style.color = 'white');
+  persist();
+}
+
+function addSnack(cat) {
+  const inp = document.getElementById(cat + '-custom'), v = inp.value.trim();
+  if (!v) return;
+  snackData[cat].push({e:'➕', n:v, _custom:true});
+  inp.value = ''; renderSnacks(); persist();
+}
+
+function saveNotes() { persist(); }
+
+// ── SUMMARY GENERATOR ────────────────────────────────────────────────────────
+function genSummary() {
+  const L = [];
+  L.push('╔═══════════════════════════════════════════╗');
+  L.push('║  MIKE & DEZ — SAN FRANCISCO, MAY 2026    ║');
+  L.push('║  1221 Jones Street, SF CA 94109            ║');
+  L.push('╚═══════════════════════════════════════════╝');
+  L.push('');
+  L.push('✈️  FLIGHTS');
+  L.push('─────────────────────────────────────────────');
+  L.push('OUTBOUND — Friday May 15');
+  L.push('  06:00 AM  BIS → DEN  UA4738 (SkyWest/United Express)');
+  L.push('  07:45 AM  DEN → SFO  UA2391  [arrives 9:35 AM]');
+  L.push('RETURN — Tuesday May 19');
+  L.push('  11:10 AM  SFO → DEN  UA1604  [arrives 2:59 PM]');
+  L.push('  05:40 PM  DEN → BIS  UA4665  [arrives 8:31 PM]');
+  L.push('  ⚠️  Leave for SFO by 8:30 AM on Tuesday!');
+  L.push('');
+  L.push('🌤️  WEATHER (Historical Averages)');
+  L.push('─────────────────────────────────────────────');
+  L.push('  Fri May 15: ⛅ Hi 66°F / Lo 55°F — Partly cloudy, breezy');
+  L.push('  Sat May 16: 🌤️ Hi 68°F / Lo 54°F — Mostly sunny (best day!)');
+  L.push('  Sun May 17: ☀️ Hi 67°F / Lo 47°F — Sunny, cool evening');
+  L.push('  Mon May 18: 🌥️ Hi 60°F / Lo 47°F — Morning marine layer');
+  L.push('  Tue May 19: ⛅ Hi 60°F / Lo 48°F — Partly cloudy, mild');
+  L.push('  🧥 Pack layers every day!');
+  L.push('');
+  L.push('🚗  SFO → 1221 JONES ST (NOB HILL) — ~$35–55, ~30–45 min');
+  L.push('─────────────────────────────────────────────');
+  L.push('  OPTION A: Uber or Lyft');
+  L.push('    → Follow "Rideshare/TNC" signs to Level 5 at SFO');
+  L.push('    → Enter: 1221 Jones Street San Francisco');
+  L.push('    → Match driver by name + plate. Payment automatic.');
+  L.push('');
+  L.push('  OPTION B: Waymo One (driverless robotaxi!)');
+  L.push('    ⚠️  Waymo picks up at the RENTAL CAR CENTER (RCC)');
+  L.push('    → Take free AirTrain to RCC stop (~5 min) after landing');
+  L.push('    → Request in app, walk to pickup pin, tap Unlock + Start');
+  L.push('    → The car drives itself — take a video! 🤖');
+  L.push('');
+  if (selActs.size > 0) {
+    L.push('🗺️  YOUR SELECTED ACTIVITIES');
+    L.push('─────────────────────────────────────────────');
+    selActs.forEach(id => { const a = AI[id]; if (a) L.push(`  ${a.emoji} ${a.name} — ${a.time}`); });
+    L.push('');
+  }
+
+  function dn(key) {
+    try { return localStorage.getItem('mddez_dnote_' + key) || ''; } catch { return ''; }
+  }
+
+  L.push('📅  SCHEDULE  (Dinner ~5 PM each day. Play it by ear!)');
+  L.push('─────────────────────────────────────────────');
+  L.push('FRI MAY 15 — Arrival  ⛅ 66°F');
+  L.push('  9:35 AM    Land at SFO → Rideshare to 1221 Jones St');
+  L.push('  5:00 PM    Dinner — Osso or Back2Back (walk! natural wine + pizza)');
+  if (dn('fri')) L.push('  📝 ' + dn('fri'));
+  L.push('');
+  L.push('SAT MAY 16  🌤️ 68°F — Best weather day!');
+  L.push('  8:30 AM    St. Frank Coffee + Tartine Bakery');
+  L.push('  9:30 AM    Ferry Building Farmers Market 🧺');
+  const satActs = ['aquarium','seals','alcatraz','lombard','ggbridge','ggpark'].filter(x => selActs.has(x));
+  if (satActs.length) satActs.forEach(id => L.push(`  ${AI[id].time}  ${AI[id].emoji} ${AI[id].name}`));
+  L.push("  5:00 PM    Brother's Korean BBQ or walk to Back2Back 🔥");
+  if (dn('sat')) L.push('  📝 ' + dn('sat'));
+  L.push('');
+  L.push('SUN MAY 17  🌲 MUIR WOODS DAY  ☀️ 67°F');
+  L.push('  7:30 AM    Early start — coffee for the road');
+  L.push('  9:00 AM    🌲 MUIR WOODS — entry reserved! ✅');
+  L.push('  ~12:30 PM  Marin Headlands (optional)');
+  L.push('  ~2:00 PM   Waymo → Yank Sing dim sum 🤖🥟');
+  L.push('  5:00 PM    Dinner — delivery + movie night?');
+  if (dn('sun')) L.push('  📝 ' + dn('sun'));
+  L.push('');
+  L.push('MON MAY 18  🌥️ 60°F — Last Full Day');
+  const monActs = ['ggbridge','baker','ggpark','monterey','alcatraz','lombard','castro','steinhart'].filter(x => selActs.has(x));
+  if (monActs.length) monActs.forEach(id => L.push(`  ${AI[id].time}  ${AI[id].emoji} ${AI[id].name}`));
+  else L.push('  Day        Wander freely — no agenda! 🎲');
+  L.push("  5:00 PM    Farewell dinner ❤️");
+  if (dn('mon')) L.push('  📝 ' + dn('mon'));
+  L.push('');
+  L.push('TUE MAY 19 — Departure  ⛅ 60°F');
+  L.push('  7:00 AM    Breakfast + pack up');
+  L.push('  8:30 AM    Depart for SFO');
+  L.push('  11:10 AM   UA1604 SFO → Denver');
+  L.push('  5:40 PM    UA4665 Denver → Bismarck');
+  L.push('  8:31 PM    Home sweet home! 🏡');
+  if (dn('tue')) L.push('  📝 ' + dn('tue'));
+  L.push('');
+
+  const checked = [];
+  ['drinks','brands','savory','sweet','meals'].forEach(cat => {
+    snackData[cat].forEach((item, i) => { if (selSnacks.has(cat + '-' + i)) checked.push(item.e + ' ' + item.n); });
+  });
+  if (checked.length > 0) {
+    L.push('🧺  SNACK CHECKLIST');
+    L.push('─────────────────────────────────────────────');
+    checked.forEach(s => L.push('  ☐ ' + s));
+    const n = document.getElementById('snack-notes').value.trim();
+    if (n) { L.push(''); L.push('  Notes: ' + n); }
+    L.push('');
+  }
+  const pn = document.getElementById('personal-notes').value.trim();
+  if (pn) { L.push('📝  HOST NOTES'); L.push('─────────────────────────────────────────────'); L.push(pn); L.push(''); }
+  L.push('─────────────────────────────────────────────');
+  L.push("Made with ❤️  for Mike & Dez's SF Adventure");
+  document.getElementById('summary-text').textContent = L.join('\n');
+  document.getElementById('summary-output').style.display = 'block';
+}
+
+function copySummary() {
+  navigator.clipboard.writeText(document.getElementById('summary-text').textContent).then(() => {
+    const t = document.getElementById('copy-toast');
+    t.style.display = 'flex';
+    setTimeout(() => { t.style.display = 'none'; }, 3000);
+  });
+}
+
+// ── INIT ─────────────────────────────────────────────────────────────────────
+// 1. Load state: URL hash wins over localStorage
+const _hashMatch = window.location.hash.match(/[#&]state=([^&]+)/);
+if (_hashMatch) {
+  applyState(decodeState(_hashMatch[1]));
+} else {
+  loadFromLS();
+}
+
+// 2. Render
+renderSnacks();
+renderSched();
+
+// 3. Apply pending notes after DOM ready
+setTimeout(() => {
+  const sn = document.getElementById('snack-notes');
+  const pn = document.getElementById('personal-notes');
+  if (sn && window._pendingNotes)  sn.value = window._pendingNotes;
+  if (pn && window._pendingPNotes) pn.value = window._pendingPNotes;
+}, 0);
+
+// 4. Sync activity card visual state
+document.querySelectorAll('.activity-card').forEach(card => {
+  const id = card.id.replace('act-', '');
+  if (selActs.has(id)) card.classList.add('selected');
+  else card.classList.remove('selected');
+});
+
+// 5. Update counter
+updateActCounter();
+</script>
+</body>
+</html>
