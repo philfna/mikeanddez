@@ -222,10 +222,11 @@
 
 <nav class="tab-nav">
   <button class="tab-btn active" onclick="go('flights')">✈️ Flights</button>
-  <button class="tab-btn" onclick="go('rideshare')">🚗 Getting Here</button>
+  <button class="tab-btn" onclick="go('hood')">🗺️ Neighborhood</button>
   <button class="tab-btn" onclick="go('food')">🍽️ Food & Fun</button>
-  <button class="tab-btn" onclick="go('activities')">🗺️ Activities</button>
+  <button class="tab-btn" onclick="go('activities')">🎯 Activities</button>
   <button class="tab-btn" onclick="go('schedule')">📅 Schedule</button>
+  <button class="tab-btn" onclick="go('pack')">🎒 What to Pack</button>
   <button class="tab-btn" onclick="go('snacks')">🧺 Snack Prep</button>
   <button class="tab-btn" onclick="go('save')">💾 Save & Share</button>
 </nav>
@@ -261,7 +262,7 @@
       <div class="flight-mid"><div class="flight-line"></div><div class="flight-date">Fri, May 15</div></div>
       <div class="flight-city" style="text-align:right;"><div class="fc-time">9:35 AM</div><div class="fc-code">SFO</div><div class="fc-city">San Francisco, CA</div></div>
     </div>
-    <div class="flight-note">🎉 Lands in SF! See the <strong>Getting Here</strong> tab for step-by-step rideshare instructions.</div>
+    <div class="flight-note">🎉 Lands in SF! We'll be there to pick you up.</div>
   </div>
   <div class="flight-card">
     <div class="flight-header"><div><div class="flight-num">Flight 3 of 4 · UA1604</div></div><div class="flight-badge fb-ret">Return Leg 1</div></div>
@@ -282,83 +283,152 @@
   </div>
 </div>
 
-<!-- ===== RIDESHARE ===== -->
-<div id="panel-rideshare" class="panel">
-  <p class="section-title">Getting from SFO to Us</p>
-  <p class="section-sub">Step-by-step guide — easy! About 30–45 min and $35–55.</p>
+<!-- ===== NEIGHBORHOOD ===== -->
+<div id="panel-hood" class="panel">
+  <p class="section-title">Your Neighborhood</p>
+  <p class="section-sub">You're staying at 1221 Jones St on Nob Hill — one of the best-located spots in SF. Here's what's within easy walking distance.</p>
 
   <div class="address-box">
-    <div class="ab-label">Your Destination</div>
+    <div class="ab-label">Home Base</div>
     <div class="ab-addr">1221 Jones Street</div>
-    <div class="ab-sub">San Francisco, CA 94109 · Nob Hill</div>
+    <div class="ab-sub">San Francisco, CA 94109 · Nob Hill · Powell-Hyde cable car nearby</div>
   </div>
 
+  <!-- NEIGHBORHOOD MAP SVG -->
+  <div style="background:var(--white);border-radius:var(--radius);border:1px solid var(--border);padding:16px;margin-bottom:16px;box-shadow:var(--shadow);">
+    <div style="font-size:11.5px;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;color:var(--text-light);margin-bottom:12px;">🗺️ Walk map — approx distances from home</div>
+    <svg viewBox="0 0 520 380" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+      <defs>
+        <marker id="arr" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+          <path d="M0,0 L0,6 L6,3 z" fill="#8E8E93"/>
+        </marker>
+      </defs>
+
+      <!-- Street grid background -->
+      <rect width="520" height="380" fill="#F7F0E3" rx="10"/>
+
+      <!-- Streets horizontal -->
+      <line x1="0" y1="80"  x2="520" y2="80"  stroke="#E5E0D5" stroke-width="8"/>
+      <line x1="0" y1="150" x2="520" y2="150" stroke="#E5E0D5" stroke-width="8"/>
+      <line x1="0" y1="220" x2="520" y2="220" stroke="#E5E0D5" stroke-width="8"/>
+      <line x1="0" y1="295" x2="520" y2="295" stroke="#E5E0D5" stroke-width="8"/>
+
+      <!-- Streets vertical -->
+      <line x1="90"  y1="0" x2="90"  y2="380" stroke="#E5E0D5" stroke-width="8"/>
+      <line x1="190" y1="0" x2="190" y2="380" stroke="#E5E0D5" stroke-width="8"/>
+      <line x1="290" y1="0" x2="290" y2="380" stroke="#E5E0D5" stroke-width="8"/>
+      <line x1="390" y1="0" x2="390" y2="380" stroke="#E5E0D5" stroke-width="8"/>
+      <line x1="480" y1="0" x2="480" y2="380" stroke="#E5E0D5" stroke-width="6"/>
+
+      <!-- Street labels -->
+      <text x="96"  y="13" font-size="9" fill="#B0A090" font-family="sans-serif">Hyde St</text>
+      <text x="196" y="13" font-size="9" fill="#B0A090" font-family="sans-serif">Leavenworth</text>
+      <text x="296" y="13" font-size="9" fill="#B0A090" font-family="sans-serif">Jones St</text>
+      <text x="396" y="13" font-size="9" fill="#B0A090" font-family="sans-serif">Taylor St</text>
+
+      <text x="2" y="77"  font-size="9" fill="#B0A090" font-family="sans-serif">Vallejo</text>
+      <text x="2" y="147" font-size="9" fill="#B0A090" font-family="sans-serif">Broadway</text>
+      <text x="2" y="217" font-size="9" fill="#B0A090" font-family="sans-serif">Union St</text>
+      <text x="2" y="292" font-size="9" fill="#B0A090" font-family="sans-serif">Green St</text>
+
+      <!-- HOME pin -->
+      <circle cx="290" cy="150" r="14" fill="#1A4A6B" stroke="white" stroke-width="2.5"/>
+      <text x="290" y="155" font-size="13" text-anchor="middle" fill="white" font-family="sans-serif">🏠</text>
+      <text x="290" y="175" font-size="10" font-weight="600" text-anchor="middle" fill="#1A4A6B" font-family="sans-serif">HOME</text>
+
+      <!-- SWENSENS - Hyde + Union = (90, 220) -->
+      <circle cx="90" cy="220" r="11" fill="#C9953A" stroke="white" stroke-width="2"/>
+      <text x="90" y="224.5" font-size="11" text-anchor="middle" fill="white" font-family="sans-serif">🍦</text>
+      <text x="90" y="240" font-size="9.5" font-weight="600" text-anchor="middle" fill="#C9953A" font-family="sans-serif">Swensen's</text>
+      <text x="90" y="252" font-size="8.5" text-anchor="middle" fill="#8E8E93" font-family="sans-serif">~8 min walk</text>
+
+      <!-- LE BEAU - Leavenworth + area between Green/Union ≈ (190, 265) -->
+      <circle cx="190" cy="260" r="11" fill="#2D5A3D" stroke="white" stroke-width="2"/>
+      <text x="190" y="264.5" font-size="11" text-anchor="middle" fill="white" font-family="sans-serif">🛒</text>
+      <text x="190" y="278" font-size="9.5" font-weight="600" text-anchor="middle" fill="#2D5A3D" font-family="sans-serif">Le Beau Market</text>
+      <text x="190" y="289" font-size="8.5" text-anchor="middle" fill="#8E8E93" font-family="sans-serif">~5 min walk</text>
+
+      <!-- BACK2BACK - nearby Jones + uphill ≈ (340, 120) -->
+      <circle cx="340" cy="105" r="11" fill="#2D5A3D" stroke="white" stroke-width="2"/>
+      <text x="340" y="109.5" font-size="11" text-anchor="middle" fill="white" font-family="sans-serif">🍕</text>
+      <text x="340" y="123" font-size="9.5" font-weight="600" text-anchor="middle" fill="#2D5A3D" font-family="sans-serif">Back2Back</text>
+      <text x="340" y="134" font-size="8.5" text-anchor="middle" fill="#8E8E93" font-family="sans-serif">~3 min walk</text>
+
+      <!-- SEVEN HILLS - Hyde St, near Broadway ≈ (90, 148) -->
+      <circle cx="90" cy="150" r="11" fill="#9B59B6" stroke="white" stroke-width="2"/>
+      <text x="90" y="154.5" font-size="11" text-anchor="middle" fill="white" font-family="sans-serif">🍝</text>
+      <text x="90" y="169" font-size="9.5" font-weight="600" text-anchor="middle" fill="#9B59B6" font-family="sans-serif">Seven Hills</text>
+      <text x="90" y="180" font-size="8.5" text-anchor="middle" fill="#8E8E93" font-family="sans-serif">~10 min walk</text>
+
+      <!-- HOT SAUCE & PANKO - Hyde + Green ≈ (90, 295) -->
+      <circle cx="90" cy="295" r="11" fill="#C9953A" stroke="white" stroke-width="2"/>
+      <text x="90" y="299.5" font-size="11" text-anchor="middle" fill="white" font-family="sans-serif">🍗</text>
+      <text x="90" y="314" font-size="9.5" font-weight="600" text-anchor="middle" fill="#C9953A" font-family="sans-serif">Hot Sauce &amp; Panko</text>
+      <text x="90" y="325" font-size="8.5" text-anchor="middle" fill="#8E8E93" font-family="sans-serif">~12 min walk</text>
+
+      <!-- OSSO - California St, near Jones ≈ (310, 60) -->
+      <circle cx="310" cy="48" r="11" fill="#9B2020" stroke="white" stroke-width="2"/>
+      <text x="310" y="52.5" font-size="11" text-anchor="middle" fill="white" font-family="sans-serif">🥩</text>
+      <text x="310" y="67" font-size="9.5" font-weight="600" text-anchor="middle" fill="#9B2020" font-family="sans-serif">Osso Steakhouse</text>
+      <text x="310" y="78" font-size="8.5" text-anchor="middle" fill="#8E8E93" font-family="sans-serif">~5 min walk</text>
+
+      <!-- ST FRANK - near Jones + Union ≈ (290, 220) -->
+      <circle cx="290" cy="220" r="11" fill="#C9953A" stroke="white" stroke-width="2"/>
+      <text x="290" y="224.5" font-size="11" text-anchor="middle" fill="white" font-family="sans-serif">☕</text>
+      <text x="290" y="239" font-size="9.5" font-weight="600" text-anchor="middle" fill="#C9953A" font-family="sans-serif">St. Frank Coffee</text>
+      <text x="290" y="250" font-size="8.5" text-anchor="middle" fill="#8E8E93" font-family="sans-serif">~4 min walk</text>
+
+      <!-- CABLE CAR line on Hyde -->
+      <line x1="90" y1="25" x2="90" y2="370" stroke="#F5C842" stroke-width="3" stroke-dasharray="8,4" opacity="0.7"/>
+      <text x="96" y="355" font-size="8.5" fill="#C9953A" font-family="sans-serif" font-weight="600">Cable Car ↕</text>
+
+      <!-- Walk time legend -->
+      <rect x="392" y="290" width="120" height="82" rx="8" fill="white" stroke="#E5E0D5" stroke-width="1"/>
+      <text x="402" y="306" font-size="9" font-weight="600" fill="#5A5A5F" font-family="sans-serif">Legend</text>
+      <circle cx="402" cy="318" r="5" fill="#1A4A6B"/><text x="412" y="322" font-size="8.5" fill="#5A5A5F" font-family="sans-serif">Home</text>
+      <circle cx="402" cy="332" r="5" fill="#2D5A3D"/><text x="412" y="336" font-size="8.5" fill="#5A5A5F" font-family="sans-serif">Walk there!</text>
+      <circle cx="402" cy="346" r="5" fill="#C9953A"/><text x="412" y="350" font-size="8.5" fill="#5A5A5F" font-family="sans-serif">Food &amp; coffee</text>
+      <circle cx="402" cy="360" r="5" fill="#9B59B6"/><text x="412" y="364" font-size="8.5" fill="#5A5A5F" font-family="sans-serif">Dinner spot</text>
+    </svg>
+    <div style="font-size:11px;color:var(--text-light);margin-top:6px;text-align:center;">Not to scale · approximate walk times</div>
+  </div>
+
+  <!-- WALKABLE SPOTS LIST -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:18px;">
+    <div class="card-sm"><div style="font-size:13px;font-weight:600;margin-bottom:2px;">🍕 Back2Back</div><div style="font-size:12px;color:var(--text-mid);">~3 min · natural wine + wood-fired pizza</div></div>
+    <div class="card-sm"><div style="font-size:13px;font-weight:600;margin-bottom:2px;">🥩 Osso Steakhouse</div><div style="font-size:12px;color:var(--text-mid);">~5 min · California St</div></div>
+    <div class="card-sm"><div style="font-size:13px;font-weight:600;margin-bottom:2px;">☕ St. Frank Coffee</div><div style="font-size:12px;color:var(--text-mid);">~4 min · neighborhood coffee bar</div></div>
+    <div class="card-sm"><div style="font-size:13px;font-weight:600;margin-bottom:2px;">🛒 Le Beau Market</div><div style="font-size:12px;color:var(--text-mid);">~5 min · our grocery store</div></div>
+    <div class="card-sm"><div style="font-size:13px;font-weight:600;margin-bottom:2px;">🍦 Swensen's Ice Cream</div><div style="font-size:12px;color:var(--text-mid);">~8 min · Hyde + Union</div></div>
+    <div class="card-sm"><div style="font-size:13px;font-weight:600;margin-bottom:2px;">🍝 Seven Hills</div><div style="font-size:12px;color:var(--text-mid);">~10 min · Hyde St Italian</div></div>
+    <div class="card-sm"><div style="font-size:13px;font-weight:600;margin-bottom:2px;">🍗 Hot Sauce &amp; Panko</div><div style="font-size:12px;color:var(--text-mid);">~12 min · Hyde St wings</div></div>
+    <div class="card-sm"><div style="font-size:13px;font-weight:600;margin-bottom:2px;">🚃 Cable Car</div><div style="font-size:12px;color:var(--text-mid);">Powell-Hyde line · steps from us</div></div>
+  </div>
+
+  <!-- LE BEAU -->
+  <div class="food-section-title">🛒 Our Favorite Grocery — Le Beau Market</div>
+  <div class="rest-card our-fave">
+    <div class="rest-header">
+      <div class="rest-emoji">🛒</div>
+      <div><div class="rest-name">Le Beau Market</div><div class="rest-meta">1263 Leavenworth St · ~5 min walk · Open daily 8 AM – 8 PM</div></div>
+    </div>
+    <div class="rest-badges"><span class="badge badge-forest">Walking distance</span><span class="badge badge-gold">Our neighborhood staple</span><span class="badge badge-ocean">Since 1984</span></div>
+    <div class="rest-desc">This is our grocery store and we love it. Family-owned for 40 years, Le Beau is the heart of the Nob Hill neighborhood — organic produce, a full deli counter with hot prepared meals, rotisserie chickens, fresh sushi, a great wine and beer selection, and butchered meats. The staff know everyone by name. Perfect for grabbing breakfast items, snacks, a quick lunch, or dinner if you don't feel like going out.</div>
+    <div class="menu-highlights"><div class="menu-title">Grab These</div><div class="menu-items"><span class="menu-item">Breakfast sandwich on ciabatta 🌟</span><span class="menu-item">Rotisserie chicken (Mon special)</span><span class="menu-item">Deli hot meals to go</span><span class="menu-item">Fresh sushi + sashimi</span><span class="menu-item">Local organic produce</span><span class="menu-item">Poppi sodas + snacks</span></div></div>
+  </div>
+
+  <!-- WAYMO tip here since relevant for getting around -->
+  <div class="food-section-title">🤖 Getting Around SF</div>
   <div class="waymo-banner">
     <div class="wb-icon">🤖</div>
     <div>
-      <div class="wb-title">✨ Try a Waymo (Fully Driverless Robotaxi!)</div>
-      <div class="wb-desc">Waymo is available at SFO and operates all over SF — no driver, ever. It's one of the most uniquely SF experiences you can have. We love taking a Waymo to Yank Sing on Sunday — it's a fun way to arrive! Download <strong>Waymo One</strong> app at home before you fly.</div>
+      <div class="wb-title">Try a Waymo — driverless robotaxi!</div>
+      <div class="wb-desc">Waymo operates all over SF and it's one of the most uniquely SF experiences you can have. We love using it for Sunday's Yank Sing dim sum run — book Waymo One on your phone and a driverless Jaguar shows up. No driver. Just you and the car. Take a video. Everyone back home will want to see it.</div>
     </div>
   </div>
-
-  <div class="airtrain-note">
-    <span style="font-size:18px;flex-shrink:0;">🚇</span>
-    <div>
-      <strong>Important SFO note for Waymo:</strong> Waymo picks up from the <strong>Rental Car Center (RCC)</strong> at SFO — not the main terminals. After landing, take the free <strong>AirTrain</strong> (the automated people mover) to the Rental Car Center stop. It runs every few minutes and takes about 5 min. Then request your Waymo from there. The app will show you exactly where to wait.
-    </div>
-  </div>
-
-  <div style="font-size:13px;font-weight:600;margin-bottom:9px;">Choose your ride app:</div>
-  <div class="app-choice">
-    <div class="app-card selected" id="app-uber" onclick="selApp('uber')"><span class="app-logo">⚫</span><div class="app-name">Uber</div><div class="app-desc">Most popular</div></div>
-    <div class="app-card" id="app-lyft" onclick="selApp('lyft')"><span class="app-logo">🩷</span><div class="app-name">Lyft</div><div class="app-desc">Great alternative</div></div>
-    <div class="app-card" id="app-waymo" onclick="selApp('waymo')"><span class="app-logo">🤖</span><div class="app-name">Waymo One</div><div class="app-desc">Driverless! So cool</div></div>
-    <div class="app-card" id="app-all" onclick="selApp('all')"><span class="app-logo">📱</span><div class="app-name">All Three</div><div class="app-desc">Compare & pick</div></div>
-  </div>
-
-  <div id="steps-uber">
-    <div class="step-list">
-      <div class="step"><div class="step-num">1</div><div><div class="step-title">Download Uber before you fly</div><div class="step-desc">App Store (iPhone) or Google Play (Android). Create a free account and add a credit or debit card for payment.</div></div></div>
-      <div class="step"><div class="step-num">2</div><div><div class="step-title">At SFO — follow Rideshare signs to Level 5</div><div class="step-desc">After baggage claim, follow <code>Rideshare / TNC</code> signs. Take the elevator or escalator to <strong>Level 5 — Departures</strong>. This is where all Ubers and Lyfts pick up.</div></div></div>
-      <div class="step"><div class="step-num">3</div><div><div class="step-title">Request your ride</div><div class="step-desc">Open Uber → tap the search bar → type <code>1221 Jones Street San Francisco</code> → choose UberX (standard) or Uber Comfort (more legroom) → tap <strong>Request</strong>.</div></div></div>
-      <div class="step"><div class="step-num">4</div><div><div class="step-title">Match your driver by name + plate</div><div class="step-desc">The app shows the driver's name, photo, car, and license plate. Confirm the plate before getting in. Tap <strong>Contact</strong> to call or text if needed.</div></div></div>
-      <div class="step"><div class="step-num">5</div><div><div class="step-title">Enjoy the ride — payment is automatic!</div><div class="step-desc">No cash needed ever. The driver sees your destination. Card is charged at the end. Tip optional in-app. Est. <strong>$35–55 · ~30–45 min</strong> to Nob Hill.</div></div></div>
-    </div>
-  </div>
-  <div id="steps-lyft" style="display:none;">
-    <div class="step-list">
-      <div class="step"><div class="step-num">1</div><div><div class="step-title">Download Lyft before you fly</div><div class="step-desc">Search "Lyft" in the App Store or Google Play. Create an account and add a payment method.</div></div></div>
-      <div class="step"><div class="step-num">2</div><div><div class="step-title">At SFO — Level 5 Rideshare pickup</div><div class="step-desc">Same pickup area as Uber — follow <code>Rideshare / TNC</code> signs to <strong>Level 5</strong> after baggage claim.</div></div></div>
-      <div class="step"><div class="step-num">3</div><div><div class="step-title">Request your ride</div><div class="step-desc">Open Lyft → tap "Where to?" → type <code>1221 Jones Street San Francisco</code> → choose "Lyft" → tap <strong>Confirm Lyft</strong>.</div></div></div>
-      <div class="step"><div class="step-num">4</div><div><div class="step-title">4-digit PIN confirms your driver</div><div class="step-desc">Lyft gives you a PIN to confirm it's the right car. Tap <strong>I'm Here</strong> at the pickup zone.</div></div></div>
-      <div class="step"><div class="step-num">5</div><div><div class="step-title">No cash — automatic payment</div><div class="step-desc">Card on file is charged at the end. Tip optional in-app. Est. <strong>$35–55 · ~30–45 min</strong>.</div></div></div>
-    </div>
-  </div>
-  <div id="steps-waymo" style="display:none;">
-    <div class="airtrain-note">
-      <span style="font-size:16px;flex-shrink:0;">🚇</span>
-      <div><strong>First:</strong> After landing, take the free <strong>AirTrain</strong> to the <strong>Rental Car Center</strong>. Follow "AirTrain" signs from baggage claim — it's automated, runs every few minutes, and takes ~5 min. Waymo picks up from the RCC, not the main terminal.</div>
-    </div>
-    <div class="step-list">
-      <div class="step"><div class="step-num">1</div><div><div class="step-title">Download Waymo One at home first</div><div class="step-desc">Search "Waymo One" in your app store. Create an account and add payment. Much easier on WiFi at home than at the airport.</div></div></div>
-      <div class="step"><div class="step-num">2</div><div><div class="step-title">Take the AirTrain to Rental Car Center</div><div class="step-desc">After landing at SFO, follow <code>AirTrain</code> signs. Board the free automated train and ride to the <strong>Rental Car Center (RCC)</strong> stop. This is Waymo's pickup zone at SFO.</div></div></div>
-      <div class="step"><div class="step-num">3</div><div><div class="step-title">Request in the app — walk to the pin</div><div class="step-desc">Open Waymo One → enter destination: <code>1221 Jones Street San Francisco</code>. The app shows a specific pickup pin location in the RCC. Walk to that exact spot and wait.</div></div></div>
-      <div class="step"><div class="step-num">4</div><div><div class="step-title">The car arrives — no driver whatsoever!</div><div class="step-desc">Tap <strong>Unlock</strong> in the app. Get in, buckle up, tap <strong>Start Ride</strong>. The car drives entirely itself. There's an in-car button to reach a live remote operator if you ever need help.</div></div></div>
-      <div class="step"><div class="step-num">5</div><div><div class="step-title">Enjoy the most SF experience possible 🤖</div><div class="step-desc">Watch the Jaguar navigate SF traffic with zero human input. It's surreal at first, then remarkably relaxing. Take a video! Payment is automatic at the end.</div></div></div>
-    </div>
-  </div>
-  <div id="steps-all" style="display:none;">
-    <div class="info-banner"><span class="ib-icon">📱</span><span>Install <strong>Uber</strong>, <strong>Lyft</strong>, and <strong>Waymo One</strong> at home before flying. At SFO compare wait times and prices — pick the best deal. Note: Waymo requires the AirTrain to the Rental Car Center first (see Waymo tab for details).</span></div>
-    <div class="step-list">
-      <div class="step"><div class="step-num">1</div><div><div class="step-title">Install all three apps at home</div><div class="step-desc">Add payment to each. 10 minutes at home beats fumbling at the airport.</div></div></div>
-      <div class="step"><div class="step-num">2</div><div><div class="step-title">Uber & Lyft → Level 5 at main terminal. Waymo → AirTrain to Rental Car Center</div><div class="step-desc">For Uber or Lyft: follow <code>Rideshare / TNC</code> signs to Level 5. For Waymo: follow <code>AirTrain</code> signs and ride to the Rental Car Center stop (~5 min).</div></div></div>
-      <div class="step"><div class="step-num">3</div><div><div class="step-title">Enter: 1221 Jones Street San Francisco</div><div class="step-desc">Same destination in all three apps. Pick the one with the best price + wait time. Budget <strong>$35–55 · ~30–45 min</strong>.</div></div></div>
-    </div>
-  </div>
-
-  <div class="info-banner" style="margin-top:14px;">
-    <span class="ib-icon">💡</span>
-    <span>We can also pick you up! UA2391 lands ~9:35 AM at <strong>Terminal 3</strong>. Pickup is <strong>Level 2, Arrivals</strong>. Allow 20–30 min for bags + walking.</span>
+  <div class="info-banner">
+    <span class="ib-icon">🚃</span>
+    <span>The <strong>Powell-Hyde cable car</strong> runs right through the neighborhood — hop on at the top of Nob Hill and ride down to Fisherman's Wharf, or take it up from downtown. A classic SF experience steps from our front door.</span>
   </div>
 </div>
 
@@ -371,14 +441,19 @@
       <span style="font-size:32px;flex-shrink:0;">🌲</span>
       <div>
         <div style="font-family:'Playfair Display',serif;font-size:17px;font-weight:700;margin-bottom:5px;">Muir Woods — The Big One</div>
-        <div style="font-size:13px;opacity:0.88;line-height:1.55;">One of the main reasons for this trip — ancient coastal redwoods with groves so tall and quiet they feel like a cathedral. <strong>We've already reserved your timed entry</strong>, so all you have to do is show up and be in awe. Plan a full morning there, and consider tacking on the Marin Headlands afterward for jaw-dropping Golden Gate views on the drive back.</div>
+        <div style="font-size:13px;opacity:0.88;line-height:1.55;">One of the main reasons for this trip — ancient coastal redwoods with groves so tall and quiet they feel like a cathedral. <strong>We've already reserved your timed entry, and we're driving you there</strong> — all you have to do is show up and be in awe. Plan a full morning there, and we can swing through the Marin Headlands on the way back for jaw-dropping Golden Gate views.</div>
         <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap;">
           <span style="background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.3);border-radius:6px;font-size:11px;padding:2px 9px;font-weight:600;">✅ Entry reserved</span>
+          <span style="background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.3);border-radius:6px;font-size:11px;padding:2px 9px;font-weight:600;">🚗 We're driving you</span>
           <span style="background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.3);border-radius:6px;font-size:11px;padding:2px 9px;font-weight:600;">Sunday morning</span>
-          <span style="background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.3);border-radius:6px;font-size:11px;padding:2px 9px;font-weight:600;">Bring a jacket</span>
+          <span style="background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.3);border-radius:6px;font-size:11px;padding:2px 9px;font-weight:600;">🧥 Bring a jacket</span>
         </div>
       </div>
     </div>
+  </div>
+
+  <div style="background:var(--ocean-light);border:1px solid #B5D4F4;border-radius:var(--radius-sm);padding:11px 15px;margin-bottom:16px;font-size:13px;color:var(--ocean);">
+    <strong>📋 Reservations — we've got you covered.</strong> We'll handle booking for any restaurants that need it. Places marked <span style="background:var(--gold-light);color:#8A6020;font-size:11px;font-weight:600;padding:1px 7px;border-radius:5px;">Book ahead</span> fill up fast — just let us know what sounds good and we'll lock it in!
   </div>
 
   <div class="ear-banner">
@@ -386,7 +461,7 @@
     <p>These are our suggestions and favorites but there's zero pressure to follow any schedule. Sleep in, wander, discover something random, or just sit on our deck and watch the Bay Bridge lights come on. Whatever feels right is the right plan.</p>
   </div>
 
-  <div class="food-section-title">☕ Morning Coffee & Breakfast</div>
+  <div class="food-section-title">☕ Morning Coffee, Breakfast & Groceries</div>
 
   <div class="rest-card our-fave">
     <div class="rest-header">
@@ -406,6 +481,16 @@
     <div class="rest-badges"><span class="badge badge-gold">SF institution</span><span class="badge badge-ocean">Breakfast / Brunch</span><span class="badge badge-red">Line is worth it</span></div>
     <div class="rest-desc">Called "the best bakery in the US" by the New York Times. Country sourdough loaves come out of the oven at 4:30 PM daily. The morning bun — caramelized, cinnamon sugar, with a hint of orange zest — is famous. Go early or expect a short wait that moves fast.</div>
     <div class="menu-highlights"><div class="menu-title">Must Order</div><div class="menu-items"><span class="menu-item">Morning bun (🌟)</span><span class="menu-item">Country sourdough loaf</span><span class="menu-item">Almond croissant</span><span class="menu-item">Pain au chocolat</span><span class="menu-item">Egg custard tart</span></div></div>
+  </div>
+
+  <div class="rest-card our-fave walkable">
+    <div class="rest-header">
+      <div class="rest-emoji">🛒</div>
+      <div><div class="rest-name">Le Beau Market</div><div class="rest-meta">Our favorite neighborhood grocery · Nob Hill · walkable</div></div>
+    </div>
+    <div class="rest-badges"><span class="badge badge-forest">Walking distance</span><span class="badge badge-gold">Our go-to</span></div>
+    <div class="rest-desc">Our favorite local market — well-stocked with great produce, prepared foods, cheeses, and everything you need for a morning in or a quick snack run. Perfect if you want to grab breakfast fixings, extra drinks, or anything you forgot to pack. Infinitely better than a chain grocery and feels very SF neighborhood.</div>
+    <div class="menu-highlights"><div class="menu-title">Great For</div><div class="menu-items"><span class="menu-item">Fresh produce + snacks</span><span class="menu-item">Prepared deli foods</span><span class="menu-item">Good cheese selection</span><span class="menu-item">Coffee + grab-and-go breakfast</span></div></div>
   </div>
 
   <div class="food-section-title">🍽️ Sit-Down Restaurants</div>
@@ -438,6 +523,16 @@
     <div class="rest-badges"><span class="badge badge-purple">Splurge night</span><span class="badge badge-ocean">Dinner only (5 PM+)</span><span class="badge badge-red">Book ahead</span></div>
     <div class="rest-desc">Right here on California Street atop Nob Hill — one of SF's top steakhouses with Art Deco elegance and impeccable service. Dry-aged prime beef, Dungeness crab, and a Wine Spectator award-winning list. Perfect for a special night out.</div>
     <div class="menu-highlights"><div class="menu-title">Standouts</div><div class="menu-items"><span class="menu-item">Bone-in ribeye (voted #1) 🌟</span><span class="menu-item">Bone-in filet mignon</span><span class="menu-item">House cheese bread</span><span class="menu-item">Dungeness crab garlic sauce</span><span class="menu-item">Creamed spinach</span><span class="menu-item">Mac & cheese</span></div></div>
+  </div>
+
+  <div class="rest-card our-fave walkable">
+    <div class="rest-header">
+      <div class="rest-emoji">🌺</div>
+      <div><div class="rest-name">Tonga Room & Hurricane Bar</div><div class="rest-meta">Legendary tiki bar · Fairmont Hotel · Nob Hill · walkable</div></div>
+    </div>
+    <div class="rest-badges"><span class="badge badge-forest">Short walk from us</span><span class="badge badge-red">Book ahead</span><span class="badge badge-purple">Wed–Sat 5 PM+</span><span class="badge badge-gold">SF icon since 1945</span></div>
+    <div class="rest-desc">One of the most unique bars in America — inside the basement of the Fairmont Hotel, there's a literal lagoon (the former hotel swimming pool) with a floating stage where a live band plays. Every 30 minutes, a tropical rainstorm rolls through indoors — thunder, lightning, and rain over the lagoon. Anthony Bourdain called it "the greatest place in the history of the world." It's a 5-minute walk from our front door.</div>
+    <div class="menu-highlights"><div class="menu-title">Order This</div><div class="menu-items"><span class="menu-item">Mai Tai 🌟 (SF's best)</span><span class="menu-item">Tonga Colada</span><span class="menu-item">Zombie cocktail</span><span class="menu-item">Polynesian-fusion bites</span><span class="menu-item">⚠️ $20 entertainment cover after 7 PM (live band)</span></div></div>
   </div>
 
   <div class="rest-card walkable">
@@ -624,13 +719,79 @@
 <!-- ===== SCHEDULE ===== -->
 <div id="panel-schedule" class="panel">
   <p class="section-title">Trip Schedule</p>
-  <p class="section-sub">A loose guide — dinner around 5 PM each day. Everything else is flexible!</p>
-  <div class="ear-banner" style="margin-bottom:16px;">
-    <h3>🎲 Remember: play it by ear!</h3>
-    <p>This is a suggested flow, not a binding contract. Sleep in if you want. Skip something if you're tired. Add a spontaneous stop. This is your vacation — the goal is joy, not a checklist.</p>
-  </div>
+  <p class="section-sub">Only the two locked items are on here — Muir Woods and Ferry Building. Everything else is open. Fill it in however you like using the notes box on each day, or just see where the trip takes you.</p>
   <div id="schedule-container"></div>
-  <div class="info-banner"><span class="ib-icon">📋</span><span>Go to <strong>Save & Share</strong> to copy or print this for Mike & Dez!</span></div>
+  <div class="info-banner"><span class="ib-icon">📋</span><span>Go to <strong>Save & Share</strong> to copy or print this!</span></div>
+</div>
+
+<!-- ===== WHAT TO PACK ===== -->
+<div id="panel-pack" class="panel">
+  <p class="section-title">What to Pack</p>
+  <p class="section-sub">SF in May is mild but tricky — the secret is layers. Here's what'll actually get used.</p>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;">
+    @media(max-width:420px){grid-template-columns:1fr;}
+  </div>
+
+  <div class="food-section-title">🧥 Clothes — the #1 thing visitors get wrong</div>
+  <div class="card">
+    <div style="font-size:13px;line-height:1.7;color:var(--text-mid);">
+      SF May averages <strong style="color:var(--text);">55–68°F</strong> with cool foggy mornings and warmer afternoons. The temperature can swing 15°F in a single day, and it's always windier than you expect near the water.
+    </div>
+    <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      <div style="background:var(--ocean-light);border-radius:var(--radius-sm);padding:10px 12px;">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--ocean);margin-bottom:6px;">Must Bring</div>
+        <div style="font-size:12.5px;line-height:1.8;color:var(--text);">
+          🧥 Light jacket or fleece<br>
+          🧣 Scarf or neck layer<br>
+          👟 Comfortable walking shoes<br>
+          🧤 Light gloves (optional but nice)<br>
+          🌂 Compact umbrella<br>
+          👕 Layers you can add/remove
+        </div>
+      </div>
+      <div style="background:var(--forest-light);border-radius:var(--radius-sm);padding:10px 12px;">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--forest);margin-bottom:6px;">For Muir Woods Specifically</div>
+        <div style="font-size:12.5px;line-height:1.8;color:var(--text);">
+          🌲 It's 10–15°F cooler in the grove<br>
+          👟 Closed-toe shoes — muddy trails<br>
+          🧥 Extra layer in the bag<br>
+          🎒 Small daypack helpful<br>
+          💧 Water bottle<br>
+          📵 Low cell service — offline maps
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="food-section-title">📱 Apps to Download Before You Come</div>
+  <div class="card">
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <span style="font-size:22px;flex-shrink:0;">🤖</span>
+        <div><div style="font-size:13px;font-weight:600;">Waymo One</div><div style="font-size:12px;color:var(--text-mid);">Driverless robotaxi — use it to Yank Sing on Sunday. Set up payment at home, not at the curb.</div></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <span style="font-size:22px;flex-shrink:0;">⚫</span>
+        <div><div style="font-size:13px;font-weight:600;">Uber or Lyft</div><div style="font-size:12px;color:var(--text-mid);">For getting around independently if you want to explore on your own schedule.</div></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <span style="font-size:22px;flex-shrink:0;">🗺️</span>
+        <div><div style="font-size:13px;font-weight:600;">Google Maps (offline)</div><div style="font-size:12px;color:var(--text-mid);">Download the SF offline map. Cell signal is spotty in Muir Woods and some neighborhoods.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="food-section-title">💳 Practical Notes</div>
+  <div class="card">
+    <div style="font-size:13px;line-height:1.8;color:var(--text-mid);">
+      <strong style="color:var(--text);">Cash</strong> — SF is mostly cashless but a little cash is handy at the Ferry Building market vendors and some small shops.<br><br>
+      <strong style="color:var(--text);">Sunscreen</strong> — Even on foggy days, UV is surprisingly strong. The marine layer doesn't block UV the way clouds do.<br><br>
+      <strong style="color:var(--text);">Power bank</strong> — GPS, maps, and Waymo drain batteries fast on a full day out.<br><br>
+      <strong style="color:var(--text);">Comfortable shoes, seriously</strong> — Nob Hill is steep. Russian Hill is steep. Most of SF is hilly. Flip flops on day one is a classic mistake.<br><br>
+      <strong style="color:var(--text);">Dining time</strong> — We eat dinner around <strong>5 PM</strong>, so you won't go hungry waiting for an 8 PM reservation like in other cities.
+    </div>
+  </div>
 </div>
 
 <!-- ===== SNACKS ===== -->
@@ -702,7 +863,7 @@
   <div class="card">
     <div style="font-size:14px;font-weight:600;margin-bottom:3px;">📝 Personal Host Notes</div>
     <div style="font-size:12px;color:var(--text-mid);margin-bottom:8px;">Reminders, pickup logistics, reservation confirmations — anything extra. Auto-saved.</div>
-    <textarea id="personal-notes" placeholder="e.g. Pick up at SFO Terminal 3 Level 2 around 10 AM. Yank Sing res: Sun 10:30 AM conf #12345. Osso booked Friday 5 PM..." oninput="saveNotes()"></textarea>
+    <textarea id="personal-notes" placeholder="e.g. Yank Sing res: Sun 10:30 AM conf #12345. Osso booked Friday 5 PM. Brother's Korean BBQ — call ahead for group..." oninput="saveNotes()"></textarea>
   </div>
 
   <div class="divider"></div>
@@ -947,7 +1108,7 @@ function updateActCounter() {
 }
 
 const AI = {
-  muir:      {name:'Muir Woods',              emoji:'🌲', time:'9:00 AM – 1:00 PM',   note:'✅ Entry reserved — big reason for this trip!'},
+  muir:      {name:'Muir Woods',              emoji:'🌲', time:'9:00 AM – 1:00 PM',   note:'✅ Entry reserved · we drive you there!'},
   marin:     {name:'Marin Headlands',         emoji:'🏔️', time:'1:30 – 4:00 PM',     note:'Pairs great with Muir Woods — same direction.'},
   ggpark:    {name:'Golden Gate Park',        emoji:'🌿', time:'10:00 AM – 1:00 PM',  note:'Visit Japanese Tea Garden inside the park.'},
   baker:     {name:'Baker Beach',             emoji:'🏖️', time:'4:00 – 5:30 PM',     note:'Perfect golden hour before 5 PM dinner!'},
@@ -976,62 +1137,56 @@ function renderSched() {
       label:'Friday, May 15 — Arrival Day', emoji:'✈️', hc:'arr', wx:WX[0], key:'fri',
       sub:'Bismarck → Denver → San Francisco',
       rows:[
-        {time:'6:00 AM',      label:'Depart Bismarck (BIS)',                    note:'UA4738 → Denver', dot:'d-f'},
-        {time:'9:35 AM',      label:'Land at SFO ✈️',                           note:'UA2391 arrives from Denver', dot:'d-f'},
-        {time:'~10:15 AM',    label:'Rideshare to 1221 Jones St',               note:'Uber / Lyft / Waymo (AirTrain to RCC for Waymo)', dot:'d-t'},
-        {time:'~11:00 AM',    label:'Welcome! Settle in 🎉',                    note:'Poppi sodas and snacks ready', dot:'d-r'},
-        {time:'Afternoon',    label:'Rest or wander Nob Hill',                  note:'St. Frank Coffee is right nearby!', dot:'d-r'},
-        {time:'5:00 PM',      label:'Dinner — Osso Steakhouse or Back2Back 🍕', note:'Back2Back is a quick walk — natural wine + wood-fired pizza!', dot:'d-fd'},
-        {time:'After dinner', label:'Bay Bridge lights from our deck 🌉',       note:'The view is spectacular after dark', dot:'d-n'},
+        {time:'6:00 AM',   label:'Depart Bismarck (BIS)',          note:'UA4738 → Denver', dot:'d-f'},
+        {time:'9:35 AM',   label:'Land at SFO ✈️',                 note:'UA2391 arrives from Denver', dot:'d-f'},
+        {time:'~10:15 AM', label:'We pick you up at SFO 🚗',        note:'Terminal 3 — allow 20–30 min for bags + walking', dot:'d-t'},
+        {time:'~11:00 AM', label:'Welcome! Settle in 🎉',          note:'Snacks ready — rest up after the early start', dot:'d-r'},
+        {time:'5:00 PM',   label:'Dinner',                         note:'', dot:'d-fd'},
+        {time:'Evening',   label:'Bay Bridge lights from our deck 🌉', note:'', dot:'d-n'},
       ]
     },
     {
-      label:'Saturday, May 16 — Ferry Building + City Day', emoji:'🌅', hc:'exp', wx:WX[1], key:'sat',
-      sub:'Best weather day — market morning + explore SF',
+      label:'Saturday, May 16', emoji:'🌅', hc:'exp', wx:WX[1], key:'sat',
+      sub:'Ferry Building morning · rest of day is yours',
       rows:[
-        {time:'8:30 AM',  label:'St. Frank Coffee + Tartine Bakery ☕',   note:'Morning buns + coffee — the perfect Saturday start', dot:'d-fd'},
-        {time:'9:30 AM',  label:'Ferry Building Farmers Market 🧺',      note:'Best market in SF — Hog Island oysters, Cowgirl Creamery, Blue Bottle', dot:'d-a'},
-        ...( getActs(['aquarium','seals','alcatraz','lombard','castro','ggbridge','ggpark']).length > 0
-              ? getActs(['aquarium','seals','alcatraz','lombard','castro','ggbridge','ggpark'])
-              : [{time:'Afternoon', label:'Your choice — best weather day!', note:'Wander wherever feels right 🎲', dot:'d-a'}] ),
-        {time:'5:00 PM',  label:"Dinner — Brother's Korean BBQ 🔥",       note:'Or stroll to Back2Back — natural wine + wood-fired pizza!', dot:'d-fd'},
-        {time:'Evening',  label:'Bay Bridge lights from home 🌉',          note:'Best viewed with something warm to drink', dot:'d-n'},
+        {time:'Morning',   label:'Coffee + breakfast',                        note:'St. Frank Coffee and Tartine Bakery are nearby if you want a great start', dot:'d-fd'},
+        {time:'9:30 AM',   label:'🧺 Ferry Building Farmers Market',    note:'Locked in — best market in SF. Hog Island oysters, Cowgirl Creamery, Blue Bottle.', dot:'d-a'},
+        {time:'Afternoon', label:'— yours to fill —',                  note:'Check the Activities tab for ideas, or just wander', dot:'d-r'},
+        {time:'5:00 PM',   label:'Dinner',                             note:'', dot:'d-fd'},
+        {time:'Evening',   label:'Bay Bridge lights 🌉',               note:'', dot:'d-n'},
       ]
     },
     {
-      label:'Sunday, May 17 — Muir Woods Day 🌲', emoji:'🌲', hc:'exp', wx:WX[2], key:'sun',
-      sub:'The big one — ancient redwoods + Yank Sing dim sum',
+      label:'Sunday, May 17', emoji:'🌲', hc:'exp', wx:WX[2], key:'sun',
+      sub:'Muir Woods morning · afternoon is yours',
       rows:[
-        {time:'7:30 AM',   label:'Early start — coffee for the road ☕',    note:'St. Frank Coffee — Muir gets busy, earlier is better', dot:'d-fd'},
-        {time:'9:00 AM',   label:'🌲 Muir Woods — entry reserved!',         note:'One of the main reasons for this trip. Cathedral redwood groves, pure magic.', dot:'d-a'},
-        {time:'~12:30 PM', label:'Marin Headlands (optional) 🏔️',          note:'5 min from Muir — jaw-dropping Golden Gate views on the drive back', dot:'d-a'},
-        {time:'~2:00 PM',  label:'Return to SF · Waymo to Yank Sing 🤖',   note:'Book Waymo One to the California St location — fun driverless arrival!', dot:'d-t'},
-        {time:'~2:30 PM',  label:'Yank Sing dim sum 🥟',                   note:'XLB soup dumplings + Peking duck bun + har gow — book ahead!', dot:'d-fd'},
-        {time:'5:00 PM',   label:'Dinner 🍽️',                             note:'Home delivery? Super Duper Burgers + shakes + movie night?', dot:'d-fd'},
-        {time:'Evening',   label:'Movie night option 🎬',                  note:'Bay Bridge view + delivery + big screen = perfect', dot:'d-n'},
+        {time:'7:30 AM',   label:'Early start + coffee for the road', note:'Muir gets busy — earlier is better', dot:'d-fd'},
+        {time:'9:00 AM',   label:'🌲 Muir Woods — entry reserved!',   note:'Locked in · we drive you there ✅', dot:'d-a'},
+        {time:'~1:00 PM',  label:'Return to SF',                      note:'', dot:'d-t'},
+        {time:'Afternoon', label:'— yours to fill —',                 note:'Rest up or keep going — check the Activities tab', dot:'d-r'},
+        {time:'5:00 PM',   label:'Dinner',                            note:'', dot:'d-fd'},
+        {time:'Evening',   label:'— yours to fill —',                 note:'Movie night? Swensen\'s walk? Bay Bridge lights?', dot:'d-r'},
       ]
     },
     {
       label:'Monday, May 18 — Last Full Day', emoji:'🌉', hc:'exp', wx:WX[3], key:'mon',
-      sub:'Make it whatever you want!',
+      sub:'Fully open — make it yours',
       rows:[
-        {time:'Morning', label:'Slow morning — your call',               note:'Sleep in! St. Frank Coffee? Neighborhood wander? Deck time?', dot:'d-r'},
-        ...( getActs(['ggbridge','baker','ggpark','monterey','alcatraz','aquarium','lombard','castro']).length > 0
-              ? getActs(['ggbridge','baker','ggpark','monterey','alcatraz','aquarium','lombard','castro'])
-              : [{time:'Day', label:'Adventure or relaxation — your choice!', note:'No plan is a great plan. Explore freely. 🎲', dot:'d-a'}] ),
-        {time:'5:00 PM', label:'Farewell dinner ❤️',                    note:"Brother's Korean BBQ? Osso splurge? Walk to Back2Back?", dot:'d-fd'},
-        {time:'Evening', label:'Last Bay Bridge view 🌉',                note:'Soak it all in — come back soon!', dot:'d-n'},
+        {time:'Morning',   label:'— yours to fill —', note:'Sleep in, grab coffee, or head straight out', dot:'d-r'},
+        {time:'Afternoon', label:'— yours to fill —', note:'Check the Activities tab for ideas', dot:'d-r'},
+        {time:'5:00 PM',   label:'Farewell dinner ❤️', note:'', dot:'d-fd'},
+        {time:'Evening',   label:'Last Bay Bridge view 🌉', note:'Soak it all in — come back soon!', dot:'d-n'},
       ]
     },
     {
       label:'Tuesday, May 19 — Departure Day', emoji:'🧳', hc:'dep', wx:WX[4], key:'tue',
       sub:'Homeward bound',
       rows:[
-        {time:'7:00 AM',  label:'Breakfast + pack up',           note:"Check all rooms — don't forget anything!", dot:'d-fd'},
-        {time:'8:30 AM',  label:'Depart for SFO 🚗',            note:'45–60 min + 90 min security buffer for 11:10 flight', dot:'d-t'},
-        {time:'11:10 AM', label:'UA1604 departs SFO',            note:'→ Denver (DEN), arrives 2:59 PM', dot:'d-f'},
-        {time:'5:40 PM',  label:'UA4665 departs Denver',         note:'→ Bismarck (BIS)', dot:'d-f'},
-        {time:'8:31 PM',  label:'Home safe in Bismarck! 🏡',    note:'Safe travels — come back soon!', dot:'d-r'},
+        {time:'7:00 AM',  label:'Breakfast + pack up', note:"Check all rooms — don't forget anything!", dot:'d-fd'},
+        {time:'8:30 AM',  label:'Depart for SFO 🚗',  note:'45–60 min + 90 min security buffer for 11:10 flight', dot:'d-t'},
+        {time:'11:10 AM', label:'UA1604 departs SFO', note:'→ Denver (DEN), arrives 2:59 PM', dot:'d-f'},
+        {time:'5:40 PM',  label:'UA4665 departs Denver', note:'→ Bismarck (BIS)', dot:'d-f'},
+        {time:'8:31 PM',  label:'Home safe in Bismarck! 🏡', note:'Safe travels — come back soon!', dot:'d-r'},
       ]
     },
   ];
@@ -1157,7 +1312,7 @@ function genSummary() {
   if (dn('fri')) L.push('  📝 ' + dn('fri'));
   L.push('');
   L.push('SAT MAY 16  🌤️ 68°F — Best weather day!');
-  L.push('  8:30 AM    St. Frank Coffee + Tartine Bakery');
+  L.push('  Morning    Coffee + breakfast (St. Frank / Tartine nearby)');
   L.push('  9:30 AM    Ferry Building Farmers Market 🧺');
   const satActs = ['aquarium','seals','alcatraz','lombard','ggbridge','ggpark'].filter(x => selActs.has(x));
   if (satActs.length) satActs.forEach(id => L.push(`  ${AI[id].time}  ${AI[id].emoji} ${AI[id].name}`));
