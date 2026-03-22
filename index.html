@@ -205,6 +205,9 @@
   .summary-box p{opacity:0.85;font-size:13px;margin-bottom:12px;}
   .copy-area{background:#F7F5F0;border:1px solid var(--border);border-radius:var(--radius-sm);padding:13px;font-size:11px;font-family:'Courier New',monospace;white-space:pre-wrap;margin-bottom:13px;color:var(--text);max-height:280px;overflow-y:auto;line-height:1.75;}
   .success-toast{display:none;background:var(--forest);color:white;padding:11px 16px;border-radius:var(--radius-sm);font-size:13px;font-weight:500;margin-bottom:12px;align-items:center;gap:8px;}
+  .map-pin{display:flex;flex-direction:column;padding:10px 12px;background:var(--white);border-radius:var(--radius-sm);border:1px solid var(--border);text-decoration:none;color:var(--text);font-size:13px;font-weight:600;transition:all 0.15s;}
+  .map-pin:hover{border-color:var(--ocean);background:var(--ocean-light);}
+  .map-pin span{font-size:11px;color:var(--text-mid);font-weight:400;margin-top:2px;}
 </style>
 </head>
 <body>
@@ -296,22 +299,20 @@
 
   <!-- NEIGHBORHOOD MAP -->
   <div style="background:var(--white);border-radius:var(--radius);border:1px solid var(--border);padding:16px;margin-bottom:16px;box-shadow:var(--shadow);">
-    <div style="font-size:11.5px;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;color:var(--text-light);margin-bottom:10px;">🗺️ What's walkable from 1221 Jones St</div>
-    <a href="https://maps.google.com/maps?q=1221+Jones+St,+San+Francisco,+CA+94109&z=15" target="_blank" style="display:block;margin-bottom:12px;">
-      <iframe
-        width="100%"
-        height="320"
-        style="border:0;border-radius:10px;display:block;"
-        loading="lazy"
-        allowfullscreen
-        referrerpolicy="no-referrer-when-downgrade"
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1574.5!2d-122.4154!3d37.7928!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085809ef8a2e1d7%3A0x6f5c8a0d9d0b6e2f!2s1221+Jones+St%2C+San+Francisco%2C+CA+94109!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus">
-      </iframe>
-    </a>
-    <div style="font-size:12px;color:var(--ocean);text-align:center;margin-bottom:4px;">
-      <a href="https://maps.google.com/maps?q=1221+Jones+St,+San+Francisco,+CA+94109&z=15" target="_blank" style="color:var(--ocean);font-weight:600;">📍 Open full map in Google Maps →</a>
+    <div style="font-size:11.5px;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;color:var(--text-light);margin-bottom:12px;">🗺️ What's walkable from 1221 Jones St</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;">
+      <a href="https://maps.google.com/maps?q=Osso+Steakhouse+1177+California+St+San+Francisco" target="_blank" class="map-pin">🥩 Osso Steakhouse<span>~2 min · 1177 California St</span></a>
+      <a href="https://maps.google.com/maps?q=Back+to+Back+1257+Taylor+St+San+Francisco" target="_blank" class="map-pin">🍕 Back2Back<span>~3 min · 1257 Taylor St</span></a>
+      <a href="https://maps.google.com/maps?q=Le+Beau+Market+1263+Leavenworth+St+San+Francisco" target="_blank" class="map-pin">🛒 Le Beau Market<span>~4 min · 1263 Leavenworth</span></a>
+      <a href="https://maps.google.com/maps?q=Hot+Sauce+and+Panko+1468+Hyde+St+San+Francisco" target="_blank" class="map-pin">🍗 Hot Sauce &amp; Panko<span>~9 min · 1468 Hyde St</span></a>
+      <a href="https://maps.google.com/maps?q=Juniper+Cafe+1401+Polk+St+San+Francisco" target="_blank" class="map-pin">🌿 Juniper Bakery<span>~10 min · 1401 Polk St</span></a>
+      <a href="https://maps.google.com/maps?q=Saint+Frank+Coffee+2340+Polk+St+San+Francisco" target="_blank" class="map-pin">☕ St. Frank Coffee<span>~15 min · 2340 Polk St</span></a>
+      <a href="https://maps.google.com/maps?q=Swensens+Ice+Cream+1999+Hyde+St+San+Francisco" target="_blank" class="map-pin">🍦 Swensen's Ice Cream<span>~15 min · 1999 Hyde St</span></a>
+      <a href="https://maps.google.com/maps?q=Seven+Hills+Restaurant+1896+Hyde+St+San+Francisco" target="_blank" class="map-pin">🍝 Seven Hills<span>~17 min · 1896 Hyde St</span></a>
+      <a href="https://maps.google.com/maps?daddr=1221+Jones+St,+San+Francisco,+CA+94109" target="_blank" class="map-pin" style="border-color:var(--ocean);background:var(--ocean-light);">📍 Our Home Base<span>1221 Jones St · Open in Maps</span></a>
+      <a href="https://maps.google.com/maps?q=Powell+Hyde+Cable+Car+San+Francisco" target="_blank" class="map-pin">🚃 Cable Car Stop<span>Steps from us · Nob Hill summit</span></a>
     </div>
-    <div style="font-size:11px;color:var(--text-light);text-align:center;">Zoom out to see all the restaurants listed below</div>
+    <div style="font-size:11.5px;color:var(--text-mid);text-align:center;">Tap any location to open it in Google Maps with directions from our place</div>
   </div>
 
   <!-- WALKABLE SPOTS LIST -->
@@ -415,6 +416,26 @@
     <div class="menu-highlights"><div class="menu-title">Get This</div><div class="menu-items"><span class="menu-item">Seasonal pastries 🌟</span><span class="menu-item">Morning coffee</span><span class="menu-item">Fresh baked goods</span></div></div>
   </div>
 
+  <div class="rest-card">
+    <div class="rest-header">
+      <div class="rest-emoji">☕</div>
+      <div><div class="rest-name">The Coffee Movement</div><div class="rest-meta">Coffee bar · San Francisco</div></div>
+    </div>
+    <div class="rest-badges"><span class="badge badge-gold">Local favorite</span><span class="badge badge-ocean">Morning</span></div>
+    <div class="rest-desc">A beloved SF coffee spot known for their thoughtful approach to specialty coffee. Great atmosphere, quality beans, and the kind of place that makes a morning in SF feel exactly right.</div>
+    <div class="menu-highlights"><div class="menu-title">Order This</div><div class="menu-items"><span class="menu-item">Specialty pour-over</span><span class="menu-item">Espresso drinks</span><span class="menu-item">Seasonal offerings</span></div></div>
+  </div>
+
+  <div class="rest-card">
+    <div class="rest-header">
+      <div class="rest-emoji">🫘</div>
+      <div><div class="rest-name">Four Barrel Coffee</div><div class="rest-meta">Coffee roaster · Valencia St · Mission District</div></div>
+    </div>
+    <div class="rest-badges"><span class="badge badge-gold">SF roaster</span><span class="badge badge-ocean">Morning / afternoon</span></div>
+    <div class="rest-desc">One of SF's notable specialty coffee roasters — beautifully sourced single-origin beans, excellent espresso, and a great place to sit with a cup while in the Mission neighborhood.</div>
+    <div class="menu-highlights"><div class="menu-title">Order This</div><div class="menu-items"><span class="menu-item">Single-origin espresso</span><span class="menu-item">Pour-over</span><span class="menu-item">Drip coffee</span></div></div>
+  </div>
+
   <div class="food-section-title">🌮 Mexican — Tacos & Burritos (Any Day, Lunch or Dinner)</div>
 
   <div class="rest-card our-fave">
@@ -509,7 +530,37 @@
     <div class="menu-highlights"><div class="menu-title">Order This</div><div class="menu-items"><span class="menu-item">Sisig burrito 🌟</span><span class="menu-item">Pork belly tacos</span><span class="menu-item">Garlic fried rice bowl</span></div></div>
   </div>
 
+  <div class="rest-card our-fave">
+    <div class="rest-header">
+      <div class="rest-emoji">🦀</div>
+      <div><div class="rest-name">R&G Lounge</div><div class="rest-meta">Classic Cantonese · 631 Kearny St · Chinatown</div></div>
+    </div>
+    <div class="rest-badges"><span class="badge badge-red">SF institution</span><span class="badge badge-gold">Dungeness crab 🦀</span><span class="badge badge-ocean">Dinner</span></div>
+    <div class="rest-desc">A beloved SF institution in Chinatown since 1985. Famous for their Dungeness crab — salt & pepper style, crispy and perfect — alongside classic Cantonese dishes done with real care. Cash only downstairs, credit cards upstairs. Lively, loud, and totally worth it.</div>
+    <div class="menu-highlights"><div class="menu-title">Order This</div><div class="menu-items"><span class="menu-item">Salt & pepper Dungeness crab 🌟</span><span class="menu-item">Garlic green beans</span><span class="menu-item">Honey walnut prawns</span><span class="menu-item">Peking duck</span><span class="menu-item">Beef chow fun</span></div></div>
+  </div>
+
+  <div class="rest-card our-fave">
+    <div class="rest-header">
+      <div class="rest-emoji">🐟</div>
+      <div><div class="rest-name">Scoma's</div><div class="rest-meta">Classic SF seafood · Pier 47 · Fisherman's Wharf</div></div>
+    </div>
+    <div class="rest-badges"><span class="badge badge-ocean">SF classic since 1965</span><span class="badge badge-gold">Waterfront views</span><span class="badge badge-red">Dungeness crab</span></div>
+    <div class="rest-desc">A true SF waterfront institution on its own private pier at Fisherman's Wharf, open since 1965. Fresh fish straight off the boat, incredible Dungeness crab, clam chowder, and that classic SF seafood house feeling. Ask for a window table for the bay views.</div>
+    <div class="menu-highlights"><div class="menu-title">Order This</div><div class="menu-items"><span class="menu-item">Dungeness crab — any style 🌟</span><span class="menu-item">Clam chowder in sourdough bread bowl</span><span class="menu-item">Petrale sole</span><span class="menu-item">Cioppino</span><span class="menu-item">Crab Louie salad</span></div></div>
+  </div>
+
   <div class="food-section-title">🏛️ Markets & Nightlife</div>
+
+  <div class="rest-card our-fave">
+    <div class="rest-header">
+      <div class="rest-emoji">🍫</div>
+      <div><div class="rest-name">Dandelion Chocolate</div><div class="rest-meta">Bean-to-bar chocolate · 740 Valencia St · Mission District</div></div>
+    </div>
+    <div class="rest-badges"><span class="badge badge-gold">SF original</span><span class="badge badge-ocean">Afternoon treat</span><span class="badge badge-red">World-class chocolate</span></div>
+    <div class="rest-desc">One of the best small-batch chocolate makers in the world, right here in SF's Mission District. They source cacao directly from farmers and make everything in-house — the factory is open and visible from the café. The drinking chocolate and bonbons are extraordinary. A must-stop if you're in the Mission for tacos.</div>
+    <div class="menu-highlights"><div class="menu-title">Get This</div><div class="menu-items"><span class="menu-item">Drinking chocolate 🌟</span><span class="menu-item">Single-origin chocolate bars</span><span class="menu-item">Bonbons + pastries</span><span class="menu-item">Hot cocoa flights</span></div></div>
+  </div>
 
   <div class="rest-card our-fave">
     <div class="rest-header">
@@ -668,7 +719,7 @@
       <div class="activity-card" id="act-lombard" onclick="togAct('lombard')"><span class="activity-emoji">🌸</span><div class="activity-title">Lombard St + Coit Tower</div><div class="activity-desc">The famous crooked street, then Coit Tower for panoramic bay views.</div><div class="activity-meta"><span class="tag tag-o">1.5 hrs</span></div></div>
       <div class="activity-card" id="act-castro" onclick="togAct('castro')"><span class="activity-emoji">🏘️</span><div class="activity-title">Castro / Haight-Ashbury</div><div class="activity-desc">Colorful Victorians, unique shops, and great people-watching in historic neighborhoods.</div><div class="activity-meta"><span class="tag tag-f">2 hrs</span></div></div>
       <div class="activity-card" id="act-crissy" onclick="togAct('crissy')"><span class="activity-emoji">🏛️</span><div class="activity-title">Crissy Field + Palace of Fine Arts</div><div class="activity-desc">Flat waterfront walk with Golden Gate views, then the gorgeous Palace rotunda — one of the most photogenic spots in SF. Totally free.</div><div class="activity-meta"><span class="tag tag-o">2 hrs</span><span class="tag tag-g">Free!</span></div></div>
-      <div class="activity-card" id="act-cablecar" onclick="togAct('cablecar')"><span class="activity-emoji">🚃</span><div class="activity-title">Cable Car Ride</div><div class="activity-desc">The Powell-Hyde line starts right near us. Ride down to Fisherman's Wharf or up from downtown — a classic SF experience, steps from our door.</div><div class="activity-meta"><span class="tag tag-o">30–60 min</span><span class="tag tag-g">Steps away!</span></div></div>
+      <div class="activity-card" id="act-cablecar" onclick="togAct('cablecar')"><span class="activity-emoji">🚃</span><div class="activity-title">Cable Car Museum</div><div class="activity-desc">Free museum at the historic Washington & Mason cable car barn — see the actual working grip machinery, vintage cars, and learn the whole history. Also just ride the Powell-Hyde line steps from us down to Fisherman's Wharf.</div><div class="activity-meta"><span class="tag tag-o">1 hr</span><span class="tag tag-g">Free admission!</span></div></div>
     </div>
   </div>
 
@@ -690,9 +741,6 @@
   <p class="section-title">What to Pack</p>
   <p class="section-sub">SF in May is mild but tricky — the secret is layers. Here's what'll actually get used.</p>
 
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;">
-    @media(max-width:420px){grid-template-columns:1fr;}
-  </div>
 
   <div class="food-section-title">🧥 Clothes — the #1 thing visitors get wrong</div>
   <div class="card">
@@ -1082,7 +1130,7 @@ const AI = {
   lombard:   {name:'Lombard St + Coit Tower', emoji:'🌸', time:'2:00 – 3:30 PM',     note:'Quick scenic stop before dinner at 5.'},
   castro:    {name:'Castro / Haight-Ashbury', emoji:'🏘️', time:'3:00 – 4:30 PM',     note:'Great window shopping + Victorian houses.'},
   crissy:    {name:'Crissy Field + Palace of Fine Arts', emoji:'🏛️', time:'10:00 AM – 12:00 PM', note:'Flat waterfront walk + iconic Palace rotunda. Free!'},
-  cablecar:  {name:'Cable Car Ride',          emoji:'🚃', time:'Any time',            note:'Powell-Hyde line starts near us — ride to Fisherman\'s Wharf!'},
+  cablecar:  {name:'Cable Car Museum',       emoji:'🚃', time:'Any time',            note:'Free! Historic barn with working grip machinery. Also ride the Powell-Hyde line from our door.'},
 };
 
 // ── SCHEDULE ─────────────────────────────────────────────────────────────────
