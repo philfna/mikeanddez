@@ -133,8 +133,11 @@
   .activity-card:hover{border-color:var(--ocean);box-shadow:var(--shadow);transform:translateY(-1px);}
   .activity-card.selected{border-color:var(--ocean);background:var(--ocean-light);}
   .activity-card.selected::after{content:'✓';position:absolute;top:9px;right:10px;width:20px;height:20px;background:var(--ocean);color:white;border-radius:50%;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;line-height:20px;text-align:center;}
-  .activity-card.our-pick{border-color:var(--gold);}
-  .activity-card.our-pick::before{content:'★ Our Pick';position:absolute;top:0;left:0;background:var(--gold);color:white;font-size:9.5px;font-weight:700;padding:2px 9px;border-radius:0 0 6px 0;letter-spacing:0.04em;}
+  .activity-card.locked{border-color:var(--forest);background:var(--forest-light);cursor:default;}
+  .activity-card.locked::after{content:'🔒';position:absolute;top:9px;right:10px;width:20px;height:20px;font-size:14px;display:flex;align-items:center;justify-content:center;}
+  .activity-card.locked::before{content:'✅ RESERVED';position:absolute;top:0;left:0;background:var(--forest);color:white;font-size:9px;font-weight:700;padding:2px 9px;border-radius:0 0 6px 0;letter-spacing:0.05em;}
+  .activity-card.our-pick:not(.locked){border-color:var(--gold);}
+  .activity-card.our-pick:not(.locked)::before{content:'★ Our Pick';position:absolute;top:0;left:0;background:var(--gold);color:white;font-size:9.5px;font-weight:700;padding:2px 9px;border-radius:0 0 6px 0;letter-spacing:0.04em;}
   .activity-emoji{font-size:24px;margin-bottom:6px;display:block;}
   .activity-title{font-size:13.5px;font-weight:600;margin-bottom:2px;}
   .activity-desc{font-size:11.5px;color:var(--text-mid);line-height:1.4;}
@@ -368,7 +371,8 @@
         <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap;">
           <span style="background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.3);border-radius:6px;font-size:11px;padding:2px 9px;font-weight:600;">✅ Entry reserved</span>
           <span style="background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.3);border-radius:6px;font-size:11px;padding:2px 9px;font-weight:600;">🚗 We're driving you</span>
-          <span style="background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.3);border-radius:6px;font-size:11px;padding:2px 9px;font-weight:600;">Sunday morning</span>
+          <span style="background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.3);border-radius:6px;font-size:11px;padding:2px 9px;font-weight:600;">Sun May 17 · Depart 7:30 AM</span>
+          <span style="background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.3);border-radius:6px;font-size:11px;padding:2px 9px;font-weight:600;">Barcode #261888857</span>
           <span style="background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.3);border-radius:6px;font-size:11px;padding:2px 9px;font-weight:600;">🧥 Bring a jacket</span>
         </div>
       </div>
@@ -377,6 +381,33 @@
 
   <div style="background:var(--ocean-light);border:1px solid #B5D4F4;border-radius:var(--radius-sm);padding:11px 15px;margin-bottom:16px;font-size:13px;color:var(--ocean);">
     <strong>📋 Reservations — we've got you covered.</strong> We'll handle booking for any restaurants that need it. Places marked <span style="background:var(--gold-light);color:#8A6020;font-size:11px;font-weight:600;padding:1px 7px;border-radius:5px;">Book ahead</span> fill up fast — just let us know what sounds good and we'll lock it in!
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
+    <div style="background:linear-gradient(135deg,#1E4028,#2D5A3D);color:white;border-radius:var(--radius-sm);padding:13px 15px;">
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;opacity:0.7;margin-bottom:5px;">✅ Confirmed</div>
+      <div style="font-size:14px;font-weight:700;margin-bottom:3px;">🌲 Muir Woods</div>
+      <div style="font-size:12px;opacity:0.88;margin-bottom:2px;">Sun May 17 · Depart 7:30 AM</div>
+      <div style="font-size:11px;opacity:0.7;">Barcode #261888857 · Parking paid</div>
+    </div>
+    <div style="background:linear-gradient(135deg,#1A3A5C,#1A4A6B);color:white;border-radius:var(--radius-sm);padding:13px 15px;">
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;opacity:0.7;margin-bottom:5px;">✅ Confirmed</div>
+      <div style="font-size:14px;font-weight:700;margin-bottom:3px;">🏝️ Alcatraz</div>
+      <div style="font-size:12px;opacity:0.88;margin-bottom:2px;">Sat May 16 · 8:40 AM ferry · Pier 33</div>
+      <div style="font-size:11px;opacity:0.7;">Conf #74910666 · 3 adults · Arrive by 7:55 AM</div>
+    </div>
+    <div style="background:linear-gradient(135deg,#3A2A10,#6B4A1A);color:white;border-radius:var(--radius-sm);padding:13px 15px;">
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;opacity:0.7;margin-bottom:5px;">✅ Confirmed</div>
+      <div style="font-size:14px;font-weight:700;margin-bottom:3px;">🍕 Back2Back</div>
+      <div style="font-size:12px;opacity:0.88;margin-bottom:2px;">Fri May 15 · 5:00 PM · ~3 min walk</div>
+      <div style="font-size:11px;opacity:0.7;">Conf #26415 · 1257 Taylor St</div>
+    </div>
+    <div style="background:linear-gradient(135deg,#5C1A1A,#9B2020);color:white;border-radius:var(--radius-sm);padding:13px 15px;">
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;opacity:0.7;margin-bottom:5px;">✅ Confirmed · Anniversary ❤️</div>
+      <div style="font-size:14px;font-weight:700;margin-bottom:3px;">🥩 Osso Steakhouse</div>
+      <div style="font-size:12px;opacity:0.88;margin-bottom:2px;">Sat May 16 · 5:00 PM · ~2 min walk</div>
+      <div style="font-size:11px;opacity:0.7;">Conf #2109897022 · 1177 California St</div>
+    </div>
   </div>
 
   <div class="ear-banner">
@@ -483,9 +514,9 @@
   <div class="rest-card our-fave">
     <div class="rest-header">
       <div class="rest-emoji">🔥</div>
-      <div><div class="rest-name">Brother's Korean BBQ</div><div class="rest-meta">Korean BBQ · SF's go-to · Must-do for this trip</div></div>
+      <div><div class="rest-name">Brother's Korean BBQ</div><div class="rest-meta">Korean BBQ · SF's go-to · Mon May 18 · 5:00 PM · Farewell dinner ❤️</div></div>
     </div>
-    <div class="rest-badges"><span class="badge badge-red">Must-do!</span><span class="badge badge-ocean">Dinner</span><span class="badge badge-gold">Group experience</span></div>
+    <div class="rest-badges"><span class="badge badge-forest">✅ Booked — Mon May 18 · 5 PM</span><span class="badge badge-red">Farewell dinner ❤️</span><span class="badge badge-gold">Group experience</span></div>
     <div class="rest-desc">Our pick for Korean BBQ in SF — grilling your own meat at the table is one of the most fun group dining experiences you'll have. Order a mix of galbi, pork belly, bulgogi, and the banchan sides keep coming. Interactive, social, and endlessly delicious. Book ahead for a group.</div>
     <div class="menu-highlights"><div class="menu-title">Order This</div><div class="menu-items"><span class="menu-item">Galbi (short ribs) 🌟</span><span class="menu-item">Pork belly (samgyeopsal)</span><span class="menu-item">Bulgogi</span><span class="menu-item">Banchan sides (keep 'em coming)</span><span class="menu-item">Stone bowl bibimbap</span><span class="menu-item">Seafood pajeon (pancake)</span></div></div>
   </div>
@@ -493,9 +524,9 @@
   <div class="rest-card our-fave">
     <div class="rest-header">
       <div class="rest-emoji">🥩</div>
-      <div><div class="rest-name">Osso Steakhouse</div><div class="rest-meta">Fine dining steakhouse · 1177 California St · Nob Hill</div></div>
+      <div><div class="rest-name">Osso Steakhouse</div><div class="rest-meta">Fine dining steakhouse · 1177 California St · Sat May 16 · 5:00 PM · Anniversary ❤️</div></div>
     </div>
-    <div class="rest-badges"><span class="badge badge-purple">Splurge night</span><span class="badge badge-ocean">Dinner only (5 PM+)</span><span class="badge badge-red">Book ahead</span></div>
+    <div class="rest-badges"><span class="badge badge-forest">✅ Booked — Sat May 16 · 5 PM</span><span class="badge badge-red">Anniversary dinner ❤️</span><span class="badge badge-ocean">Conf #2109897022</span></div>
     <div class="rest-desc">Right here on California Street atop Nob Hill — one of SF's top steakhouses with Art Deco elegance and impeccable service. Dry-aged prime beef, Dungeness crab, and a Wine Spectator award-winning list. Perfect for a special night out.</div>
     <div class="menu-highlights"><div class="menu-title">Standouts</div><div class="menu-items"><span class="menu-item">Bone-in ribeye (voted #1) 🌟</span><span class="menu-item">Bone-in filet mignon</span><span class="menu-item">House cheese bread</span><span class="menu-item">Dungeness crab garlic sauce</span><span class="menu-item">Creamed spinach</span><span class="menu-item">Mac & cheese</span></div></div>
   </div>
@@ -513,10 +544,10 @@
   <div class="rest-card walkable">
     <div class="rest-header">
       <div class="rest-emoji">🍕</div>
-      <div><div class="rest-name">Back2Back</div><div class="rest-meta">Natural wine · Wood-fired pizza · Right around the corner 🚶</div></div>
+      <div><div class="rest-name">Back2Back</div><div class="rest-meta">Natural wine · Wood-fired pizza · Fri May 15 · 5:00 PM · ~3 min walk 🚶</div></div>
     </div>
-    <div class="rest-badges"><span class="badge badge-forest">We walk there together</span><span class="badge badge-gold">Group favorite</span><span class="badge badge-ocean">Dinner</span></div>
-    <div class="rest-desc">Natural wine and wood-fired pizza — it's right around the corner from our place so we literally just walk out the door. Great vibe, great food, and zero logistics. Our kind of neighborhood night out.</div>
+    <div class="rest-badges"><span class="badge badge-forest">✅ Booked — Fri May 15 · 5 PM</span><span class="badge badge-gold">Conf #26415</span><span class="badge badge-ocean">First night dinner!</span></div>
+    <div class="rest-desc">Natural wine and wood-fired pizza — it's right around the corner from our place so we literally just walk out the door. Great vibe, great food, and zero logistics. Our kind of neighborhood night out. The perfect welcome dinner after a long travel day.</div>
     <div class="menu-highlights"><div class="menu-title">The Move</div><div class="menu-items"><span class="menu-item">Wood-fired pizzas 🌟</span><span class="menu-item">Natural wine pours</span><span class="menu-item">Seasonal small plates</span></div></div>
   </div>
 
@@ -694,8 +725,8 @@
     <div class="snack-cat-title">🌲 Nature & Outdoors</div>
     <div style="font-size:11.5px;color:var(--text-light);margin-bottom:8px;font-style:italic;">Tap a card to add it to your schedule · tap again to remove</div>
     <div class="activity-grid">
-      <div class="activity-card our-pick selected" id="act-muir" onclick="togAct('muir')"><span class="activity-emoji">🌲</span><div class="activity-title">Muir Woods</div><div class="activity-desc">Ancient coastal redwoods — cathedral-like groves. A big reason for this trip. <strong>We've already reserved your entry!</strong></div><div class="activity-meta"><span class="tag tag-f">Half day</span><span class="tag tag-g">✅ Reserved by us!</span></div></div>
-      <div class="activity-card" id="act-marin" onclick="togAct('marin')"><span class="activity-emoji">🏔️</span><div class="activity-title">Marin Headlands</div><div class="activity-desc">Dramatic Golden Gate views, rolling coastal hills. Perfect add-on after Muir Woods.</div><div class="activity-meta"><span class="tag tag-f">2–3 hrs</span></div></div>
+      <div class="activity-card locked" id="act-muir" onclick="togAct('muir')"><span class="activity-emoji">🌲</span><div class="activity-title">Muir Woods</div><div class="activity-desc">Ancient coastal redwoods so tall and quiet they feel like a cathedral. <strong>Entry reserved, parking paid, we're driving you — Sun May 17, depart 7:30 AM.</strong></div><div class="activity-meta"><span class="tag tag-f">Half day · Sun May 17</span><span class="tag tag-g">Barcode #261888857</span></div></div>
+      <div class="activity-card locked" id="act-marin" onclick="togAct('marin')"><span class="activity-emoji">🏔️</span><div class="activity-title">Marin Headlands</div><div class="activity-desc">Dramatic Golden Gate views from the hills across the bay. <strong>Dezarae's pick — locked in! We'll swing through on the way back from Muir Woods, Sun May 17.</strong></div><div class="activity-meta"><span class="tag tag-f">~1 hr · Sun May 17</span><span class="tag tag-g">On the way home!</span></div></div>
       <div class="activity-card" id="act-ggpark" onclick="togAct('ggpark')"><span class="activity-emoji">🌿</span><div class="activity-title">Golden Gate Park</div><div class="activity-desc">Botanical garden, Japanese Tea Garden, buffalo paddock — a city park like no other.</div><div class="activity-meta"><span class="tag tag-f">2–4 hrs</span></div></div>
       <div class="activity-card" id="act-baker" onclick="togAct('baker')"><span class="activity-emoji">🏖️</span><div class="activity-title">Baker Beach</div><div class="activity-desc">Sandy beach with stunning Golden Gate views. Best at golden hour before dinner.</div><div class="activity-meta"><span class="tag tag-o">1–2 hrs</span></div></div>
     </div>
@@ -715,7 +746,7 @@
     <div class="snack-cat-title">🏙️ Iconic SF</div>
     <div class="activity-grid">
       <div class="activity-card" id="act-ggbridge" onclick="togAct('ggbridge')"><span class="activity-emoji">🌁</span><div class="activity-title">Golden Gate Bridge Walk</div><div class="activity-desc">Walk or bike the bridge. Incredible views. Dress warm — it's always windy!</div><div class="activity-meta"><span class="tag tag-o">1.5–2 hrs</span></div></div>
-      <div class="activity-card" id="act-alcatraz" onclick="togAct('alcatraz')"><span class="activity-emoji">🏝️</span><div class="activity-title">Alcatraz Island</div><div class="activity-desc">Haunting and fascinating. The audio tour is excellent. Book weeks in advance!</div><div class="activity-meta"><span class="tag tag-o">Half day</span><span class="tag tag-g">Book early!</span></div></div>
+      <div class="activity-card locked" id="act-alcatraz" onclick="togAct('alcatraz')"><span class="activity-emoji">🏝️</span><div class="activity-title">Alcatraz Island</div><div class="activity-desc">Haunting, fascinating, unforgettable. The audio tour narrated by former guards and inmates is exceptional. <strong>Tickets reserved — Sat May 16, 8:40 AM ferry from Pier 33. Arrive by 7:55 AM.</strong></div><div class="activity-meta"><span class="tag tag-f">Half day · Sat May 16</span><span class="tag tag-g">Conf #74910666</span></div></div>
       <div class="activity-card" id="act-lombard" onclick="togAct('lombard')"><span class="activity-emoji">🌸</span><div class="activity-title">Lombard St + Coit Tower</div><div class="activity-desc">The famous crooked street, then Coit Tower for panoramic bay views.</div><div class="activity-meta"><span class="tag tag-o">1.5 hrs</span></div></div>
       <div class="activity-card" id="act-castro" onclick="togAct('castro')"><span class="activity-emoji">🏘️</span><div class="activity-title">Castro / Haight-Ashbury</div><div class="activity-desc">Colorful Victorians, unique shops, and great people-watching in historic neighborhoods.</div><div class="activity-meta"><span class="tag tag-f">2 hrs</span></div></div>
       <div class="activity-card" id="act-crissy" onclick="togAct('crissy')"><span class="activity-emoji">🏛️</span><div class="activity-title">Crissy Field + Palace of Fine Arts</div><div class="activity-desc">Flat waterfront walk with Golden Gate views, then the gorgeous Palace rotunda — one of the most photogenic spots in SF. Totally free.</div><div class="activity-meta"><span class="tag tag-o">2 hrs</span><span class="tag tag-g">Free!</span></div></div>
@@ -890,8 +921,22 @@ const LS_PNOTES = 'mddez_pnotes';
 const LS_CUSTOM = 'mddez_custom';
 
 // ── STATE ────────────────────────────────────────────────────────────────────
-const selActs   = new Set(['muir']);
-const selSnacks = new Set();
+const selActs   = new Set(['muir','alcatraz','marin']);
+const selSnacks = new Set([
+  'drinks-0',  // Poppi Prebiotic Soda
+  'drinks-2',  // Coffee & creamer
+  'drinks-4',  // Orange juice
+  'drinks-5',  // Still / filtered water
+  'drinks-6',  // Oat milk / almond milk
+  'drinks-7',  // NA sparkling mocktail
+  'brands-0',  // David Protein Bars
+  'brands-1',  // Poppi Soda variety pack
+  'sweet-6',   // Dried apple bananas
+  'meals-0',   // Eggs
+  'meals-1',   // Sausage
+  'meals-4',   // Croissants / pastries
+  'meals-7',   // Pasta
+]);
 
 // ── SNACK DATA (defined early so loadFromLS can add customs) ─────────────────
 const snackData = {
@@ -932,10 +977,11 @@ const snackData = {
     {e:'🍓',n:'Strawberries'},
     {e:'🧁',n:'Pastries / muffins'},
     {e:'🍮',n:'Caramel / toffee treats'},
+    {e:'🍌',n:'Dried apple bananas ⭐'},
   ],
   meals: [
     {e:'🥚',n:'Eggs (for breakfast)'},
-    {e:'🥓',n:'Bacon / turkey sausage'},
+    {e:'🍳',n:'Sausage (for breakfast)'},
     {e:'🫐',n:'Pancake / waffle mix'},
     {e:'🥑',n:'Avocados for toast'},
     {e:'🥐',n:'Bakery croissants / pastries'},
@@ -974,9 +1020,13 @@ function decodeState(encoded) {
 function applyState(state) {
   if (!state) return;
   selActs.clear();
-  (state.a || ['muir']).forEach(id => selActs.add(id));
-  selSnacks.clear();
-  (state.s || []).forEach(k => selSnacks.add(k));
+  (state.a || ['muir','alcatraz','marin']).forEach(id => selActs.add(id));
+  if (state.s && state.s.length > 0) {
+    // URL hash has explicit snack state — use it
+    selSnacks.clear();
+    state.s.forEach(k => selSnacks.add(k));
+  }
+  // else: no snack state in hash, keep pre-populated defaults
   if (state.c) {
     Object.entries(state.c).forEach(([cat, items]) => {
       items.forEach(n => {
@@ -1009,10 +1059,16 @@ function persist() {
 
 function loadFromLS() {
   try {
-    const acts = JSON.parse(localStorage.getItem(LS_ACTS) || '["muir"]');
+    const actsRaw = localStorage.getItem(LS_ACTS);
+    const acts = JSON.parse(actsRaw || '["muir","alcatraz","marin"]');
     selActs.clear(); acts.forEach(id => selActs.add(id));
-    const snacks = JSON.parse(localStorage.getItem(LS_SNACKS) || '[]');
-    selSnacks.clear(); snacks.forEach(k => selSnacks.add(k));
+    const snacksRaw = localStorage.getItem(LS_SNACKS);
+    if (snacksRaw !== null) {
+      // User has saved state — use it
+      const snacks = JSON.parse(snacksRaw);
+      selSnacks.clear(); snacks.forEach(k => selSnacks.add(k));
+    }
+    // else: no saved state, keep the pre-populated defaults in selSnacks
     const custom = JSON.parse(localStorage.getItem(LS_CUSTOM) || '{}');
     Object.entries(custom).forEach(([cat, items]) => {
       if (!snackData[cat]) return;
@@ -1100,6 +1156,7 @@ function selApp(a) {
 // ── ACTIVITIES ───────────────────────────────────────────────────────────────
 function togAct(id) {
   const c = document.getElementById('act-' + id);
+  if (c.classList.contains('locked')) return; // reserved — cannot deselect
   selActs.has(id) ? (selActs.delete(id), c.classList.remove('selected')) : (selActs.add(id), c.classList.add('selected'));
   updateActCounter();
   persist();
@@ -1117,8 +1174,8 @@ function updateActCounter() {
 }
 
 const AI = {
-  muir:      {name:'Muir Woods',              emoji:'🌲', time:'9:00 AM – 1:00 PM',   note:'✅ Entry reserved — we\'re driving you there!'},
-  marin:     {name:'Marin Headlands',         emoji:'🏔️', time:'1:30 – 4:00 PM',     note:'Pairs great with Muir Woods — same direction.'},
+  muir:      {name:'Muir Woods',              emoji:'🌲', time:'~9:00 AM – 1:00 PM', note:'✅ Reserved · Barcode #261888857 · Parking paid · We\'re driving you! Depart 7:30 AM.'},
+  marin:     {name:'Marin Headlands',         emoji:'🏔️', time:'~1:00 – 2:00 PM',    note:'Dezarae\'s pick ✅ — jaw-dropping Golden Gate views on the drive back from Muir. Locked in!'},
   ggpark:    {name:'Golden Gate Park',        emoji:'🌿', time:'10:00 AM – 1:00 PM',  note:'Visit Japanese Tea Garden inside the park.'},
   baker:     {name:'Baker Beach',             emoji:'🏖️', time:'4:00 – 5:30 PM',     note:'Perfect golden hour before 5 PM dinner!'},
   aquarium:  {name:'Aquarium of the Bay',     emoji:'🦈', time:'11:00 AM – 12:30 PM', note:"At Fisherman's Wharf — great for fish fans!"},
@@ -1126,7 +1183,7 @@ const AI = {
   seals:     {name:'Pier 39 Sea Lions',       emoji:'🦭', time:'2:00 – 3:00 PM',     note:"Free! Combine with Fisherman's Wharf."},
   monterey:  {name:'Monterey Bay Aquarium',   emoji:'🐙', time:'All day',             note:'2 hrs south on scenic Hwy 1 — book ahead!'},
   ggbridge:  {name:'Golden Gate Bridge Walk', emoji:'🌁', time:'9:00 – 11:00 AM',    note:'Morning light is best. Very windy — dress warm!'},
-  alcatraz:  {name:'Alcatraz Island',         emoji:'🏝️', time:'10:30 AM – 2:00 PM', note:'⚠️ Book weeks ahead at alcatrazcruises.com!'},
+  alcatraz:  {name:'Alcatraz Island',         emoji:'🏝️', time:'8:40 AM – ~12:30 PM', note:'✅ Reserved! Confirmation #74910666 · Pier 33 · Arrive by 7:55 AM'},
   lombard:   {name:'Lombard St + Coit Tower', emoji:'🌸', time:'2:00 – 3:30 PM',     note:'Quick scenic stop before dinner at 5.'},
   castro:    {name:'Castro / Haight-Ashbury', emoji:'🏘️', time:'3:00 – 4:30 PM',     note:'Great window shopping + Victorian houses.'},
   crissy:    {name:'Crissy Field + Palace of Fine Arts', emoji:'🏛️', time:'10:00 AM – 12:00 PM', note:'Flat waterfront walk + iconic Palace rotunda. Free!'},
@@ -1146,46 +1203,50 @@ function renderSched() {
   const days = [
     {
       label:'Friday, May 15 — Arrival Day', emoji:'✈️', hc:'arr', wx:WX[0], key:'fri',
-      sub:'Bismarck → Denver → San Francisco',
+      sub:'Bismarck → Denver → San Francisco · Back2Back dinner ✅',
       rows:[
-        {time:'6:00 AM',   label:'Depart Bismarck (BIS)',          note:'UA4738 → Denver', dot:'d-f'},
-        {time:'9:35 AM',   label:'Land at SFO ✈️',                 note:'UA2391 arrives from Denver', dot:'d-f'},
-        {time:'~10:15 AM', label:'Rideshare to 1221 Jones St',     note:'Uber / Lyft / Waymo — see Getting Here tab', dot:'d-t'},
-        {time:'~11:00 AM', label:'Welcome! Settle in 🎉',          note:'Snacks ready — rest up after the early start', dot:'d-r'},
-        {time:'5:00 PM',   label:'Dinner',                         note:'', dot:'d-fd'},
-        {time:'Evening',   label:'Bay Bridge lights from our deck 🌉', note:'', dot:'d-n'},
+        {time:'6:00 AM',   label:'Depart Bismarck (BIS)',               note:'UA4738 → Denver', dot:'d-f'},
+        {time:'9:35 AM',   label:'Land at SFO ✈️',                      note:'UA2391 arrives from Denver', dot:'d-f'},
+        {time:'~10:15 AM', label:'Rideshare to 1221 Jones St',          note:'Uber / Lyft / Waymo — see Getting Here tab', dot:'d-t'},
+        {time:'~11:00 AM', label:'Welcome! Settle in 🎉',               note:'Snacks ready — rest up after the early start', dot:'d-r'},
+        {time:'5:00 PM',   label:'🍕 Back2Back — dinner ✅',            note:'Conf #26415 · 1257 Taylor St · wood-fired pizza + natural wine · ~3 min walk!', dot:'d-a'},
+        {time:'Evening',   label:'Bay Bridge lights from our deck 🌉',  note:'', dot:'d-n'},
       ]
     },
     {
       label:'Saturday, May 16', emoji:'🌅', hc:'exp', wx:WX[1], key:'sat',
-      sub:'Ferry Building morning · rest of day is yours',
+      sub:'Alcatraz morning ✅ · Ferry Building lunch · Osso anniversary dinner ✅',
       rows:[
-        {time:'Morning',   label:'Coffee + breakfast',                        note:'St. Frank Coffee and Tartine Bakery are nearby if you want a great start', dot:'d-fd'},
-        {time:'9:30 AM',   label:'🧺 Ferry Building Farmers Market',    note:'Locked in — best market in SF. Hog Island oysters, Cowgirl Creamery, Blue Bottle.', dot:'d-a'},
-        {time:'Afternoon', label:'— yours to fill —',                  note:'Check the Activities tab for ideas, or just wander', dot:'d-r'},
-        {time:'5:00 PM',   label:'Dinner',                             note:'', dot:'d-fd'},
-        {time:'Evening',   label:'Bay Bridge lights 🌉',               note:'', dot:'d-n'},
+        {time:'7:00 AM',   label:'Early breakfast + head out',               note:'Alcatraz departs Pier 33 at 8:40 AM sharp — no late arrivals', dot:'d-fd'},
+        {time:'7:45 AM',   label:'Depart for Pier 33',                       note:'Rideshare ~15 min · arrive by 7:55 AM (45 min before departure)', dot:'d-t'},
+        {time:'8:40 AM',   label:'🏝️ Alcatraz Ferry departs! ✅',          note:'Confirmation #74910666 · 3 adults · Show QR code at Pier 33 boarding gate', dot:'d-a'},
+        {time:'11:40 AM',  label:'Return ferry to Pier 33',                  note:'~3 hrs on the island', dot:'d-t'},
+        {time:'~12:15 PM', label:'🧺 Ferry Building Farmers Market — Lunch', note:'Short walk from Pier 33 · Hog Island oysters, Cowgirl Creamery, Blue Bottle Coffee', dot:'d-a'},
+        {time:'Afternoon', label:'— yours to fill —',                        note:'Check the Activities tab for ideas, or just wander', dot:'d-r'},
+        {time:'5:00 PM',   label:'🥩 Osso Steakhouse ✅ — Anniversary dinner!', note:'Conf #2109897022 · 1177 California St · ~2 min walk · celebrating Phil & Heather ❤️', dot:'d-a'},
+        {time:'Evening',   label:'Bay Bridge lights 🌉',                     note:'', dot:'d-n'},
       ]
     },
     {
       label:'Sunday, May 17', emoji:'🌲', hc:'exp', wx:WX[2], key:'sun',
-      sub:'Muir Woods morning · afternoon is yours',
+      sub:'Muir Woods ✅ · Marin Headlands ✅ · afternoon yours',
       rows:[
-        {time:'7:30 AM',   label:'Early start + coffee for the road', note:'Muir gets busy — earlier is better', dot:'d-fd'},
-        {time:'9:00 AM',   label:'🌲 Muir Woods — entry reserved!',   note:'Locked in — we\'re driving you there ✅', dot:'d-a'},
-        {time:'~1:00 PM',  label:'Return to SF',                      note:'', dot:'d-t'},
-        {time:'Afternoon', label:'— yours to fill —',                 note:'Rest up or keep going — check the Activities tab', dot:'d-r'},
-        {time:'5:00 PM',   label:'Dinner',                            note:'', dot:'d-fd'},
-        {time:'Evening',   label:'— yours to fill —',                 note:'Movie night? Swensen\'s walk? Bay Bridge lights?', dot:'d-r'},
+        {time:'7:30 AM',   label:'Depart for Muir Woods 🚗',            note:'Barcode #261888857 · parking paid · we\'re driving you!', dot:'d-t'},
+        {time:'~9:00 AM',  label:'🌲 Muir Woods — entry reserved! ✅',   note:'Ancient redwood groves — one of the main reasons for this trip', dot:'d-a'},
+        {time:'~1:00 PM',  label:'🏔️ Marin Headlands ✅',               note:'Dezarae\'s pick — jaw-dropping Golden Gate views on the drive back', dot:'d-a'},
+        {time:'~2:00 PM',  label:'Head back to SF',                       note:'', dot:'d-t'},
+        {time:'Afternoon', label:'— yours to fill —',                  note:'Rest up or keep going — check the Activities tab', dot:'d-r'},
+        {time:'5:00 PM',   label:'Dinner',                             note:'', dot:'d-fd'},
+        {time:'Evening',   label:'— yours to fill —',                  note:'Movie night? Swensen\'s walk? Bay Bridge lights?', dot:'d-r'},
       ]
     },
     {
       label:'Monday, May 18 — Last Full Day', emoji:'🌉', hc:'exp', wx:WX[3], key:'mon',
-      sub:'Fully open — make it yours',
+      sub:'Fully open morning · Brother\'s Korean BBQ dinner ✅',
       rows:[
-        {time:'Morning',   label:'— yours to fill —', note:'Sleep in, grab coffee, or head straight out', dot:'d-r'},
-        {time:'Afternoon', label:'— yours to fill —', note:'Check the Activities tab for ideas', dot:'d-r'},
-        {time:'5:00 PM',   label:'Farewell dinner ❤️', note:'', dot:'d-fd'},
+        {time:'Morning',   label:'— yours to fill —',      note:'Sleep in, grab coffee, or head straight out', dot:'d-r'},
+        {time:'Afternoon', label:'— yours to fill —',      note:'Check the Activities tab for ideas', dot:'d-r'},
+        {time:'5:00 PM',   label:'🔥 Brother\'s Korean BBQ ✅', note:'Farewell dinner — grill your own galbi, pork belly & bulgogi at the table. Banchan sides keep coming!', dot:'d-a'},
         {time:'Evening',   label:'Last Bay Bridge view 🌉', note:'Soak it all in — come back soon!', dot:'d-n'},
       ]
     },
@@ -1319,30 +1380,30 @@ function genSummary() {
   L.push('─────────────────────────────────────────────');
   L.push('FRI MAY 15 — Arrival  ⛅ 66°F');
   L.push('  9:35 AM    Land at SFO → Rideshare to 1221 Jones St');
-  L.push('  5:00 PM    Dinner — Osso or Back2Back (walk! natural wine + pizza)');
+  L.push('  5:00 PM    🍕 Back2Back dinner — Conf #26415 · 1257 Taylor St (3 min walk!)');
   if (dn('fri')) L.push('  📝 ' + dn('fri'));
   L.push('');
   L.push('SAT MAY 16  🌤️ 68°F — Best weather day!');
-  L.push('  Morning    Coffee + breakfast (St. Frank / Tartine nearby)');
-  L.push('  9:30 AM    Ferry Building Farmers Market 🧺');
-  const satActs = ['aquarium','seals','alcatraz','lombard','ggbridge','ggpark'].filter(x => selActs.has(x));
-  if (satActs.length) satActs.forEach(id => L.push(`  ${AI[id].time}  ${AI[id].emoji} ${AI[id].name}`));
-  L.push("  5:00 PM    Brother's Korean BBQ or walk to Back2Back 🔥");
+  L.push('  7:00 AM    Early breakfast — Alcatraz departs 8:40 AM sharp');
+  L.push('  8:40 AM    🏝️ Alcatraz Ferry — Conf #74910666 · Pier 33');
+  L.push('  11:40 AM   Return ferry to Pier 33');
+  L.push('  12:15 PM   🧺 Ferry Building Farmers Market — lunch');
+  L.push('  5:00 PM    🥩 Osso Steakhouse — Anniversary dinner ❤️ — Conf #2109897022');
   if (dn('sat')) L.push('  📝 ' + dn('sat'));
   L.push('');
-  L.push('SUN MAY 17  🌲 MUIR WOODS DAY  ☀️ 67°F');
-  L.push('  7:30 AM    Early start — coffee for the road');
-  L.push('  9:00 AM    🌲 MUIR WOODS — entry reserved! ✅');
-  L.push('  ~12:30 PM  Marin Headlands (optional)');
-  L.push('  ~2:00 PM   Waymo → Yank Sing dim sum 🤖🥟');
-  L.push('  5:00 PM    Dinner — delivery + movie night?');
+  L.push('SUN MAY 17  🌲 MUIR WOODS + MARIN DAY  ☀️ 67°F');
+  L.push('  7:30 AM    Depart for Muir Woods — Barcode #261888857 · parking paid');
+  L.push('  9:00 AM    🌲 Muir Woods — entry reserved ✅');
+  L.push('  1:00 PM    🏔️ Marin Headlands ✅ — Dezarae\'s pick');
+  L.push('  2:00 PM    Head back to SF');
+  L.push('  5:00 PM    Dinner');
   if (dn('sun')) L.push('  📝 ' + dn('sun'));
   L.push('');
   L.push('MON MAY 18  🌥️ 60°F — Last Full Day');
   const monActs = ['ggbridge','baker','ggpark','monterey','alcatraz','lombard','castro','steinhart'].filter(x => selActs.has(x));
   if (monActs.length) monActs.forEach(id => L.push(`  ${AI[id].time}  ${AI[id].emoji} ${AI[id].name}`));
   else L.push('  Day        Wander freely — no agenda! 🎲');
-  L.push("  5:00 PM    Farewell dinner ❤️");
+  L.push("  5:00 PM    🔥 Brother's Korean BBQ — farewell dinner!");
   if (dn('mon')) L.push('  📝 ' + dn('mon'));
   L.push('');
   L.push('TUE MAY 19 — Departure  ⛅ 60°F');
