@@ -244,12 +244,12 @@
 
   <p style="font-size:11.5px;font-weight:600;color:var(--text-mid);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.07em;">🌤️ SF Weather — July Historical Averages</p>
   <div class="weather-strip">
-    <div class="weather-day hi"><div class="wd-date">Mon Jul 13</div><span class="wd-icon">☀️</span><div class="wd-temp">65°F</div><div class="wd-lo">Lo 54°F</div><div class="wd-desc">Sunny, some fog AM</div></div>
-    <div class="weather-day hi"><div class="wd-date">Tue Jul 14</div><span class="wd-icon">🌤️</span><div class="wd-temp">66°F</div><div class="wd-lo">Lo 55°F</div><div class="wd-desc">Mostly sunny</div></div>
-    <div class="weather-day hi"><div class="wd-date">Wed Jul 15</div><span class="wd-icon">🌤️</span><div class="wd-temp">66°F</div><div class="wd-lo">Lo 54°F</div><div class="wd-desc">Mostly sunny</div></div>
-    <div class="weather-day"><div class="wd-date">Thu Jul 16</div><span class="wd-icon">☀️</span><div class="wd-temp">65°F</div><div class="wd-lo">Lo 53°F</div><div class="wd-desc">Sunny, warm afternoon</div></div>
+    <div class="weather-day hi"><div class="wd-date">Mon Jul 13</div><span class="wd-icon">🌫️</span><div class="wd-temp">67°F</div><div class="wd-lo">Lo 55°F</div><div class="wd-desc">Foggy AM, clears noon</div></div>
+    <div class="weather-day hi"><div class="wd-date">Tue Jul 14</div><span class="wd-icon">🌤️</span><div class="wd-temp">67°F</div><div class="wd-lo">Lo 55°F</div><div class="wd-desc">Partly sunny, breezy</div></div>
+    <div class="weather-day hi"><div class="wd-date">Wed Jul 15</div><span class="wd-icon">🌤️</span><div class="wd-temp">67°F</div><div class="wd-lo">Lo 55°F</div><div class="wd-desc">Partly sunny, breezy</div></div>
+    <div class="weather-day"><div class="wd-date">Thu Jul 16</div><span class="wd-icon">🌫️</span><div class="wd-temp">67°F</div><div class="wd-lo">Lo 55°F</div><div class="wd-desc">Foggy eve — late flight!</div></div>
   </div>
-  <div class="weather-note">🧥 <strong>Pack a light layer.</strong> SF July = 55–68°F. Karl the Fog often rolls in mornings and evenings — warmer afternoons in between. Much warmer than May! Bring a jacket for evenings and the bay.</div>
+  <div class="weather-note">🧥 <strong>July in SF is famously chilly — locals call it "No Sky July."</strong> Average high is 67°F but evenings drop to the mid-50s. Karl the Fog rolls in most mornings and evenings, burning off by midday. Pack a real jacket — not just a light layer. Tourists in shorts and flip flops suffer. You will not.</div>
 
   <div class="flight-card">
     <div class="flight-header"><div><div class="flight-num">Flight 1 of 2 · SY391</div><div style="font-size:10px;color:var(--text-light);margin-top:1px;">Sun Country Airlines · Nonstop</div></div><div class="flight-badge fb-out">Outbound</div></div>
@@ -739,7 +739,7 @@
   <div class="food-section-title">🧥 Clothes — the #1 thing visitors get wrong</div>
   <div class="card">
     <div style="font-size:13px;line-height:1.7;color:var(--text-mid);">
-      SF May averages <strong style="color:var(--text);">55–68°F</strong> with cool foggy mornings and warmer afternoons. The temperature can swing 15°F in a single day, and it's always windier than you expect near the water.
+      SF July averages <strong style="color:var(--text);">67°F</strong> with foggy mornings and evenings that drop into the mid-50s. Locals call it "No Sky July" — Karl the Fog is relentless in the AM and after dark. Afternoons warm up nicely, but the wind off the bay makes it feel colder than the number suggests. <strong>Tourists in shorts suffer. Don't be a tourist.</strong>
     </div>
     <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px;">
       <div style="background:var(--ocean-light);border-radius:var(--radius-sm);padding:10px 12px;">
@@ -748,9 +748,11 @@
           🧥 Light jacket or fleece<br>
           🧣 Scarf or neck layer<br>
           👟 Comfortable walking shoes<br>
-          🧤 Light gloves (optional but nice)<br>
-          🌂 Compact umbrella<br>
-          👕 Layers you can add/remove
+          🧥 Real jacket or fleece — not optional, Karl is real<br>
+          🌡️ Layers you can add/remove — 15°F swings in a day<br>
+          👟 Comfortable closed-toe walking shoes<br>
+          🧣 Scarf or neck layer for evening fog<br>
+          ☀️ Sunscreen — marine layer doesn't block UV
         </div>
       </div>
       <div style="background:var(--forest-light);border-radius:var(--radius-sm);padding:10px 12px;">
@@ -1141,7 +1143,7 @@ const AI = {
 };
 
 // ── SCHEDULE ─────────────────────────────────────────────────────────────────
-const WX = ['☀️ 65°F','🌤️ 66°F','🌤️ 66°F','☀️ 65°F'];
+const WX = ['🌫️ 67°F · foggy AM','🌤️ 67°F · breezy','🌤️ 67°F · breezy','🌫️ 67°F · foggy eve'];
 
 function getActs(candidates) {
   return candidates.filter(id => selActs.has(id)).map(id => ({
@@ -1282,9 +1284,10 @@ function genSummary() {
   L.push('');
   L.push('🌤️  WEATHER (Historical Averages)');
   L.push('─────────────────────────────────────────────');
-  L.push('  Mon Jul 13: ☀️ Hi 65°F / Lo 54°F — Sunny, some morning fog');
-  L.push('  Tue Jul 14: 🌤️ Hi 66°F / Lo 55°F — Mostly sunny');
-  L.push('  Wed Jul 15: 🌤️ Hi 66°F / Lo 54°F — Mostly sunny');
+  L.push('  Mon Jul 13: 🌫️ Hi 67°F / Lo 55°F — Foggy morning, clears by noon');
+  L.push('  Tue Jul 14: 🌤️ Hi 67°F / Lo 55°F — Partly sunny, breezy');
+  L.push('  Wed Jul 15: 🌤️ Hi 67°F / Lo 55°F — Partly sunny, breezy');
+  L.push('  Thu Jul 16: 🌫️ Hi 67°F / Lo 55°F — Foggy evening — dress warm for late-night departure!');
   L.push('  Thu Jul 16: ☀️ Hi 65°F / Lo 53°F — Sunny, warm afternoon');
   
   L.push('  🧥 Pack layers every day!');
