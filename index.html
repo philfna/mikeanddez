@@ -350,11 +350,10 @@
       <span style="font-size:32px;flex-shrink:0;">🌲</span>
       <div>
         <div style="font-family:'Playfair Display',serif;font-size:17px;font-weight:700;margin-bottom:5px;">Muir Woods — The Big One</div>
-        <div style="font-size:13px;opacity:0.88;line-height:1.55;">One of the main reasons for this trip — ancient coastal redwoods with groves so tall and quiet they feel like a cathedral. <strong>We've already reserved your timed entry and we're driving you there</strong>, so all you have to do is show up and be in awe. We can swing through the Marin Headlands on the way back for jaw-dropping Golden Gate views.</div>
+        <div style="font-size:13px;opacity:0.88;line-height:1.55;">One of the most magical places near San Francisco — ancient coastal redwoods with groves so tall and quiet they feel like a cathedral. A timed entry reservation is required and sells out fast, so we'll take care of booking if you want to go. The grove is 10–15°F cooler than SF, so bring a warm layer!</div>
         <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap;">
-          <span style="background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.3);border-radius:6px;font-size:11px;padding:2px 9px;font-weight:600;">✅ Entry reserved</span>
-          <span style="background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.3);border-radius:6px;font-size:11px;padding:2px 9px;font-weight:600;">🚗 We're driving you</span>
-          <span style="background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.3);border-radius:6px;font-size:11px;padding:2px 9px;font-weight:600;">Reservations required · book at gomuirwoods.com</span>
+          <span style="background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.3);border-radius:6px;font-size:11px;padding:2px 9px;font-weight:600;">⏳ Reservation required</span>
+          <span style="background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.3);border-radius:6px;font-size:11px;padding:2px 9px;font-weight:600;">Select in Activities tab to add</span>
           <span style="background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.3);border-radius:6px;font-size:11px;padding:2px 9px;font-weight:600;">🧥 Bring a jacket</span>
         </div>
       </div>
@@ -690,7 +689,7 @@
     <div class="snack-cat-title">🌲 Nature & Outdoors</div>
     <div style="font-size:11.5px;color:var(--text-light);margin-bottom:8px;font-style:italic;">Tap a card to add it to your schedule · tap again to remove</div>
     <div class="activity-grid">
-      <div class="activity-card our-pick" id="act-muir" onclick="togAct('muir')"><span class="activity-emoji">🌲</span><div class="activity-title">Muir Woods</div><div class="activity-desc">Ancient coastal redwoods — cathedral-like groves. One of the most magical places near SF. We'll handle the entry reservation. Dress warm — it's 10°F cooler in the canyon!</div><div class="activity-meta"><span class="tag tag-f">Half day</span><span class="tag tag-g">★ Our Pick</span></div></div>
+      <div class="activity-card" id="act-muir" onclick="togAct('muir')"><span class="activity-emoji">🌲</span><div class="activity-title">Muir Woods</div><div class="activity-desc">Ancient coastal redwoods — cathedral-like groves. One of the most magical places near SF. We'll handle the reservation if you want to go. Dress warm — it's 10°F cooler in the canyon!</div><div class="activity-meta"><span class="tag tag-f">Half day</span><span class="tag tag-o">Reservation required</span></div></div>
       <div class="activity-card" id="act-marin" onclick="togAct('marin')"><span class="activity-emoji">🏔️</span><div class="activity-title">Marin Headlands</div><div class="activity-desc">Dramatic Golden Gate views from the hills across the bay. Dramatic Golden Gate views from the hills across the bay. Perfect add-on after Muir Woods — same direction, easy detour.</div><div class="activity-meta"><span class="tag tag-f">~1 hr</span><span class="tag tag-g">With Muir Woods</span></div></div>
       <div class="activity-card" id="act-ggpark" onclick="togAct('ggpark')"><span class="activity-emoji">🌿</span><div class="activity-title">Golden Gate Park</div><div class="activity-desc">Botanical garden, Japanese Tea Garden, buffalo paddock — a city park like no other.</div><div class="activity-meta"><span class="tag tag-f">2–4 hrs</span></div></div>
       <div class="activity-card" id="act-baker" onclick="togAct('baker')"><span class="activity-emoji">🏖️</span><div class="activity-title">Baker Beach</div><div class="activity-desc">Sandy beach with stunning Golden Gate views. Best at golden hour before dinner.</div><div class="activity-meta"><span class="tag tag-o">1–2 hrs</span></div></div>
@@ -1126,7 +1125,7 @@ function updateActCounter() {
 
 const AI = {
   ccsf:      {name:'Visit CCSF Campus',        emoji:'🎓', time:'10:00 AM – 12:00 PM', note:'Heather\'s school! Walking tour of the Ocean Ave campus. Free.'},
-  muir:      {name:'Muir Woods',              emoji:'🌲', time:'~9:00 AM – 1:00 PM', note:'Ancient coastal redwoods — cathedral groves. Entry reservation recommended at gomuirwoods.com.'},
+  muir:      {name:'Muir Woods',              emoji:'🌲', time:'~9:00 AM – 1:00 PM', note:'Ancient coastal redwoods. Timed entry required — we\'ll handle the reservation!'},
   marin:     {name:'Marin Headlands',         emoji:'🏔️', time:'~1:00 – 2:00 PM',    note:'Golden Gate views from the hills — great add-on after Muir Woods, same direction.'},
   ggpark:    {name:'Golden Gate Park',        emoji:'🌿', time:'10:00 AM – 1:00 PM',  note:'Visit Japanese Tea Garden inside the park.'},
   baker:     {name:'Baker Beach',             emoji:'🏖️', time:'4:00 – 5:30 PM',     note:'Perfect golden hour before 5 PM dinner!'},
@@ -1331,8 +1330,8 @@ function genSummary() {
   if (dn('sat')) L.push('  📝 ' + dn('sat'));
   L.push('');
   L.push('SUN MAY 17  🌲 MUIR WOODS + MARIN DAY  ☀️ 67°F');
-  L.push('  7:30 AM    Depart for Muir Woods — Barcode #261888857 · parking paid');
-  L.push('  9:00 AM    🌲 Muir Woods — entry reserved ✅');
+  L.push('  7:30 AM    Depart for Muir Woods');
+  L.push('  9:00 AM    🌲 Muir Woods (if selected)');
   L.push('  1:00 PM    🏔️ Marin Headlands ✅ — Dezarae\'s pick');
   L.push('  2:00 PM    Head back to SF');
   L.push('  5:00 PM    Dinner');
