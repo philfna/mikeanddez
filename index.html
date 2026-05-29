@@ -95,7 +95,7 @@
   .airtrain-note{background:#FBF0FF;border:1px solid #D4A8E8;border-radius:var(--radius-sm);padding:11px 14px;font-size:12px;color:#6B3A8A;margin:10px 0;display:flex;gap:8px;align-items:flex-start;}
 
   /* FOOD CARDS */
-  .food-section-title{font-size:11.5px;font-weight:600;letter-spacing:0.09em;text-transform:uppercase;color:var(--text-light);margin:20px 0 10px;padding-bottom:7px;border-bottom:1px solid var(--border);}
+  .food-section-title{font-size:14px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:var(--text);margin:32px 0 12px;padding:8px 0 10px;border-bottom:2px solid var(--ocean);}
   .rest-card{background:var(--white);border-radius:var(--radius);border:1px solid var(--border);padding:16px 18px;margin-bottom:10px;box-shadow:var(--shadow);}
   .rest-card.our-fave{border-left:4px solid var(--gold);}
   .rest-card.walkable{border-left:4px solid var(--forest);}
@@ -301,19 +301,6 @@
     <div style="font-size:11.5px;color:var(--text-mid);text-align:center;">Tap any location to open it in Google Maps with directions from our place</div>
   </div>
 
-  <!-- WALKABLE SPOTS LIST -->
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:18px;">
-    <div class="card-sm"><div style="font-size:13px;font-weight:600;margin-bottom:2px;">&#x1F969; Osso Steakhouse</div><div style="font-size:12px;color:var(--text-mid);">~2 min · 1177 California St</div></div>
-    <div class="card-sm"><div style="font-size:13px;font-weight:600;margin-bottom:2px;">&#127829; Back2Back</div><div style="font-size:12px;color:var(--text-mid);">~3 min · 1257 Taylor St</div></div>
-    <div class="card-sm"><div style="font-size:13px;font-weight:600;margin-bottom:2px;">&#x1F6D2; Le Beau Market</div><div style="font-size:12px;color:var(--text-mid);">~4 min · 1263 Leavenworth</div></div>
-    <div class="card-sm"><div style="font-size:13px;font-weight:600;margin-bottom:2px;">&#x1F357; Hot Sauce &amp; Panko</div><div style="font-size:12px;color:var(--text-mid);">~9 min · 1468 Hyde St</div></div>
-    <div class="card-sm"><div style="font-size:13px;font-weight:600;margin-bottom:2px;">&#x1F331; Juniper Bakery</div><div style="font-size:12px;color:var(--text-mid);">~10 min · 1401 Polk St</div></div>
-    <div class="card-sm"><div style="font-size:13px;font-weight:600;margin-bottom:2px;">&#x2615; St. Frank Coffee</div><div style="font-size:12px;color:var(--text-mid);">~15 min · 2340 Polk St</div></div>
-    <div class="card-sm"><div style="font-size:13px;font-weight:600;margin-bottom:2px;">&#x1F366; Swensen's Ice Cream</div><div style="font-size:12px;color:var(--text-mid);">~15 min · 1999 Hyde St</div></div>
-    <div class="card-sm"><div style="font-size:13px;font-weight:600;margin-bottom:2px;">&#x1F35D; Seven Hills</div><div style="font-size:12px;color:var(--text-mid);">~17 min · 1896 Hyde St</div></div>
-    <div class="card-sm"><div style="font-size:13px;font-weight:600;margin-bottom:2px;">&#x1F683; Cable Car</div><div style="font-size:12px;color:var(--text-mid);">Powell-Hyde line · steps from us</div></div>
-  </div>
-
   <!-- LE BEAU -->
   <div class="food-section-title">🛒 Our Favorite Grocery — Le Beau Market</div>
   <div class="rest-card our-fave">
@@ -332,7 +319,7 @@
     <div class="wb-icon">🤖</div>
     <div>
       <div class="wb-title">Try a Waymo — driverless robotaxi!</div>
-      <div class="wb-desc">Waymo operates all over SF and it's one of the most uniquely SF experiences you can have. We love using it for Sunday's Yank Sing dim sum run — book Waymo One on your phone and a driverless Jaguar shows up. No driver. Just you and the car. Take a video. Everyone back home will want to see it.</div>
+      <div class="wb-desc">Waymo operates all over SF and it's one of the most uniquely SF experiences you can have. Book Waymo One on your phone and a driverless Jaguar shows up. No driver. Just you and the car. Take a video — everyone back home will want to see it. Great for getting across town, to the Mission for tacos, or anywhere.</div>
     </div>
   </div>
   <div class="info-banner">
@@ -345,26 +332,9 @@
 <div id="panel-food" class="panel">
   <p class="section-title">Food — Our Picks</p>
 
-  <div style="background:linear-gradient(135deg,#1E4028,#2D5A3D);color:white;border-radius:var(--radius);padding:18px 20px;margin-bottom:16px;">
-    <div style="display:flex;gap:13px;align-items:flex-start;">
-      <span style="font-size:32px;flex-shrink:0;">🌲</span>
-      <div>
-        <div style="font-family:'Playfair Display',serif;font-size:17px;font-weight:700;margin-bottom:5px;">Muir Woods — The Big One</div>
-        <div style="font-size:13px;opacity:0.88;line-height:1.55;">One of the most magical places near San Francisco — ancient coastal redwoods with groves so tall and quiet they feel like a cathedral. A timed entry reservation is required and sells out fast, so we'll take care of booking if you want to go. The grove is 10–15°F cooler than SF, so bring a warm layer!</div>
-        <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap;">
-          <span style="background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.3);border-radius:6px;font-size:11px;padding:2px 9px;font-weight:600;">⏳ Reservation required</span>
-          <span style="background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.3);border-radius:6px;font-size:11px;padding:2px 9px;font-weight:600;">Select in Activities tab to add</span>
-          <span style="background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.3);border-radius:6px;font-size:11px;padding:2px 9px;font-weight:600;">🧥 Bring a jacket</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <div style="background:var(--ocean-light);border:1px solid #B5D4F4;border-radius:var(--radius-sm);padding:11px 15px;margin-bottom:16px;font-size:13px;color:var(--ocean);">
     <strong>📋 Reservations — we've got you covered.</strong> We'll handle booking for any restaurants that need it. Places marked <span style="background:var(--gold-light);color:#8A6020;font-size:11px;font-weight:600;padding:1px 7px;border-radius:5px;">Book ahead</span> fill up fast — just let us know what sounds good and we'll lock it in!
   </div>
-
-
 
   <div class="ear-banner">
     <h3>🎲 Play it by ear — this is YOUR trip!</h3>
@@ -470,7 +440,7 @@
   <div class="rest-card our-fave">
     <div class="rest-header">
       <div class="rest-emoji">🔥</div>
-      <div><div class="rest-name">Brother's Korean BBQ</div><div class="rest-meta">Korean BBQ · SF's go-to · Mon May 18 · 5:00 PM · Farewell dinner ❤️</div></div>
+      <div><div class="rest-name">Brother's Korean BBQ</div><div class="rest-meta">Korean BBQ · SF's go-to · Korean BBQ · Must-do group dining experience</div></div>
     </div>
     <div class="rest-badges"><span class="badge badge-red">Must-do!</span><span class="badge badge-ocean">Dinner</span><span class="badge badge-gold">Group experience</span></div>
     <div class="rest-desc">Our pick for Korean BBQ in SF — grilling your own meat at the table is one of the most fun group dining experiences you'll have. Order a mix of galbi, pork belly, bulgogi, and the banchan sides keep coming. Interactive, social, and endlessly delicious. Book ahead for a group.</div>
@@ -480,7 +450,7 @@
   <div class="rest-card our-fave">
     <div class="rest-header">
       <div class="rest-emoji">🥩</div>
-      <div><div class="rest-name">Osso Steakhouse</div><div class="rest-meta">Fine dining steakhouse · 1177 California St · Sat May 16 · 5:00 PM · Anniversary ❤️</div></div>
+      <div><div class="rest-name">Osso Steakhouse</div><div class="rest-meta">Fine dining steakhouse · 1177 California St · Fine dining steakhouse · 1177 California St · Nob Hill</div></div>
     </div>
     <div class="rest-badges"><span class="badge badge-purple">Splurge night</span><span class="badge badge-ocean">Dinner only (5 PM+)</span><span class="badge badge-red">Book ahead</span></div>
     <div class="rest-desc">Right here on California Street atop Nob Hill — one of SF's top steakhouses with Art Deco elegance and impeccable service. Dry-aged prime beef, Dungeness crab, and a Wine Spectator award-winning list. Perfect for a special night out.</div>
@@ -500,7 +470,7 @@
   <div class="rest-card walkable">
     <div class="rest-header">
       <div class="rest-emoji">🍕</div>
-      <div><div class="rest-name">Back2Back</div><div class="rest-meta">Natural wine · Wood-fired pizza · Fri May 15 · 5:00 PM · ~3 min walk 🚶</div></div>
+      <div><div class="rest-name">Back2Back</div><div class="rest-meta">Natural wine · Wood-fired pizza · Natural wine · Wood-fired pizza · ~3 min walk 🚶</div></div>
     </div>
     <div class="rest-badges"><span class="badge badge-forest">We walk there together</span><span class="badge badge-gold">Group favorite</span><span class="badge badge-ocean">Dinner</span></div>
     <div class="rest-desc">Natural wine and wood-fired pizza — it's right around the corner from our place so we literally just walk out the door. Great vibe, great food, and zero logistics. Our kind of neighborhood night out. The perfect welcome dinner after a long travel day.</div>
@@ -707,6 +677,7 @@
 
   <div style="margin-bottom:14px;">
     <div class="snack-cat-title">🏙️ Iconic SF</div>
+    <div style="font-size:11.5px;color:var(--text-light);margin-bottom:8px;font-style:italic;">Tap a card to add it to your schedule · tap again to remove</div>
     <div class="activity-grid">
       <div class="activity-card" id="act-ggbridge" onclick="togAct('ggbridge')"><span class="activity-emoji">🌁</span><div class="activity-title">Golden Gate Bridge Walk</div><div class="activity-desc">Walk or bike the bridge. Incredible views. Dress warm — it's always windy!</div><div class="activity-meta"><span class="tag tag-o">1.5–2 hrs</span></div></div>
       <div class="activity-card" id="act-alcatraz" onclick="togAct('alcatraz')"><span class="activity-emoji">🏝️</span><div class="activity-title">Alcatraz Island</div><div class="activity-desc">Haunting, fascinating, unforgettable. The audio tour narrated by former guards and inmates is exceptional. <strong>Book ahead at alcatrazcruises.com — tickets sell out weeks in advance!</strong></div><div class="activity-meta"><span class="tag tag-f">Half day</span><span class="tag tag-g">Book early!</span></div></div>
@@ -725,7 +696,7 @@
 <!-- ===== SCHEDULE ===== -->
 <div id="panel-schedule" class="panel">
   <p class="section-title">Trip Schedule</p>
-  <p class="section-sub">Only the two locked items are on here — Muir Woods and Ferry Building. Everything else is open. Fill it in however you like using the notes box on each day, or just see where the trip takes you.</p>
+  <p class="section-sub">Tap activities in the Activities tab to add them here. Everything else is wide open — fill in the notes or just see where the trip takes you.</p>
   <div id="schedule-container"></div>
   <div class="info-banner"><span class="ib-icon">📋</span><span>Go to <strong>Save & Share</strong> to copy or print this!</span></div>
 </div>
@@ -733,7 +704,7 @@
 <!-- ===== WHAT TO PACK ===== -->
 <div id="panel-pack" class="panel">
   <p class="section-title">What to Pack</p>
-  <p class="section-sub">SF in May is mild but tricky — the secret is layers. Here's what'll actually get used.</p>
+  <p class="section-sub">SF in July is famously cold despite being "summer." Locals call it No Sky July. Here's what'll actually get used.</p>
 
 
   <div class="food-section-title">🧥 Clothes — the #1 thing visitors get wrong</div>
@@ -774,7 +745,7 @@
     <div style="display:flex;flex-direction:column;gap:10px;">
       <div style="display:flex;align-items:center;gap:12px;">
         <span style="font-size:22px;flex-shrink:0;">🤖</span>
-        <div><div style="font-size:13px;font-weight:600;">Waymo One</div><div style="font-size:12px;color:var(--text-mid);">Driverless robotaxi — use it to Yank Sing on Sunday. Set up payment at home, not at the curb.</div></div>
+        <div><div style="font-size:13px;font-weight:600;">Waymo One</div><div style="font-size:12px;color:var(--text-mid);">Driverless robotaxi — one of the most uniquely SF experiences you can have. Set up payment at home, not at the curb.</div></div>
       </div>
       <div style="display:flex;align-items:center;gap:12px;">
         <span style="font-size:22px;flex-shrink:0;">⚫</span>
@@ -782,7 +753,7 @@
       </div>
       <div style="display:flex;align-items:center;gap:12px;">
         <span style="font-size:22px;flex-shrink:0;">🗺️</span>
-        <div><div style="font-size:13px;font-weight:600;">Google Maps (offline)</div><div style="font-size:12px;color:var(--text-mid);">Download the SF offline map. Cell signal is spotty in Muir Woods and some neighborhoods.</div></div>
+        <div><div style="font-size:13px;font-weight:600;">Google Maps (offline)</div><div style="font-size:12px;color:var(--text-mid);">Download the SF offline map before you leave home. Cell signal can be spotty in some neighborhoods and parks.</div></div>
       </div>
     </div>
   </div>
@@ -868,7 +839,7 @@
   <div class="card">
     <div style="font-size:14px;font-weight:600;margin-bottom:3px;">📝 Personal Host Notes</div>
     <div style="font-size:12px;color:var(--text-mid);margin-bottom:8px;">Reminders, pickup logistics, reservation confirmations — anything extra. Auto-saved.</div>
-    <textarea id="personal-notes" placeholder="e.g. Yank Sing res: Sun 10:30 AM conf #12345. Osso booked Friday 5 PM. Brother's Korean BBQ — call ahead for group..." oninput="saveNotes()"></textarea>
+    <textarea id="personal-notes" placeholder="e.g. Alcatraz booked for Tue · Muir Woods reservation confirmed · Brothers Korean BBQ — 5 PM Thu..." oninput="saveNotes()"></textarea>
   </div>
 
   <div class="divider"></div>
@@ -971,7 +942,7 @@ function decodeState(encoded) {
 function applyState(state) {
   if (!state) return;
   selActs.clear();
-  (state.a || ['muir','alcatraz','marin']).forEach(id => selActs.add(id));
+  (state.a || []).forEach(id => selActs.add(id));
   if (state.s && state.s.length > 0) {
     // URL hash has explicit snack state — use it
     selSnacks.clear();
@@ -1011,7 +982,7 @@ function persist() {
 function loadFromLS() {
   try {
     const actsRaw = localStorage.getItem(LS_ACTS);
-    const acts = JSON.parse(actsRaw || '["muir","alcatraz","marin"]');
+    const acts = JSON.parse(actsRaw || '[]');
     selActs.clear(); acts.forEach(id => selActs.add(id));
     const snacksRaw = localStorage.getItem(LS_SNACKS);
     if (snacksRaw !== null) {
@@ -1178,12 +1149,11 @@ function renderSched() {
       ]
     },
     {
-      label:'Wednesday, July 15', emoji:'🌲', hc:'exp', wx:WX[2], key:'sun',
+      label:'Wednesday, July 15', emoji:'🌤️', hc:'exp', wx:WX[2], key:'sun',
       sub:'Full day — yours to explore',
       rows:[
         {time:'Morning',   label:'Coffee + breakfast',               note:'', dot:'d-fd'},
-        ...getActs(['muir','marin','ggbridge','ggpark','baker','monterey','crissy']),
-        {time:'~10:00 AM', label:'🎓 Visit CCSF Campus ✅',          note:'City College of San Francisco — Heather\'s school! Walking tour of the Ocean Ave campus', dot:'d-a'},
+        ...getActs(['ccsf','muir','marin','ggbridge','ggpark','baker','monterey','crissy']),
         {time:'Afternoon', label:'— yours to fill —',                note:'Check the Activities tab for ideas', dot:'d-r'},
         {time:'5:00 PM',   label:'Dinner',                           note:'', dot:'d-fd'},
         {time:'Evening',   label:'— yours to fill —',                note:'Movie night? Swensen\'s walk? Bay Bridge lights?', dot:'d-r'},
@@ -1318,40 +1288,30 @@ function genSummary() {
 
   L.push('📅  SCHEDULE  (Dinner ~5 PM each day. Play it by ear!)');
   L.push('─────────────────────────────────────────────');
-  L.push('FRI MAY 15 — Arrival  ⛅ 66°F');
-  L.push('  9:35 AM    Land at SFO → Rideshare to 1221 Jones St');
-  L.push('  5:00 PM    Dinner — see Food tab for ideas!');
+  L.push('MON JUL 13 — Arrival  🌫️ 67°F');
+  L.push('  8:06 AM    Land at SFO · Res K6EU2Z · Rideshare to 1221 Jones St');
+  L.push('  5:00 PM    Dinner');
   if (dn('fri')) L.push('  📝 ' + dn('fri'));
   L.push('');
-  L.push('SAT MAY 16  🌤️ 68°F — Best weather day!');
-  
-  
-  
-  
+  L.push('TUE JUL 14  🌤️ 67°F — Full day');
+  const tueActs = ['alcatraz','ggbridge','aquarium','crissy','lombard','cablecar','calacademy','steinhart'].filter(x => selActs.has(x));
+  if (tueActs.length) tueActs.forEach(id => L.push(`  ${AI[id].time}  ${AI[id].emoji} ${AI[id].name}`));
+  else L.push('  Day        Choose from Activities tab 🎲');
   L.push('  5:00 PM    Dinner');
   if (dn('sat')) L.push('  📝 ' + dn('sat'));
   L.push('');
-  L.push('SUN MAY 17  🌲 MUIR WOODS + MARIN DAY  ☀️ 67°F');
-  L.push('  7:30 AM    Depart for Muir Woods');
-  L.push('  9:00 AM    🌲 Muir Woods (if selected)');
-  L.push('  1:00 PM    🏔️ Marin Headlands ✅ — Dezarae\'s pick');
-  L.push('  2:00 PM    Head back to SF');
+  L.push('WED JUL 15  🌤️ 67°F — Full day');
+  const wedActs = ['ccsf','muir','marin','ggbridge','ggpark','baker','monterey','crissy'].filter(x => selActs.has(x));
+  if (wedActs.length) wedActs.forEach(id => L.push(`  ${AI[id].time}  ${AI[id].emoji} ${AI[id].name}`));
+  else L.push('  Day        Choose from Activities tab 🎲');
   L.push('  5:00 PM    Dinner');
   if (dn('sun')) L.push('  📝 ' + dn('sun'));
   L.push('');
-  L.push('MON MAY 18  🌥️ 60°F — Last Full Day');
-  const monActs = ['ggbridge','baker','ggpark','monterey','alcatraz','lombard','castro','steinhart'].filter(x => selActs.has(x));
-  if (monActs.length) monActs.forEach(id => L.push(`  ${AI[id].time}  ${AI[id].emoji} ${AI[id].name}`));
-  else L.push('  Day        Wander freely — no agenda! 🎲');
-  L.push('  5:00 PM    Farewell dinner ❤️ — see Food tab for ideas');
-  if (dn('mon')) L.push('  📝 ' + dn('mon'));
-  L.push('');
-  L.push('TUE MAY 19 — Departure  ⛅ 60°F');
-  L.push('  7:00 AM    Breakfast + pack up');
-  L.push('  8:30 AM    Depart for SFO');
-  L.push('  11:59 PM   SY398 SFO → Minneapolis');
-  L.push('  5:36 AM    Arrives MSP (Jul 17)');
-  L.push('  8:31 PM    Home sweet home! 🏡');
+  L.push('THU JUL 16 — Departure  🌫️ 67°F');
+  L.push('  Morning    Last breakfast + final adventures');
+  L.push('  5:00 PM    Farewell dinner ❤️');
+  L.push('  9:30 PM    Depart for SFO');
+  L.push('  11:59 PM   SY398 SFO → Minneapolis · arrives 5:36 AM Jul 17');
   if (dn('tue')) L.push('  📝 ' + dn('tue'));
   L.push('');
 
